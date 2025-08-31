@@ -33,7 +33,7 @@
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Enable HD rock chunk textures</label>
-		<tooltip>Enable HD textures for rock chunks.</tooltip>
+		<tooltip>Enable HD textures for rock chunks. Clean Texture user might want to disable it.</tooltip>
 		<id>RG_RockChunksTextures</id>
 		<category>RG_Retextures</category>
 		<order>111</order>
