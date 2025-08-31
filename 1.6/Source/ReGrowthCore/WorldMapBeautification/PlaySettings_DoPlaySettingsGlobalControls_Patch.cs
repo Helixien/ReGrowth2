@@ -11,16 +11,16 @@ namespace ReGrowthCore
     {
         public static void Postfix(WidgetRow row, bool worldView)
         {
-            if (worldView is false || BiomesKitWorldLayer.WorldBeautificationIsActive is false)
+            if (worldView is false || ReGrowthMod.WorldBeautificationIsActive is false)
             {
                 return;
             }
-            bool showWorldLayers = BiomesKitWorldLayer.WorldBeautificationToggle;
+            bool showWorldLayers = ReGrowthMod.WorldBeautificationToggle;
             var toggleTexture = ContentFinder<Texture2D>.Get("UI/Icons/WMB_Toggle");
             row.ToggleableIcon(ref showWorldLayers, toggleTexture, "RG.ToggleWorldMapBeautification".Translate(), SoundDefOf.Mouseover_ButtonToggle);
-            if (showWorldLayers != BiomesKitWorldLayer.WorldBeautificationToggle)
+            if (showWorldLayers != ReGrowthMod.WorldBeautificationToggle)
             {
-                BiomesKitWorldLayer.WorldBeautificationToggle = showWorldLayers;
+                ReGrowthMod.WorldBeautificationToggle = showWorldLayers;
             }
         }
     }

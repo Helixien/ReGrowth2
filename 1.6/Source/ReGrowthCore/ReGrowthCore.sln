@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGrowthCore", "ReGrowthCore.csproj", "{70885008-CC89-4E55-83F0-1BF3FCFC321F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGrowthCore", "ReGrowthCore.csproj", "{5D873BC3-57B9-6103-6C91-A3DA835D16EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70885008-CC89-4E55-83F0-1BF3FCFC321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70885008-CC89-4E55-83F0-1BF3FCFC321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70885008-CC89-4E55-83F0-1BF3FCFC321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70885008-CC89-4E55-83F0-1BF3FCFC321F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D873BC3-57B9-6103-6C91-A3DA835D16EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D873BC3-57B9-6103-6C91-A3DA835D16EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D873BC3-57B9-6103-6C91-A3DA835D16EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D873BC3-57B9-6103-6C91-A3DA835D16EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {025EA125-D0B7-4A6D-9633-20B75BD03A36}
+		SolutionGuid = {7DD87A06-D5AE-4F85-A80B-2635611BAF15}
 	EndGlobalSection
 EndGlobal
