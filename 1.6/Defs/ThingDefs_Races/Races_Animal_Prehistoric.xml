@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--====================  Woolly Stegosaurus ===========================-->
+	<ThingDef ParentName="AnimalThingBase">
+		<defName>RG_WoollyStegosaurus</defName>
+		<label>woolly stegosaurus</label>
+		<description>A variation of the more common “roof lizard”, this creature is a herbivore characterized by their distinctive kite-shaped upright bony scales along the back which help regulate their body temperature and acts as a mating display.\n\nThe Woolly Stegosaurus finds their home in cold biomes, preferring to eat low-lying vegetation due to a short neck and small head. The spines on the end of the tail differ from the regular Stegosaurus, in that they are curved instead of straight. While this does hinder their ability to defend against predators somewhat, they are much better suited to digging into hard soil and flinging it away to exposed nutritious roots.</description>
+		<statBases>
+			<MoveSpeed>4.3</MoveSpeed>
+			<MarketValue>950</MarketValue>
+			<ComfyTemperatureMin>-65</ComfyTemperatureMin>
+			<ComfyTemperatureMax>32</ComfyTemperatureMax>
+			<FilthRate>28</FilthRate>
+			<ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.12</ArmorRating_Sharp>
+		</statBases>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>2.5</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.7</chanceFactor>
+			</li>
+			<li>
+				<capacities>
+					<li>Bite</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+				<chanceFactor>0.5</chanceFactor>
+			</li>
+			<li>
+				<label>left foot</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>5</cooldownTime>
+				<linkedBodyPartsGroup>FrontLeftLeg</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+			<li>
+				<label>right foot</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>5</cooldownTime>
+				<linkedBodyPartsGroup>FrontRightLeg</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+			<li>
+				<label>tail spikes</label>
+				<capacities>
+					<li>Scratch</li>
+					<li>Stab</li>
+					<li>Blunt</li>
+				</capacities>
+				<power>32</power>
+				<cooldownTime>2.2</cooldownTime>
+				<linkedBodyPartsGroup>RG_TailAttackTool</linkedBodyPartsGroup>
+				<chanceFactor>1.6</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>RG_SauropodWithTailSpikes</body>
+			<baseBodySize>4.0</baseBodySize>
+			<baseHealthScale>4.2</baseHealthScale>
+			<baseHungerRate>1.43</baseHungerRate>
+			<foodType>VegetarianRoughAnimal</foodType>
+			<wildness>0.30</wildness>
+			<trainability>Intermediate</trainability>
+			<herdAnimal>true</herdAnimal>
+			<lifeExpectancy>85</lifeExpectancy>
+			<leatherDef>RG_DinosaursHideHeavy</leatherDef>
+			<meatLabel>stegosaurus meat</meatLabel>
+			<manhunterOnDamageChance>0.5</manhunterOnDamageChance>
+			<herdMigrationAllowed>true</herdMigrationAllowed>
+			<nameOnTameChance>1</nameOnTameChance>
+			<lifeStageAges>
+				<li>
+					<def>AnimalBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>AnimalJuvenile</def>
+					<minAge>0.6</minAge>
+				</li>
+				<li>
+					<def>AnimalAdult</def>
+					<minAge>1.5</minAge>
+					<soundCall>RG_StegoSauropod_Call</soundCall>
+					<soundAngry>RG_StegoSauropod_Angry</soundAngry>
+					<soundWounded>RG_StegoSauropod_Wounded</soundWounded>
+					<soundDeath>RG_StegoSauropod_Death</soundDeath>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_BigBash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
+		</race>
+		<comps>
+			<li Class="CompProperties_EggLayer">
+				<eggFertilizedDef>RG_EggWoollyStegosaurus</eggFertilizedDef>
+				<eggFertilizationCountMax>3</eggFertilizationCountMax>
+				<eggLayIntervalDays>12</eggLayIntervalDays>
+				<eggProgressUnfertilizedMax>0.6</eggProgressUnfertilizedMax>
+				<eggCountRange>1~3</eggCountRange>
+			</li>
+			<li Class="CompProperties_Shearable">
+				<woolDef>RG_WoolStegosaurus</woolDef>
+				<shearIntervalDays>33</shearIntervalDays>
+				<woolAmount>125</woolAmount>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>AnimalExotic</li>
+			<li>AnimalFighter</li>
+			<li>AnimalExtinct</li>
+		</tradeTags>
+	</ThingDef>
+	<PawnKindDef ParentName="AnimalKindBase">
+		<defName>RG_WoollyStegosaurus</defName>
+		<label>woolly stegosaurus</label>
+		<race>RG_WoollyStegosaurus</race>
+		<combatPower>135</combatPower>
+		<wildGroupSize>3~5</wildGroupSize>
+		<lifeStages>
+			<li>
+				<label>hatchling</label>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegosaurus</texPath>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.6, 0.4, 0.25)</volume>
+						<offset>(0,0,-0.1)</offset>
+					</shadowData>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/dessicated_WoollyStegosaurus</texPath>
+					<drawSize>1.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegosaurus</texPath>
+					<drawSize>3.2</drawSize>
+					<shadowData>
+						<volume>(0.8, 0.6, 0.35)</volume>
+						<offset>(0,0,-0.2)</offset>
+					</shadowData>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/dessicated_WoollyStegosaurus</texPath>
+					<drawSize>3.2</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegosaurus</texPath>
+					<drawSize>4.5</drawSize>
+					<shadowData>
+						<volume>(1.0, 0.8, 0.6)</volume>
+						<offset>(0,0,-0.4)</offset>
+					</shadowData>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/dessicated_WoollyStegosaurus</texPath>
+					<drawSize>4.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+</Defs>

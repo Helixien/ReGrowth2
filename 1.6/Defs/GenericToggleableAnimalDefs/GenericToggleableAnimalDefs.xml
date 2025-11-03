@@ -65,6 +65,7 @@
 			<li>RG_Rabbit</li>
 			<li>RG_KiwiBird</li>
 			<li>RG_Neutrolope</li>
+			<li>RG_WoollyStegosaurus</li>
 			<li MayRequire="Ludeon.RimWorld.Biotech">RG_Hemolope</li>
 		</toggleablePawns>
 	</VEF.AnimalBehaviours.GenericToggleableAnimalDef>
