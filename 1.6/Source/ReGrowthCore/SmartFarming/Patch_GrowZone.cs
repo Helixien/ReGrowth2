@@ -90,17 +90,13 @@ namespace ReGrowthCore
 
 		static IEnumerable<Gizmo> GetMultiZoneGizmos(MapComponent_SmartFarming comp, ZoneData zoneData, Zone thisZone)
 		{
-			ZoneData basisZoneData = zoneData;
-			Zone basisZone = null;
-			var selected = Find.Selector.selected;
-			for (int i = selected.Count; i-- > 0;)
+			var firstSelectedGrowZone = Find.Selector.SelectedObjects.OfType<Zone>().FirstOrDefault(z => z is IPlantToGrowSettable);
+			if (thisZone != firstSelectedGrowZone)
 			{
-				if (selected[i] is Zone growZone && growZone is IPlantToGrowSettable && comp.growZoneRegistry.TryGetValue(growZone.ID, out basisZoneData))
-				{
-					basisZone = growZone;
-					break;
-				}
+				yield break;
 			}
+
+			var basisZoneData = zoneData;
 
 			yield return new Command_Action()
 			{
@@ -169,7 +165,8 @@ namespace ReGrowthCore
 					break;
 			}
 			yield return priorityGizmo;
-			if (basisZone != null && basisZone != thisZone)
+			
+			if (Find.Selector.selected.Count > 1)
 			{
 				yield return new Command_Action()
 				{
@@ -178,11 +175,17 @@ namespace ReGrowthCore
 					icon = ResourceBank.mergeZones,
 					action = () =>
 					{
-						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("SmartFarming.Icon.ConfirmMergeZones".Translate(), () => zoneData.MergeZones(thisZone, basisZone)));
+						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("SmartFarming.Icon.ConfirmMergeZones".Translate(), () =>
+						{
+							var selectedGrowZones = Find.Selector.SelectedObjects.OfType<Zone>()
+								.Where(z => z is IPlantToGrowSettable)
+								.ToList();
+							
+							zoneData.MergeZones(thisZone, selectedGrowZones);
+						}));
 					}
 				};
 			}
-			yield break;
 		}
 	}
 

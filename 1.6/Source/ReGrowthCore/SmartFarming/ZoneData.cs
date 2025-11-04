@@ -181,20 +181,36 @@ namespace ReGrowthCore
 			}
 			this.cornerCell = new IntVec3(southMost, 0, westMost);
 		}
-		public void MergeZones(Zone thisZone, Zone otherZone)
+
+		public void MergeZones(Zone primaryZone, List<Zone> zonesToMerge)
 		{
-			if (thisZone == otherZone)
+			var cellsToMove = new HashSet<IntVec3>();
+			foreach (var zone in zonesToMerge)
 			{
-				this.isMerged = true;
-				return;
+				if (zone == primaryZone) continue;
+				foreach (var cell in zone.cells)
+				{
+					cellsToMove.Add(cell);
+				}
 			}
-			var workingList = new List<IntVec3>(thisZone.cells);
-			foreach (var cell in workingList)
+
+			for (int i = zonesToMerge.Count - 1; i >= 0; i--)
 			{
-				thisZone.RemoveCell(cell);
-				otherZone.AddCell(cell);
+				var zone = zonesToMerge[i];
+				if (zone != primaryZone)
+				{
+					zone.Delete();
+				}
 			}
-			Find.Selector.Deselect(thisZone);
+
+			foreach (var cell in cellsToMove)
+			{
+				if (!primaryZone.cells.Contains(cell))
+				{
+					primaryZone.AddCell(cell);
+				}
+			}
+			this.isMerged = true;
 		}
 	}
 }
