@@ -74,13 +74,12 @@
 			<baseHealthScale>4.2</baseHealthScale>
 			<baseHungerRate>1.43</baseHungerRate>
 			<foodType>VegetarianRoughAnimal</foodType>
-			<wildness>0.30</wildness>
 			<trainability>Intermediate</trainability>
 			<herdAnimal>true</herdAnimal>
 			<lifeExpectancy>85</lifeExpectancy>
 			<leatherDef>RG_DinosaursHideHeavy</leatherDef>
-			<meatLabel>stegosaurus meat</meatLabel>
-			<manhunterOnDamageChance>0.5</manhunterOnDamageChance>
+			<meatLabel>dinosaur meat</meatLabel>
+			<manhunterOnDamageChance>0.40</manhunterOnDamageChance>
 			<herdMigrationAllowed>true</herdMigrationAllowed>
 			<nameOnTameChance>1</nameOnTameChance>
 			<lifeStageAges>

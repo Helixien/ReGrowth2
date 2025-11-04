@@ -6,7 +6,7 @@
 		<label>Increase vanilla plant density</label>
 		<tooltip>Makes all biomes more lush. Does only affect performance on low end machines. All ReGrowth mods are build around this setting enabled. (Default: True)</tooltip>
 		<id>RG_IncreaseVanillaPlantDensity</id>
-		<category>RG_Core</category>
+		<category>RG_GeneralSettings</category>
 		<order>0</order>
 		<operations>
 			<!-- ================ Biome Boreal Forest ================ -->
@@ -130,99 +130,16 @@
 			</li>
 		</operations>
 	</Operation>
-	<!-- ================================ Leaf Spawner for Autumn leafs ====================== -->
-	<Operation Class="ModSettingsFramework.PatchOperationModOption">
-		<defaultValue>True</defaultValue>
-		<label>Enable autumn leaves spawners</label>
-		<tooltip>Enables autumn leaves spawners on trees. (Default: True)</tooltip>
-		<id>RG_EnableAutumnLeavesSpawners</id>
-		<category>RG_Core</category>
-		<order>10</order>
-		<operations>
-			<li Class="PatchOperationAdd">
-				<xpath>/Defs/ThingDef[defName="Plant_TreeOak"]</xpath>
-				<value>
-					<comps>
-						<li Class="CompProperties_Spawner">
-							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
-							<thingToSpawn>RG_Filth_LeavesTreeOak</thingToSpawn>
-							<spawnCount>1</spawnCount>
-							<spawnIntervalRange>3000~8000</spawnIntervalRange>
-							<spawnMaxAdjacent>3</spawnMaxAdjacent>
-							<saveKeysPrefix>leaves</saveKeysPrefix>
-						</li>
-					</comps>
-				</value>
-			</li>
-			<li Class="PatchOperationAdd">
-				<xpath>/Defs/ThingDef[defName="Plant_TreePoplar"]</xpath>
-				<value>
-					<comps>
-						<li Class="CompProperties_Spawner">
-							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
-							<thingToSpawn>RG_Filth_LeavesTreePopolar</thingToSpawn>
-							<spawnCount>1</spawnCount>
-							<spawnIntervalRange>3000~8000</spawnIntervalRange>
-							<spawnMaxAdjacent>3</spawnMaxAdjacent>
-							<saveKeysPrefix>leaves</saveKeysPrefix>
-						</li>
-					</comps>
-				</value>
-			</li>
-			<li Class="PatchOperationAdd">
-				<xpath>/Defs/ThingDef[defName="Plant_TreeBirch"]</xpath>
-				<value>
-					<comps>
-						<li Class="CompProperties_Spawner">
-							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
-							<thingToSpawn>RG_Filth_LeavesTreeBirch</thingToSpawn>
-							<spawnCount>1</spawnCount>
-							<spawnIntervalRange>3000~8000</spawnIntervalRange>
-							<spawnMaxAdjacent>3</spawnMaxAdjacent>
-							<saveKeysPrefix>leaves</saveKeysPrefix>
-						</li>
-					</comps>
-				</value>
-			</li>
-			<li Class="PatchOperationAdd">
-				<xpath>/Defs/ThingDef[defName="Plant_TreeMaple"]</xpath>
-				<value>
-					<comps>
-						<li Class="CompProperties_Spawner">
-							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
-							<thingToSpawn>RG_Filth_LeavesTreeOak</thingToSpawn>
-							<spawnCount>1</spawnCount>
-							<spawnIntervalRange>3000~8000</spawnIntervalRange>
-							<spawnMaxAdjacent>3</spawnMaxAdjacent>
-							<saveKeysPrefix>leaves</saveKeysPrefix>
-						</li>
-					</comps>
-				</value>
-			</li>
-		</operations>
-	</Operation>
-	<!-- ================================ Toggle Perspective Trees ====================== -->
-	<Operation Class="ModSettingsFramework.PatchOperationModOption">
-		<defaultValue>True</defaultValue>
-		<label>Enable perspective trees</label>
-		<tooltip>Enable the alterations to the tree draw layer so items/chunks/pawns are not drawn in front of it. It should work with most tree-adding mods. This does the same as the mod "Perspective: Trees" from Owlchemist. (Default: True)</tooltip>
-		<id>RG_DisablePerspectiveTrees</id>
-		<category>RG_Core</category>
-		<order>15</order>
-		<operations>
-			<li Class="PatchOperationReplace">
-				<xpath>Defs/ThingDef[@Name="TreeBase" or defName="Plant_TreeArchean" or defName="Plant_TreeSnagroot" or defName="Plant_MagmaCactus" or defName="Plant_Willowgill" or defName="Boomshroom"]/altitudeLayer</xpath>
-				<value>
-					<altitudeLayer>Pawn</altitudeLayer>
-				</value>
-			</li>
-			<li MayRequire="ludeon.rimworld.ideology" Class="PatchOperationReplace">
-				<xpath>Defs/ThingDef[defName="Plant_TreeGauranlen"]/comps/li[@Class="CompProperties_TreeConnection"]/spawningPodOffset</xpath>
-				<value>
-					<spawningPodOffset>(-0.15, 3.2, -0.55)</spawningPodOffset>
-				</value>
-			</li>
-		</operations>
+	<!-- ================ Bathe joy activity chance ================ -->
+	<Operation Class="ModSettingsFramework.PatchOperationSliderFloat">
+		<label>Base chance of bathing</label>
+		<tooltip>Adjust the base chance of colonists bathing as a recreational activity. Default: 2.5</tooltip>
+		<id>RG_BaseChanceBathingActivity</id>
+		<category>RG_GeneralSettings</category>
+		<order>5</order>
+		<xpath>Defs/JoyGiverDef[defName="RG_BatheJoyGiver"]/baseChance</xpath>
+		<range>0~10</range>
+		<defaultValue>2.5</defaultValue>
 	</Operation>
 	<!-- ================ Replantable Anima Tree ================ -->
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
@@ -230,8 +147,8 @@
 		<label>Make anima tree replantable</label>
 		<tooltip>Allows for the anima tree to be replanted. Might lead to errors if used with another mod that does the same thing. (Default: False)</tooltip>
 		<id>RG_AnimaTreeReplant</id>
-		<category>RG_Core</category>
-		<order>50</order>
+		<category>RG_GeneralSettings</category>
+		<order>10</order>
 		<mods>
 			<li>Royalty</li>
 		</mods>
@@ -250,8 +167,8 @@
 		<label>Make gauranlen tree replantable</label>
 		<tooltip>Allows for the gauranlen tree to be replanted. Might lead to errors if used with another mod that does the same thing. (Default: False)</tooltip>
 		<id>RG_GauranlenTreeReplant</id>
-		<category>RG_Core</category>
-		<order>60</order>
+		<category>RG_GeneralSettings</category>
+		<order>15</order>
 		<mods>
 			<li>Ideology</li>
 		</mods>
@@ -270,8 +187,8 @@
 		<label>Make polux tree replantable</label>
 		<tooltip>Allows for the polux tree to be replanted. Might lead to errors if used with another mod that does the same thing. (Default: False)</tooltip>
 		<id>RG_PoluxTreeReplant</id>
-		<category>RG_Core</category>
-		<order>61</order>
+		<category>RG_GeneralSettings</category>
+		<order>20</order>
 		<mods>
 			<li>Biotech</li>
 		</mods>
@@ -290,8 +207,8 @@
 		<label>Make harbinger tree replantable</label>
 		<tooltip>Allows for the harbinger  tree to be replanted. Might lead to errors if used with another mod that does the same thing. (Default: False)</tooltip>
 		<id>RG_HarbingerTreeReplant</id>
-		<category>RG_Core</category>
-		<order>62</order>
+		<category>RG_GeneralSettings</category>
+		<order>25</order>
 		<mods>
 			<li>Anomaly</li>
 		</mods>
@@ -310,8 +227,8 @@
 		<label>Make archean tree replantable</label>
 		<tooltip>Allows for the archean  tree to be replanted. Might lead to errors if used with another mod that does the same thing. (Default: False)</tooltip>
 		<id>RG_ArcheanTreeReplant</id>
-		<category>RG_Core</category>
-		<order>63</order>
+		<category>RG_GeneralSettings</category>
+		<order>30</order>
 		<mods>
 			<li>Odyssey</li>
 		</mods>
@@ -324,34 +241,14 @@
 			</li>
 		</operations>
 	</Operation>
-	<!-- ================ Disable Snow on Plants ================ -->
-	<Operation Class="ModSettingsFramework.PatchOperationModOption">
-		<defaultValue>True</defaultValue>
-		<label>Disable snow on plants</label>
-		<tooltip>Allows for the player to disable the ability for snow to accumulate on plants. It's for people like me, who hate it. (Default: True)</tooltip>
-		<id>RG_DisableSnowOnPlants</id>
-		<category>RG_Core</category>
-		<order>65</order>
-		<operations>
-			<li Class="PatchOperationRemove">
-				<xpath>/Defs/ThingDef[plant/leaflessSnowOverlayGraphicPath]/plant/leaflessSnowOverlayGraphicPath</xpath>
-			</li>
-			<li Class="PatchOperationRemove">
-				<xpath>/Defs/ThingDef[plant/immatureSnowOverlayGraphicPath]/plant/immatureSnowOverlayGraphicPath</xpath>
-			</li>
-			<li Class="PatchOperationRemove">
-				<xpath>/Defs/ThingDef[plant/snowOverlayGraphicPath]/plant/snowOverlayGraphicPath</xpath>
-			</li>
-		</operations>
-	</Operation>
 	<!-- ================ Realistic Faction Placement ================ -->
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Enable realistic faction placement</label>
 		<tooltip>Prevent factions from spawning in extreme biomes like sea ice or extreme deserts unless it makes logical sense for them. Might lead to issues on tiny world maps. (Default: True)</tooltip>
 		<id>RG_RealisticFactionPlacement</id>
-		<category>RG_Core</category>
-		<order>40</order>
+		<category>RG_GeneralSettings</category>
+		<order>35</order>
 		<operations>
 			<li Class="PatchOperationAddModExtension">
 				<xpath>Defs/FactionDef[defName="OutlanderCivil" or defName="OutlanderRough"]</xpath>
@@ -734,14 +631,14 @@
 			</li>
 		</operations>
 	</Operation>
-		<!-- ================ World Map Beautification Project ================ -->
+	<!-- ================ World Map Beautification Project ================ -->
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Enable world map beautification</label>
 		<tooltip>Enable additional visual elements and better textures for the world map, making it look nicer and more detailed. Has no noticeable impact on performance and does not change game balancing. (Default: True)</tooltip>
 		<id>RG_WorldMapBeautificationProject</id>
-		<category>RG_Core</category>
-		<order>5</order>
+		<category>RG_GeneralSettings</category>
+		<order>35</order>
 		<operations>
 			<!-- Add the custom WorldGenStepDef -->
 			<li Class="PatchOperationAdd">
@@ -750,7 +647,7 @@
 					<WorldGenStepDef>
 						<defName>BiomesKitWorldGenStep</defName>
 						<order>999</order>
-						<worldGenStep Class="ReGrowthCore.LateBiomeWorker" />
+						<worldGenStep Class="ReGrowthCore.LateBiomeWorker"/>
 					</WorldGenStepDef>
 				</value>
 			</li>
@@ -823,29 +720,27 @@
 					</li>
 				</value>
 			</li>
-
 			<li Class="PatchOperationAddModExtension" MayRequire="Ludeon.RimWorld.Odyssey">
 				<xpath>/Defs/BiomeDef[defName="Glowforest"]</xpath>
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
-						     <forested>true</forested>
-                				     <uniqueHills>true</uniqueHills>
-                				     <forestSparseBelow>1100</forestSparseBelow>
-                				     <forestDenseAbove>1500</forestDenseAbove>
-                				     <mountainsSemiSnowyBelow>10</mountainsSemiSnowyBelow>
-               				    	     <impassableSemiSnowyBelow>25</impassableSemiSnowyBelow>
-                				     <impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
-                				     <mountainsSnowyBelow>-5</mountainsSnowyBelow>
-                				     <impassableSnowyBelow>0</impassableSnowyBelow>
-                				     <materialRandomRotation>false</materialRandomRotation>
-                				     <smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
-                				     <largeHillSizeMultiplier>2</largeHillSizeMultiplier>
-                				     <mountainSizeMultiplier>1.4</mountainSizeMultiplier>
-                				     <impassableSizeMultiplier>1.3</impassableSizeMultiplier>
+						<forested>true</forested>
+						<uniqueHills>true</uniqueHills>
+						<forestSparseBelow>1100</forestSparseBelow>
+						<forestDenseAbove>1500</forestDenseAbove>
+						<mountainsSemiSnowyBelow>10</mountainsSemiSnowyBelow>
+						<impassableSemiSnowyBelow>25</impassableSemiSnowyBelow>
+						<impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
+						<mountainsSnowyBelow>-5</mountainsSnowyBelow>
+						<impassableSnowyBelow>0</impassableSnowyBelow>
+						<materialRandomRotation>false</materialRandomRotation>
+						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
+						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
+						<mountainSizeMultiplier>1.4</mountainSizeMultiplier>
+						<impassableSizeMultiplier>1.3</impassableSizeMultiplier>
 					</li>
 				</value>
 			</li>
-
 			<!-- ================ Cold Biomes ================ -->
 			<li Class="PatchOperationAddModExtension">
 				<xpath>/Defs/BiomeDef[defName="BorealForest"]</xpath>
@@ -942,71 +837,62 @@
 					</li>
 				</value>
 			</li>
-
 			<li Class="PatchOperationAddModExtension" MayRequire="Ludeon.RimWorld.Odyssey">
 				<xpath>/Defs/BiomeDef[defName="GlacialPlain"]</xpath>
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
-						  <forested>true</forested>
-                				  <uniqueHills>true</uniqueHills>
-                				  <snowpilesBelow>999</snowpilesBelow>
-                				  <mountainsSnowyBelow>999</mountainsSnowyBelow>
-                				  <impassableSnowyBelow>999</impassableSnowyBelow>
-                				  <mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
-                				  <impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
-                				  <mountainsFullySnowyBelow>-21</mountainsFullySnowyBelow>
-                		 	          <impassableFullySnowyBelow>-21</impassableFullySnowyBelow>
-                				  <materialRandomRotation>false</materialRandomRotation>
-               					  <smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
-                				  <largeHillSizeMultiplier>2</largeHillSizeMultiplier>
-                				  <mountainSizeMultiplier>1.4</mountainSizeMultiplier>
-                				  <impassableSizeMultiplier>1.3</impassableSizeMultiplier>
+						<forested>true</forested>
+						<uniqueHills>true</uniqueHills>
+						<snowpilesBelow>999</snowpilesBelow>
+						<mountainsSnowyBelow>999</mountainsSnowyBelow>
+						<impassableSnowyBelow>999</impassableSnowyBelow>
+						<mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
+						<impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
+						<mountainsFullySnowyBelow>-21</mountainsFullySnowyBelow>
+						<impassableFullySnowyBelow>-21</impassableFullySnowyBelow>
+						<materialRandomRotation>false</materialRandomRotation>
+						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
+						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
+						<mountainSizeMultiplier>1.4</mountainSizeMultiplier>
+						<impassableSizeMultiplier>1.3</impassableSizeMultiplier>
 					</li>
 				</value>
 			</li>
-
-
-
 			<!-- ================ Arid Biomes ================ -->
-
-
 			<li Class="PatchOperationAddModExtension" MayRequire="Ludeon.RimWorld.Odyssey">
 				<xpath>/Defs/BiomeDef[defName="Scarlands"]</xpath>
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
-						     <uniqueHills>true</uniqueHills>
-                				     <mountainsSemiSnowyBelow>10</mountainsSemiSnowyBelow>
-                				     <impassableSemiSnowyBelow>25</impassableSemiSnowyBelow>
-                				     <mountainsSnowyBelow>-5</mountainsSnowyBelow>
-                				     <impassableSnowyBelow>0</impassableSnowyBelow>
-                				     <mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
-                			   	     <impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
-                				     <mountainsFullySnowyBelow>-21</mountainsFullySnowyBelow>
-                				     <impassableFullySnowyBelow>-21</impassableFullySnowyBelow>
-                				     <materialRandomRotation>false</materialRandomRotation>
-                				     <smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
-                				     <largeHillSizeMultiplier>2</largeHillSizeMultiplier>
-                				     <mountainSizeMultiplier>1.4</mountainSizeMultiplier>
-                				     <impassableSizeMultiplier>1.3</impassableSizeMultiplier>
+						<uniqueHills>true</uniqueHills>
+						<mountainsSemiSnowyBelow>10</mountainsSemiSnowyBelow>
+						<impassableSemiSnowyBelow>25</impassableSemiSnowyBelow>
+						<mountainsSnowyBelow>-5</mountainsSnowyBelow>
+						<impassableSnowyBelow>0</impassableSnowyBelow>
+						<mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
+						<impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
+						<mountainsFullySnowyBelow>-21</mountainsFullySnowyBelow>
+						<impassableFullySnowyBelow>-21</impassableFullySnowyBelow>
+						<materialRandomRotation>false</materialRandomRotation>
+						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
+						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
+						<mountainSizeMultiplier>1.4</mountainSizeMultiplier>
+						<impassableSizeMultiplier>1.3</impassableSizeMultiplier>
 					</li>
 				</value>
 			</li>
-
-				<li Class="PatchOperationAddModExtension" MayRequire="Ludeon.RimWorld.Odyssey">
+			<li Class="PatchOperationAddModExtension" MayRequire="Ludeon.RimWorld.Odyssey">
 				<xpath>/Defs/BiomeDef[defName="LavaField"]</xpath>
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
-						     <uniqueHills>true</uniqueHills>
-                				     <materialRandomRotation>false</materialRandomRotation>
-                				     <smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
-                				     <largeHillSizeMultiplier>2</largeHillSizeMultiplier>
-                				     <mountainSizeMultiplier>1.4</mountainSizeMultiplier>
-                				     <impassableSizeMultiplier>1.3</impassableSizeMultiplier>
+						<uniqueHills>true</uniqueHills>
+						<materialRandomRotation>false</materialRandomRotation>
+						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
+						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
+						<mountainSizeMultiplier>1.4</mountainSizeMultiplier>
+						<impassableSizeMultiplier>1.3</impassableSizeMultiplier>
 					</li>
 				</value>
 			</li>
-
-
 			<li Class="PatchOperationAddModExtension">
 				<xpath>/Defs/BiomeDef[defName="AridShrubland"]</xpath>
 				<value>
@@ -1207,7 +1093,6 @@
 					</li>
 				</value>
 			</li>
-
 			<!-- ================ Winter Taiga Biome ================ -->
 			<!--			<li Class="PatchOperationAdd" MayRequire="reel.FrozenForest">
 				<xpath>/Defs/BiomeDef[defName = "WinterTaiga"]/modExtensions/li[@Class="ReGrowthCore.BiomesKitControl"]</xpath>
@@ -1230,14 +1115,12 @@
 			</li>-->
 		</operations>
 	</Operation>
-
-
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>False</defaultValue>
 		<label>WMBP - fallback to default textures</label>
 		<tooltip>Display default textures if biome is not configured for world map beautification. (Default: False)</tooltip>
 		<id>RG_WMBPDefaultFallback</id>
-		<category>RG_Core</category>
-		<order>6</order>		
+		<category>RG_GeneralSettings</category>
+		<order>40</order>
 	</Operation>
 </Patch>

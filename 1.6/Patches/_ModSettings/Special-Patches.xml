@@ -1,43 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-	<!-- ================ Toggle weathers ================ -->
-	<Operation Class="ReGrowthCore.ReGrowthCore_WeatherStates">
-		<id>RG_ReGrowthCore_WeatherStates</id>
-		<category>RG_WeatherToggles</category>
-		<order>999</order>
+	<Operation Class="ReGrowthCore.ReGrowthCore_SmartFarming">
+		<id>RG_ReGrowthCore_SmartFarming</id>
+		<category>RG_SmartFarming</category>
+		<order>0</order>
 	</Operation>
 	<Operation Class="ReGrowthCore.ReGrowthCore_PerspectiveOres">
 		<id>RG_ReGrowthCore_PerspectiveOres</id>
 		<category>RG_PerspectiveOres</category>
-		<order>1000</order>
+		<order>0</order>
 	</Operation>
 	<Operation Class="ReGrowthCore.ReGrowthCore_MakeCamp">
 		<id>RG_ReGrowthCore_MakeCamp</id>
 		<category>RG_MakeCamp</category>
-		<order>1001</order>
+		<order>0</order>
 	</Operation>
-	<Operation Class="ReGrowthCore.ReGrowthCore_SmartFarming">
-		<id>RG_ReGrowthCore_SmartFarming</id>
-		<category>RG_SmartFarming</category>
-		<order>1002</order>
-	</Operation>
-	<Operation Class="ReGrowthCore.ReGrowthCore_SimpleFX">
-		<id>RG_ReGrowthCore_SimpleFX</id>
-		<category>RG_FXSection</category>
-		<order>1003</order>
-		<operations>
-			<li Class="PatchOperationAddModExtension">
-				<xpath>Defs/TerrainDef[defName="BrokenAsphalt"]</xpath>
-				<value>
-					<li Class="ReGrowthCore.HardSurface" />
-				</value>
-			</li>
-			<li Class="PatchOperationAddModExtension">
-				<xpath>Defs/StuffCategoryDef[defName="Metallic" or defName="Stony"]</xpath>
-				<value>
-					<li Class="ReGrowthCore.HardStuff" />
-				</value>
-			</li>
-		</operations>
+	<Operation Class="ReGrowthCore.ReGrowthCore_WeatherStates">
+		<id>RG_ReGrowthCore_WeatherStates</id>
+		<category>RG_WeatherSettings</category>
+		<order>0</order>
 	</Operation>
 </Patch>

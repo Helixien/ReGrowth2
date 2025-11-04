@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ================================ Leaf Spawner for Autumn leafs ====================== -->
+	<Operation Class="ModSettingsFramework.PatchOperationModOption">
+		<defaultValue>True</defaultValue>
+		<label>Enable autumn leaves spawners</label>
+		<tooltip>Enables autumn leaves spawners on trees. (Default: True)</tooltip>
+		<id>RG_EnableAutumnLeavesSpawners</id>
+		<category>RG_FXSettings</category>
+		<order>0</order>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="Plant_TreeOak"]</xpath>
+				<value>
+					<comps>
+						<li Class="CompProperties_Spawner">
+							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
+							<thingToSpawn>RG_Filth_LeavesTreeOak</thingToSpawn>
+							<spawnCount>1</spawnCount>
+							<spawnIntervalRange>3000~8000</spawnIntervalRange>
+							<spawnMaxAdjacent>3</spawnMaxAdjacent>
+							<saveKeysPrefix>leaves</saveKeysPrefix>
+						</li>
+					</comps>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="Plant_TreePoplar"]</xpath>
+				<value>
+					<comps>
+						<li Class="CompProperties_Spawner">
+							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
+							<thingToSpawn>RG_Filth_LeavesTreePopolar</thingToSpawn>
+							<spawnCount>1</spawnCount>
+							<spawnIntervalRange>3000~8000</spawnIntervalRange>
+							<spawnMaxAdjacent>3</spawnMaxAdjacent>
+							<saveKeysPrefix>leaves</saveKeysPrefix>
+						</li>
+					</comps>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="Plant_TreeBirch"]</xpath>
+				<value>
+					<comps>
+						<li Class="CompProperties_Spawner">
+							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
+							<thingToSpawn>RG_Filth_LeavesTreeBirch</thingToSpawn>
+							<spawnCount>1</spawnCount>
+							<spawnIntervalRange>3000~8000</spawnIntervalRange>
+							<spawnMaxAdjacent>3</spawnMaxAdjacent>
+							<saveKeysPrefix>leaves</saveKeysPrefix>
+						</li>
+					</comps>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="Plant_TreeMaple"]</xpath>
+				<value>
+					<comps>
+						<li Class="CompProperties_Spawner">
+							<compClass>ReGrowthCore.CompAutumnLeavesSpawner</compClass>
+							<thingToSpawn>RG_Filth_LeavesTreeOak</thingToSpawn>
+							<spawnCount>1</spawnCount>
+							<spawnIntervalRange>3000~8000</spawnIntervalRange>
+							<spawnMaxAdjacent>3</spawnMaxAdjacent>
+							<saveKeysPrefix>leaves</saveKeysPrefix>
+						</li>
+					</comps>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<!-- ================ Leaf beauty ================ -->
+	<Operation Class="ModSettingsFramework.PatchOperationSliderFloat">
+		<label>Leaf filth beauty value</label>
+		<tooltip>Adjust the base beauty value of fallen leaf filth. Default: -4</tooltip>
+		<id>RG_FallenLeafBeauty</id>
+		<category>RG_FXSettings</category>
+		<order>5</order>
+		<xpath>Defs/ThingDef[@Name="RG_BaseFilthLeaves"]/statBases/Beauty</xpath>
+		<range>-10~10</range>
+		<defaultValue>-4</defaultValue>
+	</Operation>
+	<Operation Class="ModSettingsFramework.PatchOperationSliderFloat">
+		<label>Leaf filth outdoor beauty value</label>
+		<tooltip>Adjust the base outdoor beauty value of fallen leaf filth. Default: 0</tooltip>
+		<id>RG_FallenLeafBeautyOutdoor</id>
+		<category>RG_FXSettings</category>
+		<order>10</order>
+		<xpath>Defs/ThingDef[@Name="RG_BaseFilthLeaves"]/statBases/BeautyOutdoors</xpath>
+		<range>-10~10</range>
+		<defaultValue>0</defaultValue>
+	</Operation>
+	<!-- ================================ Toggle Perspective Trees ====================== -->
+	<Operation Class="ModSettingsFramework.PatchOperationModOption">
+		<defaultValue>True</defaultValue>
+		<label>Enable perspective trees</label>
+		<tooltip>Enable the alterations to the tree draw layer so items/chunks/pawns are not drawn in front of it. It should work with most tree-adding mods. This does the same as the mod "Perspective: Trees" from Owlchemist. (Default: True)</tooltip>
+		<id>RG_DisablePerspectiveTrees</id>
+		<category>RG_FXSettings</category>
+		<order>15</order>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="TreeBase" or defName="Plant_TreeArchean" or defName="Plant_TreeSnagroot" or defName="Plant_MagmaCactus" or defName="Plant_Willowgill" or defName="Boomshroom"]/altitudeLayer</xpath>
+				<value>
+					<altitudeLayer>Pawn</altitudeLayer>
+				</value>
+			</li>
+			<li MayRequire="ludeon.rimworld.ideology" Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_TreeGauranlen"]/comps/li[@Class="CompProperties_TreeConnection"]/spawningPodOffset</xpath>
+				<value>
+					<spawningPodOffset>(-0.15, 3.2, -0.55)</spawningPodOffset>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<!-- ================================ Simple FX Settings ====================== -->
+	<Operation Class="ReGrowthCore.ReGrowthCore_SimpleFX">
+		<id>RG_ReGrowthCore_SimpleFX</id>
+		<category>RG_FXSettings</category>
+		<order>20</order>
+		<operations>
+			<li Class="PatchOperationAddModExtension">
+				<xpath>Defs/TerrainDef[defName="BrokenAsphalt"]</xpath>
+				<value>
+					<li Class="ReGrowthCore.HardSurface"/>
+				</value>
+			</li>
+			<li Class="PatchOperationAddModExtension">
+				<xpath>Defs/StuffCategoryDef[defName="Metallic" or defName="Stony"]</xpath>
+				<value>
+					<li Class="ReGrowthCore.HardStuff"/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<!-- ================ Disable Snow on Plants ================ -->
+	<Operation Class="ModSettingsFramework.PatchOperationModOption">
+		<defaultValue>True</defaultValue>
+		<label>Disable snow on plants</label>
+		<tooltip>Allows for the player to disable the ability for snow to accumulate on plants. It's for people like me, who hate it. (Default: True)</tooltip>
+		<id>RG_DisableSnowOnPlants</id>
+		<category>RG_FXSettings</category>
+		<order>25</order>
+		<operations>
+			<li Class="PatchOperationRemove">
+				<xpath>/Defs/ThingDef[plant/leaflessSnowOverlayGraphicPath]/plant/leaflessSnowOverlayGraphicPath</xpath>
+			</li>
+			<li Class="PatchOperationRemove">
+				<xpath>/Defs/ThingDef[plant/immatureSnowOverlayGraphicPath]/plant/immatureSnowOverlayGraphicPath</xpath>
+			</li>
+			<li Class="PatchOperationRemove">
+				<xpath>/Defs/ThingDef[plant/snowOverlayGraphicPath]/plant/snowOverlayGraphicPath</xpath>
+			</li>
+		</operations>
+	</Operation>
+	<!-- ================================ Toggle Perspective Trees ====================== -->
+	<Operation Class="ModSettingsFramework.PatchOperationModOption">
+		<defaultValue>True</defaultValue>
+		<label>Enable perspective trees</label>
+		<tooltip>Enable the alterations to the tree draw layer so items/chunks/pawns are not drawn in front of it. It should work with most tree-adding mods. This does the same as the mod "Perspective: Trees" from Owlchemist. (Default: True)</tooltip>
+		<id>RG_DisablePerspectiveTrees</id>
+		<category>RG_FXSettings</category>
+		<order>30</order>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="TreeBase" or defName="Plant_TreeArchean" or defName="Plant_TreeSnagroot" or defName="Plant_MagmaCactus" or defName="Plant_Willowgill" or defName="Boomshroom"]/altitudeLayer</xpath>
+				<value>
+					<altitudeLayer>Pawn</altitudeLayer>
+				</value>
+			</li>
+			<li MayRequire="ludeon.rimworld.ideology" Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_TreeGauranlen"]/comps/li[@Class="CompProperties_TreeConnection"]/spawningPodOffset</xpath>
+				<value>
+					<spawningPodOffset>(-0.15, 3.2, -0.55)</spawningPodOffset>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

@@ -6,8 +6,8 @@
 		<label>Enable new worldmap textures</label>
 		<tooltip>Enable new textures for world map biome tiles (Currently: Tundra, Arid).</tooltip>
 		<id>RG_WorldmapTextures</id>
-		<category>RG_Retextures</category>
-		<order>110</order>
+		<category>RG_RetexturesSettings</category>
+		<order>0</order>
 		<operations>
 			<li Class="PatchOperationReplace">
 				<xpath>/Defs/BiomeDef[defName = "Tundra"]/texture</xpath>
@@ -21,39 +21,16 @@
 					<texture>World/RG_Biomes/AridShrubland</texture>
 				</value>
 			</li>
-<!--			<li Class="PatchOperationReplace">
-				<xpath>/Defs/BiomeDef[defName = "Ocean" or defName = "Lake"]/texture</xpath>
-				<value>
-					<texture>World/RG_Biomes/Ocean</texture>
-				</value>
-			</li>-->
 		</operations>
 	</Operation>
-	<!-- ================ Rock Chunk Texture Replacer================ -->
-<!--	<Operation Class="ModSettingsFramework.PatchOperationModOption">
-		<defaultValue>True</defaultValue>
-		<label>Enable HD rock chunk textures</label>
-		<tooltip>Enable HD textures for rock chunks. Clean Texture user might want to disable it.</tooltip>
-		<id>RG_RockChunksTextures</id>
-		<category>RG_Retextures</category>
-		<order>111</order>
-		<operations>
-			<li Class="PatchOperationReplace">
-				<xpath>/Defs/ThingDef[@Name = "ChunkBase"]/graphicData/texPath</xpath>
-				<value>
-					<texPath>Things/Item/Chunk/RG_ChunkStone</texPath>
-				</value>
-			</li>
-		</operations>
-	</Operation>-->
 	<!-- ================ New rock atlas texture ================ -->
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Enable new rock texture</label>
 		<tooltip>Enable our new textures for rocks. Includes support for DLCs, Vanilla Expanded and Expanded Materials.</tooltip>
 		<id>RG_Alternative_Rock_Textures</id>
-		<category>RG_Retextures</category>
-		<order>115</order>
+		<category>RG_RetexturesSettings</category>
+		<order>5</order>
 		<operations>
 			<li Class="PatchOperationReplace">
 				<xpath>/Defs/ThingDef[defName="CollapsedRocks"]/graphicData/texPath</xpath>
@@ -140,8 +117,8 @@
 		<label>Enable new animal textures</label>
 		<tooltip>Enable new textures for animals, including colour variations.</tooltip>
 		<id>RG_NewAnimalTextures</id>
-		<category>RG_Retextures</category>
-		<order>130</order>
+		<category>RG_RetexturesSettings</category>
+		<order>900</order>
 		<operations>
 			<!-- ================================ Boomalope ====================== -->
 			<li Class="PatchOperationReplace">

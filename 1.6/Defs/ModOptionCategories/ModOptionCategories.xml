@@ -4,39 +4,46 @@
 		<modSettingsName>ReGrowth</modSettingsName>
 		<modPackageSettingsID>ReGrowth.BOTR.Core</modPackageSettingsID>
 	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== General Settings ==============-->
 	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_Core</defName>
+		<defName>RG_GeneralSettings</defName>
 		<label>General</label>
 		<order>0</order>
 	</ModSettingsFramework.ModOptionCategoryDef>
-	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_Retextures</defName>
-		<label>Textures</label>
-		<order>995</order>
-	</ModSettingsFramework.ModOptionCategoryDef>
-	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_MakeCamp</defName>
-		<label>Make camp options</label>
-		<order>997</order>
-	</ModSettingsFramework.ModOptionCategoryDef>
-	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_PerspectiveOres</defName>
-		<label>Perspective ores toggles</label>
-		<order>998</order>
-	</ModSettingsFramework.ModOptionCategoryDef>
-	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_WeatherToggles</defName>
-		<label>New Weather toggles</label>
-		<order>999</order>
-	</ModSettingsFramework.ModOptionCategoryDef>
-	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
-		<defName>RG_FXSection</defName>
-		<label>Visual Effects / FX</label>
-		<order>1000</order>
-	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Smart Farming Settings ==============-->
 	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
 		<defName>RG_SmartFarming</defName>
 		<label>Smart farming</label>
-		<order>1001</order>
+		<order>10</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Perspective Ore Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_PerspectiveOres</defName>
+		<label>Perspective ores toggles</label>
+		<order>20</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Make Camp Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_MakeCamp</defName>
+		<label>Make camp options</label>
+		<order>30</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Visual Effects Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_FXSettings</defName>
+		<label>Visual Effects</label>
+		<order>40</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Retexture Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_RetexturesSettings</defName>
+		<label>Textures</label>
+		<order>900</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Weather Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_WeatherSettings</defName>
+		<label>Weather toggles</label>
+		<order>999</order>
 	</ModSettingsFramework.ModOptionCategoryDef>
 </Defs>
