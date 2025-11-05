@@ -106,7 +106,8 @@
 		</race>
 		<comps>
 			<li Class="CompProperties_EggLayer">
-				<eggFertilizedDef>RG_EggWoollyStegosaurus</eggFertilizedDef>
+				<eggUnfertilizedDef>RG_EggWoollyStegosaurusUnfertilized</eggUnfertilizedDef>
+				<eggFertilizedDef>RG_EggWoollyStegosaurusFertilized</eggFertilizedDef>
 				<eggFertilizationCountMax>3</eggFertilizationCountMax>
 				<eggLayIntervalDays>12</eggLayIntervalDays>
 				<eggProgressUnfertilizedMax>0.6</eggProgressUnfertilizedMax>

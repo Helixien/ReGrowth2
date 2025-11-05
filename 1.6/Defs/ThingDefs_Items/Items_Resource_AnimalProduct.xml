@@ -33,7 +33,7 @@
 	</ThingDef>
 	<!--====================  Woolly Stegosaurus Eggs ===========================-->
 	<ThingDef ParentName="EggFertBase">
-		<defName>RG_EggWoollyStegosaurus</defName>
+		<defName>RG_EggWoollyStegosaurusFertilized</defName>
 		<label>woolly stegosaurus(fert.)</label>
 		<description>A fertilized woolly stegosaurus egg. If all goes well, it should hatch into a baby woolly stegosaurus. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
@@ -45,7 +45,23 @@
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<stackLimit>25</stackLimit>
 		<statBases>
-			<MarketValue>30</MarketValue>
+			<MarketValue>25</MarketValue>
+		</statBases>
+	</ThingDef>
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_EggWoollyStegosaurusUnfertilized</defName>
+		<label>woolly stegosaurus(unfert.)</label>
+		<description>A fertilized woolly stegosaurus egg. If all goes well, it should hatch into a baby woolly stegosaurus. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>0.9</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>25</MarketValue>
 		</statBases>
 		<comps>
 			<li Class="CompProperties_Hatcher">
