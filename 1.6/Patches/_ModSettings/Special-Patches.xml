@@ -20,4 +20,32 @@
 		<category>RG_WeatherSettings</category>
 		<order>0</order>
 	</Operation>
+	<Operation Class="ReGrowthCore.ReGrowthCore_ScatteredFlames">
+		<id>RG_ReGrowthCore_ScatteredFlames</id>
+		<category>RG_ScatteredFlames</category>
+		<order>0</order>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Fire"]/graphicData/graphicClass</xpath>
+				<value>
+					<graphicClass>ReGrowthCore.Graphic_FlickerMulti</graphicClass>
+				</value>
+			</li>
+			<li Class="PatchOperationFindMod">
+				<mods>
+					<li>Simple FX: Smoke</li>
+				</mods>
+				<match Class="PatchOperationAddModExtension">
+					<xpath>Defs/ThingDef[defName="Fire"]</xpath>
+					<value>
+						<li Class="Flecker.Flecker">
+							<particleSize>1.5</particleSize>
+							<alwaysSmoke>true</alwaysSmoke>
+							<driver>Fire</driver>
+						</li>
+					</value>
+				</match>
+			</li>
+		</operations>
+	</Operation>
 </Patch>

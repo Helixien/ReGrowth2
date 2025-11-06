@@ -34,6 +34,12 @@
 		<label>Visual Effects</label>
 		<order>40</order>
 	</ModSettingsFramework.ModOptionCategoryDef>
+	<!--=============== Scattered Flames Settings ==============-->
+	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
+		<defName>RG_ScatteredFlames</defName>
+		<label>Scattered Flames</label>
+		<order>41</order>
+	</ModSettingsFramework.ModOptionCategoryDef>
 	<!--=============== Retexture Settings ==============-->
 	<ModSettingsFramework.ModOptionCategoryDef ParentName="RG_ModOptionsBase">
 		<defName>RG_RetexturesSettings</defName>
