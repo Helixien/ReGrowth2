@@ -135,7 +135,7 @@
 			<li>
 				<label>hatchling</label>
 				<bodyGraphicData>
-					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegosaurus</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegausaurusBaby</texPath>
 					<drawSize>1.5</drawSize>
 					<shadowData>
 						<volume>(0.6, 0.4, 0.25)</volume>
@@ -143,7 +143,7 @@
 					</shadowData>
 				</bodyGraphicData>
 				<dessicatedBodyGraphicData>
-					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/dessicated_WoollyStegosaurus</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/WoollyStegosaurus/WoollyStegausaurusBaby_dessicated</texPath>
 					<drawSize>1.5</drawSize>
 				</dessicatedBodyGraphicData>
 			</li>
