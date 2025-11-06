@@ -30,7 +30,7 @@ namespace ReGrowthCore
 				zoneData.orchardAlignment)
 			{
 				var refCell = zoneData.cornerCell;
-				if (ReGrowthCore_SmartFarming.ModSettings.logging && Verse.Prefs.DevMode) map.debugDrawer.FlashCell(refCell, text: "REF");
+				if (ReGrowthCore_SmartFarming.ModSettings.logging && Prefs.DevMode) map.debugDrawer.FlashCell(refCell, text: "REF");
 
 				return ((refCell.x & 1) == 0) == ((c.x & 1) == 0) && ((refCell.z & 1) == 0) == ((c.z & 1) == 0) ? __result : null;
 			}

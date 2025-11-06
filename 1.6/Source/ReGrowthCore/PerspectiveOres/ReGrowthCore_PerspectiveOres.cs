@@ -1,4 +1,4 @@
-﻿using ModSettingsFramework;
+using ModSettingsFramework;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +61,7 @@ namespace ReGrowthCore
 
         void DrawList(Listing_Standard options)
         {
-                                           //List out all the unremoved defs from the compiled database
+            //List out all the unremoved defs from the compiled database
             for (int i = PerspectiveOresUtility.mineableDefs.Count; i-- > 0;)
             {
                 ThingDef def = PerspectiveOresUtility.mineableDefs[i];

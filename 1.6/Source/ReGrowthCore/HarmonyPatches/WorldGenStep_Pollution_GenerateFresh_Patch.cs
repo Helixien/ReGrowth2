@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;

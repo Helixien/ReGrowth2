@@ -124,13 +124,13 @@
 			<li Class="PatchOperationAddModExtension">
 				<xpath>Defs/TerrainDef[defName="BrokenAsphalt"]</xpath>
 				<value>
-					<li Class="ReGrowthCore.HardSurface"/>
+					<li Class="ReGrowthCore.HardSurface" />
 				</value>
 			</li>
 			<li Class="PatchOperationAddModExtension">
 				<xpath>Defs/StuffCategoryDef[defName="Metallic" or defName="Stony"]</xpath>
 				<value>
-					<li Class="ReGrowthCore.HardStuff"/>
+					<li Class="ReGrowthCore.HardStuff" />
 				</value>
 			</li>
 		</operations>
@@ -177,5 +177,14 @@
 				</value>
 			</li>
 		</operations>
+	</Operation>
+
+	<!-- ================================ Snow On Walls ====================== -->
+	<Operation Class="ReGrowthCore.ReGrowthCore_SnowOnWalls">
+		<id>RG_ReGrowthCore_SnowOnWalls</id>
+		<category>RG_FXSettings</category>
+		<order>35</order>
+		<label>Enable snow on walls</label>
+		<tooltip>Toggles the snow overlay on walls. (Default: True)</tooltip>
 	</Operation>
 </Patch>

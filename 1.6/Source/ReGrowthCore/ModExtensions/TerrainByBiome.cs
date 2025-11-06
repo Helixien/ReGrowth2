@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -40,7 +40,7 @@ namespace ReGrowthCore
 
         public Graphic graphicPolluted = BaseContent.BadGraphic;
 
-        public Material DrawMatSingle(TerrainDef def) 
+        public Material DrawMatSingle(TerrainDef def)
         {
             if (graphic != null && graphic != BaseContent.BadGraphic)
             {

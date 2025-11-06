@@ -15,7 +15,6 @@ namespace ReGrowthCore
 		//
 		//public static ThingDef RG_Mote_FrostGlow;
 
-
 		public static ThingDef RG_DustDevil;
 
 		public static ThingDef RG_Mote_DevilDustPuff;

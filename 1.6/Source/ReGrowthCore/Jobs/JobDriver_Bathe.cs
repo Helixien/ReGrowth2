@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -32,7 +32,7 @@ namespace ReGrowthCore
             this.FailOn(delegate
             {
                 StringBuilder failReason = new();
-                bool isGoodSpot = JoyGiver_Bathe.IsGoodSpotForBathing(pawn.Map, TargetA.Cell, 
+                bool isGoodSpot = JoyGiver_Bathe.IsGoodSpotForBathing(pawn.Map, TargetA.Cell,
                     JoyGiver_Bathe.GetComfortTempRange(pawn), failReason, pawn);
                 if (isGoodSpot is false && failReason.Length > 0)
                 {

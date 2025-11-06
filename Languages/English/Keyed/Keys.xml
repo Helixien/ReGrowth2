@@ -35,21 +35,22 @@
 	<RG.TimeRemaining>Time remaining: {0}</RG.TimeRemaining>
 	<RG.VisitCamp>Visit abandoned camp</RG.VisitCamp>
 	<RG.PlantPollutionNoDeath>Plants no longer die from pollution</RG.PlantPollutionNoDeath>
-    <RG.PlantPollutionNoDeathDesc>When enabled, plants will no longer die as a result of pollution. They will still be polluted, but will not die.</RG.PlantPollutionNoDeathDesc>
+	<RG.PlantPollutionNoDeathDesc>When enabled, plants will no longer die as a result of pollution. They will still be polluted, but will not die.</RG.PlantPollutionNoDeathDesc>
 	<RG.ChunkContains>Contains ore: {0}</RG.ChunkContains>
 	<RG.ToggleWorldMapBeautification>Toggle world map beautification</RG.ToggleWorldMapBeautification>
+	<RG.Enable>Enable {0}</RG.Enable>
 	<SimpleFxSplashes.Settings.SizeMultiplier>Splash size (default: {0}): {3}</SimpleFxSplashes.Settings.SizeMultiplier>
 	<SimpleFxSplashes.Settings.SizeMultiplier.Desc>Adjust how big the splash particles are.</SimpleFxSplashes.Settings.SizeMultiplier.Desc>
-	
+
 	<SimpleFxSplashes.Settings.SplashRarity>Splash rarity (default: {0}): {3}</SimpleFxSplashes.Settings.SplashRarity>
 	<SimpleFxSplashes.Settings.SplashRarity.Desc>Lowering this will spawn more splash particle, and increasing will make them rarer. This impacts performance.</SimpleFxSplashes.Settings.SplashRarity.Desc>
-	
+
 	<SimpleFxSplashes.Settings.FilterNature>Filter natural tiles (default: {0}): {3}</SimpleFxSplashes.Settings.FilterNature>
 	<SimpleFxSplashes.Settings.FilterNature.Desc>A reduction on natural cells (such as rough stone) allowed to splash rain. Only allow {0}% of natural tiles to splash rain. Increasing this impacts performance.</SimpleFxSplashes.Settings.FilterNature.Desc>
-	
+
 	<SimpleFxVapor.Settings.ConsiderOutdoors>Consider outdoor temperature</SimpleFxVapor.Settings.ConsiderOutdoors>
 	<SimpleFxVapor.Settings.ConsiderOutdoors.Desc>Do not show indoor vapors if it's freezing cold outside.</SimpleFxVapor.Settings.ConsiderOutdoors.Desc>
-	
+
 	<SmartFarming.Icon.On>On</SmartFarming.Icon.On>
 	<SmartFarming.Icon.On.Desc>Sow the selected plant so long as it is currently the grow season.</SmartFarming.Icon.On.Desc>
 	<SmartFarming.Icon.Off>Off</SmartFarming.Icon.Off>
@@ -67,62 +68,62 @@
 	<SmartFarming.Icon.MergeZones>Merge zones</SmartFarming.Icon.MergeZones>
 	<SmartFarming.Icon.MergeZones.Desc>Merge the selected zones into a single zone, using the first selected zone as the reference.
 	</SmartFarming.Icon.MergeZones.Desc>
-	
+
 	<SmartFarming.Icon.Low>Low</SmartFarming.Icon.Low>
 	<SmartFarming.Icon.Normal>Normal</SmartFarming.Icon.Normal>
 	<SmartFarming.Icon.Preferred>Preferred</SmartFarming.Icon.Preferred>
 	<SmartFarming.Icon.Important>Important</SmartFarming.Icon.Important>
 	<SmartFarming.Icon.Critical>Critical</SmartFarming.Icon.Critical>
 	<SmartFarming.Icon.Priority.Desc>Pawns are encouraged to sow and harvest plants in order of priority.</SmartFarming.Icon.Priority.Desc>
-	
+
 	<SmartFarming.Icon.NoPettyJobs>No petty jobs</SmartFarming.Icon.NoPettyJobs>
 	<SmartFarming.Icon.NoPettyJobs.Desc>Pawns will not sow new plants to this zone unless there is enough work to do, configured in the settings.</SmartFarming.Icon.NoPettyJobs.Desc>
 	<SmartFarming.Settings.Enabled>Enable</SmartFarming.Settings.Enabled>
 	<SmartFarming.Settings.Enabled.Desc>Enable or disable smart farming.</SmartFarming.Settings.Enabled.Desc>
-	
+
 	<SmartFarming.Settings.ColdSowing>Allow cold sowing</SmartFarming.Settings.ColdSowing>
 	<SmartFarming.Settings.ColdSowing.Desc>Normally, the game does not allow sowing when the ground is frozen, even if the type of plant being sown tolerates freezing temperatures. Disable this to maintain vanilla rules.</SmartFarming.Settings.ColdSowing.Desc>
-	
+
 	<SmartFarming.Settings.AllowHarvest>Allow harvest gizmo</SmartFarming.Settings.AllowHarvest>
 	<SmartFarming.Settings.AllowHarvest.Desc>Show the "allow harvest" gizmo. Enabling this may have some performance impact for high population colonies with many crop workers. Changing this requires a game restart.</SmartFarming.Settings.AllowHarvest.Desc>
-	
+
 	<SmartFarming.Settings.SmartSowLabel>Smart sow:</SmartFarming.Settings.SmartSowLabel>
 	<SmartFarming.Settings.ProcessedFoodLabel>Processed food factor:</SmartFarming.Settings.ProcessedFoodLabel>
-	
+
 	<SmartFarming.Settings.UseAverageTemperature>Use average temperature prediction instead of low</SmartFarming.Settings.UseAverageTemperature>
 	<SmartFarming.Settings.UseAverageTemperature.Desc>When predicting the weather for the Smart Sow feature, use the average temperature for the day instead of the low. Using the average will extend the grow season at the risk of losing some crops.</SmartFarming.Settings.UseAverageTemperature.Desc>
-	
+
 	<SmartFarming.Settings.UseAverageFertility>Use average zone fertility instead of weakest</SmartFarming.Settings.UseAverageFertility>
 	<SmartFarming.Settings.UseAverageFertility.Desc>When predicting plant growth, use the average zone fertility instead of the zone's weakest fertility.</SmartFarming.Settings.UseAverageFertility.Desc>
-	
+
 	<SmartFarming.Settings.AutoCutBlighted>Automatically designate blighted crops for disposal</SmartFarming.Settings.AutoCutBlighted>
 	<SmartFarming.Settings.AutoCutBlighted.Desc>If a crop becomes blighted, a cut work order will automatically be designated.</SmartFarming.Settings.AutoCutBlighted.Desc>
-	
+
 	<SmartFarming.Settings.AutoHarvestNow>Harvest early if threatened</SmartFarming.Settings.AutoHarvestNow>
 	<SmartFarming.Settings.AutoHarvestNow.Desc>If tonight's weather is going to be deadly cold, designate all plants for an immediate harvest.</SmartFarming.Settings.AutoHarvestNow.Desc>
 	<SmartFarming.Message.AutoHarvestNow>Plants designated for an early harvest due tonight's forecasted weather.</SmartFarming.Message.AutoHarvestNow>
-	
+
 	<SmartFarming.Settings.OrchardAlignment>Alignment gizmo</SmartFarming.Settings.OrchardAlignment>
 	<SmartFarming.Settings.OrchardAlignment.Desc>Enables a gizmo that prompts pawns to plant trees in careful rows.</SmartFarming.Settings.OrchardAlignment.Desc>
-	
+
 	<SmartFarming.Settings.AutoCutDying>Automatically try to harvest dying crops</SmartFarming.Settings.AutoCutDying>
 	<SmartFarming.Settings.AutoCutDying.Desc>If a crop dies to the cold, try to automatically harvest any surviving crops before it is too late. Changing this requires a game restart.</SmartFarming.Settings.AutoCutDying.Desc>
-	
+
 	<SmartFarming.Settings.ProcessedFood.Desc>When grow zones give an estimated potential nutrition yield, it multiplies the raw food's nutrition by this value. For reference, a Simple Meal multiplies the value by 1.8, Fine Meals by 1.2, and Lavish Meals by 1.0.</SmartFarming.Settings.ProcessedFood.Desc>
-	
+
 	<SmartFarming.Settings.MinTempSlider>Minimum temperature allowance (Mod default: {0}, Min: {1}, Max: {2}): </SmartFarming.Settings.MinTempSlider>
 	<SmartFarming.Settings.MinTemp>When predicting the weather of the earliest harvest day, consider anything below this temperature unacceptable. Plants can potentially die at 0C, but can usually survive if it's only barely freezing for a few hours. However, random daily temperatre deviation may reduce accuracy.</SmartFarming.Settings.MinTemp>
-	
+
 	<SmartFarming.Settings.PettyJobsSlider>Petty jobs margin (Mod default: {0}, Min: {1}, Max: {2}): </SmartFarming.Settings.PettyJobsSlider>
 	<SmartFarming.Settings.PettyJobs>If "no petty jobs" is enabled on a zone, pawns will not sow a field unless there is at least this percentage of empty tiles to sow. This can be useful for animal grazing zones.</SmartFarming.Settings.PettyJobs>
-	
+
 	<SmartFarming.Inspector.MinHarvestDay>\nEarliest harvest day: </SmartFarming.Inspector.MinHarvestDay>
 	<SmartFarming.Inspector.MinHarvestDayFail>\nPlants will likely die before harvest</SmartFarming.Inspector.MinHarvestDayFail>
 	<SmartFarming.Inspector.Fertility>\nFertility: {0} average / {1} weakest</SmartFarming.Inspector.Fertility>
 	<SmartFarming.Inspector.AverageGrowth>\nAverage growth: </SmartFarming.Inspector.AverageGrowth>
 	<SmartFarming.Inspector.Yield>\nPotential nutrition: </SmartFarming.Inspector.Yield>
 	<SmartFarming.Inspector.DaysWorth> ({0} days worth)</SmartFarming.Inspector.DaysWorth>
-	
+
 	<SmartFarming.Icon.SetAll>Set zones to </SmartFarming.Icon.SetAll>
 	<SmartFarming.Icon.ConfirmMergeZones>Are you sure you want to merge these zones? This action cannot be undone.</SmartFarming.Icon.ConfirmMergeZones>
 </LanguageData>

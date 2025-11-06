@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using ModSettingsFramework;
 using RimWorld.Planet;
 using System;
@@ -15,8 +15,8 @@ namespace ReGrowthCore
         public static ModContentPack modPack;
         public ReGrowthMod(ModContentPack pack) : base(pack)
         {
-            modPack = pack;           
-           
+            modPack = pack;
+
             var harmony = new Harmony("ReGrowthCore.WMB");
             var method = AccessTools.Method(typeof(LoadedModManager), "ApplyPatches",
                 new[] { typeof(XmlDocument), typeof(Dictionary<XmlNode, LoadableXmlAsset>) });
@@ -68,14 +68,14 @@ namespace ReGrowthCore
         }
 
     }
-    
+
     [StaticConstructorOnStartup]
     public static class Startup
     {
         static Startup()
         {
-           
-            new Harmony("Helixien.ReGrowthCore").PatchAll();            
+
+            new Harmony("Helixien.ReGrowthCore").PatchAll();
 
         }
     }

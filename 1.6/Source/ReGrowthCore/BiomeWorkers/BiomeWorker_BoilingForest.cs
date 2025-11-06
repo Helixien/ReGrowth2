@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ using Verse;
 
 namespace ReGrowthCore
 {
-	public class BiomeWorker_BoilingForest : BiomeWorker
-	{
+    public class BiomeWorker_BoilingForest : BiomeWorker
+    {
         public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
         {
             if (tile.WaterCovered)
@@ -27,13 +27,13 @@ namespace ReGrowthCore
                 return 0f;
             }
             Vector3 tileCenter = Find.WorldGrid.GetTileCenter(planetTile.tileId);
-			var value = BiomePerlin.GetNoiseFor(biome).GetValue(tileCenter);
-			if (value >= 0.3f)
+            var value = BiomePerlin.GetNoiseFor(biome).GetValue(tileCenter);
+            if (value >= 0.3f)
             {
                 var initValue = 16f + (tile.temperature - 7f) + (tile.rainfall - 600f) / 180f;
                 return initValue + value;
             }
             return -100f;
-		}
-	}
+        }
+    }
 }

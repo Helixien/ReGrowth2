@@ -8,19 +8,19 @@ using System.Linq;
 
 namespace ReGrowthCore
 {
-	[StaticConstructorOnStartup]
+    [StaticConstructorOnStartup]
     public static class PerspectiveOresUtility
-	{
-		static PerspectiveOresUtility()
+    {
+        static PerspectiveOresUtility()
         {
             var list = DefDatabase<ThingDef>.AllDefsListForReading;
             for (int i = list.Count; i-- > 0;)
             {
                 var def = list[i];
-                if (def.thingClass == mineable && def.building != null && def.building.isResourceRock) 
-					mineableDefs.Add(def);
+                if (def.thingClass == mineable && def.building != null && def.building.isResourceRock)
+                    mineableDefs.Add(def);
             }
-		}
+        }
         public static System.Type mineable = typeof(Mineable);
         public static List<ThingDef> mineableDefs = new List<ThingDef>();
 

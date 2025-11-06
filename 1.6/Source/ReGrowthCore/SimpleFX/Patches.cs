@@ -85,7 +85,6 @@ namespace ReGrowthCore
 		}
 	}
 
-
 	[HarmonyPatch(typeof(SteadyEnvironmentEffects), nameof(SteadyEnvironmentEffects.DoCellSteadyEffects))]
 	static class Patch_DoCellSteadyEffects
 	{

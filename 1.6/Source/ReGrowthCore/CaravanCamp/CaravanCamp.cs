@@ -90,7 +90,8 @@ namespace ReGrowthCore
         private void RestoreCampMap()
         {
             SyncGrids(Map.terrainGrid.underGrid, savedCamp.terrainGrid.underGrid, delegate (int i, TerrainDef def)
-            {   if (def is null) return;
+            {
+                if (def is null) return;
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetUnderTerrain(cell, def);
             });

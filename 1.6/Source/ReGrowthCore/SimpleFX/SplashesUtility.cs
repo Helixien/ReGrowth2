@@ -112,9 +112,6 @@ namespace ReGrowthCore
 			//Record
 			hardGrids[map.uniqueID] = workingList.ToArray();
 
-			//Debug
-			if (Prefs.DevMode) Log.Message("[Simple FX: Splashes] Splash grid build with " + workingList.Count().ToString() + " cells.");
-
 			SetActiveGrid(map);
 		}
 

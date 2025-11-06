@@ -22,7 +22,6 @@ namespace ReGrowthCore
 		}
 	}
 
-
 	public enum BiomesKitHilliness
 	{
 		Undefined,

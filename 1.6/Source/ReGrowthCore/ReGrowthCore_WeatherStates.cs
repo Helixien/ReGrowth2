@@ -1,11 +1,10 @@
-﻿using ModSettingsFramework;
+using ModSettingsFramework;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
 namespace ReGrowthCore
 {
-
     public class ReGrowthCore_WeatherStates : PatchOperationWorker
     {
         public Dictionary<string, bool> weatherDefStates = new Dictionary<string, bool>();
@@ -47,25 +46,10 @@ namespace ReGrowthCore
                 if (weatherDef != null)
                 {
                     var value = weatherState.Value;
-                    CheckboxLabeled(list, "Enable " + weatherDef.label, ref value);
+                    DoCheckbox(list, "RG.Enable".Translate(weatherDef.label), ref value, weatherDef.description);
                     weatherDefStates[weatherState.Key] = value;
-                    list.Gap(5);
                 }
             }
-        }
-
-        public override int SettingsHeight()
-        {
-            var scrollHeight = 0;
-            foreach (var weatherState in weatherDefStates.ToList())
-            {
-                var weatherDef = DefDatabase<WeatherDef>.GetNamedSilentFail(weatherState.Key);
-                if (weatherDef != null)
-                {
-                    scrollHeight += 29;
-                }
-            }
-            return scrollHeight;
         }
 
         public override void Reset()

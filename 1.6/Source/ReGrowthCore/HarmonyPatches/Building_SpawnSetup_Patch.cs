@@ -1,8 +1,9 @@
 using HarmonyLib;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(Building), nameof(Building.SpawnSetup))]
     public static class Building_SpawnSetup_Patch
@@ -12,6 +13,12 @@ namespace RimWorld
             if (__instance is Mineable mineable && mineable.IsSpaceRock())
             {
                 mineable.UpdateGraphic();
+            }
+
+            if (__instance.def.building != null && __instance.def.building.isWall)
+            {
+                var manager = __instance.Map.GetComponent<WallSnowManager>();
+                manager.UpdateWallSnowState(__instance);
             }
         }
     }

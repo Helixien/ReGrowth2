@@ -1,4 +1,3 @@
-using ModSettingsFramework;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ using Verse;
 
 namespace ReGrowthCore
 {
-
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class HotSwappableAttribute : Attribute
     {
@@ -17,6 +15,8 @@ namespace ReGrowthCore
     [StaticConstructorOnStartup]
     public static class ReGrowthUtils
     {
+        private static ReGrowthCore_SnowOnWalls _snowOnWallsPatchWorker;
+        public static ReGrowthCore_SnowOnWalls SnowOnWallsPatchWorker => _snowOnWallsPatchWorker ??= ReGrowthMod.modPack.Patches.OfType<ReGrowthCore_SnowOnWalls>().FirstOrDefault();
         private static ReGrowthCore_MakeCamp _setUpCampPatchWorker;
         public static ReGrowthCore_MakeCamp MakeCampPatchWorker => _setUpCampPatchWorker ??= ReGrowthMod.modPack.Patches.OfType<ReGrowthCore_MakeCamp>().FirstOrDefault();
         public static List<(TerrainDef, DefExtension_ShaderSpeedMult)> terrrainWithdefExtensions = new List<(TerrainDef, DefExtension_ShaderSpeedMult)>();
@@ -51,7 +51,7 @@ namespace ReGrowthCore
         public static bool IsBathingNow(this Pawn pawn)
         {
             if (pawn?.jobs?.curDriver is null) return false;
-            return pawn.jobs.curDriver is JobDriver_Bathe driver_Bathe 
+            return pawn.jobs.curDriver is JobDriver_Bathe driver_Bathe
             && driver_Bathe.IsBathingNow() || pawn.jobs.curJob.swimming;
         }
 

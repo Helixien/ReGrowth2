@@ -10,11 +10,12 @@ namespace ReGrowthCore
 {
 	public class MapComponent_SmartFarming : MapComponent
 	{
-		int ticks, currentDay, tile, hour, sunrise, sunset, lastMessageDay = -1;
+		int ticks, currentDay, hour, sunrise, sunset, lastMessageDay = -1;
+		PlanetTile tile;
 		public Dictionary<int, ZoneData> growZoneRegistry = new Dictionary<int, ZoneData>();
 		public float tempOffsetCache, latitude, longitudeTuning, baseTemperature, worldAverage, sunLow, sunHigh;
 		List<string> report = new List<string>();
-		RimWorld.Planet.World world;
+		World world;
 
 		public MapComponent_SmartFarming(Map map) : base(map) { }
 
@@ -153,7 +154,7 @@ namespace ReGrowthCore
 
 			while (simulatedGrowth < growthNeeded && simulatedGrowth != -1)
 			{
-				simulatedGrowth = SimulateDay(numOfDays, simulatedGrowth, zone, plant, zoneData, world, tile, simulationReport);
+				simulatedGrowth = SimulateDay(numOfDays, simulatedGrowth, zone, plant, zoneData, simulationReport);
 
 				if (++numOfDays > 360)
 				{
@@ -173,7 +174,7 @@ namespace ReGrowthCore
 			return simulatedGrowth == -1 ? -1 : (numOfDays * 60000) + Find.TickManager.TicksAbs;
 		}
 
-		int SimulateDay(int numOfDays, int simulatedGrowth, Zone zone, ThingDef plant, ZoneData zoneData, RimWorld.Planet.World world, int tile, List<string> simulationReport)
+		int SimulateDay(int numOfDays, int simulatedGrowth, Zone zone, ThingDef plant, ZoneData zoneData, List<string> simulationReport)
 		{
 			int ticksOfLight = 32500; // 32500 = 60,000 ticks * .54167, only the hours this plant is "awake"
 

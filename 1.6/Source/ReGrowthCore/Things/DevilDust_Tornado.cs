@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -10,7 +10,7 @@ using Verse.Sound;
 
 namespace ReGrowthCore
 {
-    [StaticConstructorOnStartup]
+	[StaticConstructorOnStartup]
 	public class DevilDust_Tornado : ThingWithComps
 	{
 		private Vector2 realPosition;
@@ -149,12 +149,12 @@ namespace ReGrowthCore
 			var movedPosition = realPosition.Moved(direction, 17f / 600f);
 			var cell = new Vector3(movedPosition.x, 0f, movedPosition.y).ToIntVec3();
 			if (this.Map is null)
-            {
+			{
 				Destroy();
 				return;
-            }
+			}
 			if (cell.IsValid && this.Map != null)
-            {
+			{
 				if (!cell.InBounds(this.Map) || !cell.Roofed(this.Map))
 				{
 					realPosition = movedPosition;
@@ -215,16 +215,16 @@ namespace ReGrowthCore
 			}
 		}
 
-        public override void DrawAt(global::UnityEngine.Vector3 drawLoc, bool flip = false)
-        {
-            Rand.PushState();
-            Rand.Seed = thingIDNumber;
-            for (int i = 0; i < 90; i++)
-            {
-                DrawTornadoPart(PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
-            }
-            Rand.PopState();
-        }
+		public override void DrawAt(global::UnityEngine.Vector3 drawLoc, bool flip = false)
+		{
+			Rand.PushState();
+			Rand.Seed = thingIDNumber;
+			for (int i = 0; i < 90; i++)
+			{
+				DrawTornadoPart(PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
+			}
+			Rand.PopState();
+		}
 
 		private void DrawTornadoPart(float distanceFromCenter, float initialAngle, float speedMultiplier, float colorMultiplier)
 		{

@@ -1,7 +1,8 @@
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(Mineable), nameof(Mineable.ExposeData))]
     public static class Mineable_ExposeData_Patch

@@ -4,7 +4,6 @@ using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using static ReGrowthCore.ResourceBank;
 
 namespace ReGrowthCore
 {
@@ -50,7 +49,7 @@ namespace ReGrowthCore
 			sowGizmo = new Command_Action()
 			{
 				hotKey = KeyBindingDefOf.Command_ItemForbid,
-				icon = sowIconOn,
+				icon = ResourceBank.sowIconOn,
 				action = () => SwitchSowMode(comp, zone)
 			};
 			priorityGizmo = new Command_Action()

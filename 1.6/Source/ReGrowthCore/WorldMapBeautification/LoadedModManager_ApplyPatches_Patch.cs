@@ -3,7 +3,6 @@ using Verse;
 using System.Collections.Generic;
 using System.Xml;
 
-
 namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(LoadedModManager))]
@@ -13,7 +12,7 @@ namespace ReGrowthCore
     {
         public static void Postfix(XmlDocument xmlDoc, Dictionary<XmlNode, LoadableXmlAsset> assetlookup)
         {
-         
+
             var patchOpSwapExtension = new PatchOperationAttributeSet
             {
                 xpath = "Defs/BiomeDef/modExtensions/li[@Class=\"BiomesKit.BiomesKitControls\"]",

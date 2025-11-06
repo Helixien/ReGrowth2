@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Verse;
@@ -15,7 +15,7 @@ namespace ReGrowthCore
             foreach (var instruction in codeInstructions)
             {
                 yield return instruction;
-                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder lb 
+                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder lb
                     && lb.LocalIndex == 9)
                 {
                     yield return new CodeInstruction(OpCodes.Ldloc_S, 9);

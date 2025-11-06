@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using System.Linq;
 using UnityEngine;
 using Verse;

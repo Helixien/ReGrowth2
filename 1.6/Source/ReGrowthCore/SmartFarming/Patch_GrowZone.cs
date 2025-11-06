@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System;
 using System.Text;
 using UnityEngine;
-using static ReGrowthCore.ZoneData;
 using Verse.AI;
 using System.Reflection;
 using System.Linq;
+using static ReGrowthCore.ZoneData;
 
 namespace ReGrowthCore
 {
@@ -165,7 +165,7 @@ namespace ReGrowthCore
 					break;
 			}
 			yield return priorityGizmo;
-			
+
 			if (Find.Selector.selected.Count > 1)
 			{
 				yield return new Command_Action()
@@ -180,7 +180,7 @@ namespace ReGrowthCore
 							var selectedGrowZones = Find.Selector.SelectedObjects.OfType<Zone>()
 								.Where(z => z is IPlantToGrowSettable)
 								.ToList();
-							
+
 							zoneData.MergeZones(thisZone, selectedGrowZones);
 						}));
 					}

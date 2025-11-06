@@ -80,6 +80,7 @@ namespace ReGrowthCore
 			if (enabled)
 			{
 				options.GapLine();
+				scrollHeight += 12;
 				DoCheckbox(options, "SmartFarming.Settings.AutoHarvestNow".Translate(), ref autoHarvestNow, "SmartFarming.Settings.AutoHarvestNow.Desc".Translate());
 				DoCheckbox(options, "SmartFarming.Settings.AutoCutBlighted".Translate(), ref autoCutBlighted, "SmartFarming.Settings.AutoCutBlighted.Desc".Translate());
 				DoCheckbox(options, "SmartFarming.Settings.AutoCutDying".Translate(), ref autoCutDying, "SmartFarming.Settings.AutoCutDying.Desc".Translate());
@@ -93,7 +94,7 @@ namespace ReGrowthCore
 				DoLabel(options, "SmartFarming.Settings.ProcessedFoodLabel".Translate(), null);
 
 				options.TextFieldNumeric(ref processedFoodFactor, ref buffer, 0f, 99f);
-				scrollHeight += 24;
+				scrollHeight += 29;
 
 				DoLabel(options, "SmartFarming.Settings.ProcessedFood.Desc".Translate(), null);
 

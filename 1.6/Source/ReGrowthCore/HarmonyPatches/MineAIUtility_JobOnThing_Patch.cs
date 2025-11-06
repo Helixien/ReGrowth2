@@ -16,7 +16,7 @@ namespace ReGrowthCore
             {
                 return true;
             }
-            
+
             if (!t.def.mineable)
             {
                 return false;
@@ -29,7 +29,6 @@ namespace ReGrowthCore
             {
                 return false;
             }
-
 
             if (!new HistoryEvent(HistoryEventDefOf.Mined, pawn.Named(HistoryEventArgsNames.Doer)).Notify_PawnAboutToDo_Job())
             {

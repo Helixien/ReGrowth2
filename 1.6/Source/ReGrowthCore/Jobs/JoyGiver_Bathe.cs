@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Linq;
 using System.Text;
@@ -52,7 +52,7 @@ namespace ReGrowthCore
             return comfortRange;
         }
 
-        public static bool IsGoodSpotForBathing(Map map, IntVec3 cell, FloatRange comfortRange, 
+        public static bool IsGoodSpotForBathing(Map map, IntVec3 cell, FloatRange comfortRange,
             StringBuilder failReason = null, Pawn pawn = null)
         {
             if (cell.GetZone(map) is not Zone_Bathe)

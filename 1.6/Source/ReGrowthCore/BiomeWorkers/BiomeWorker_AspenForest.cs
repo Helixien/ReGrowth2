@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
@@ -6,9 +6,9 @@ namespace ReGrowthCore
 {
 	public class BiomeWorker_AspenForest : BiomeWorker
 	{
-        public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
-        {
-            if (tile.WaterCovered)
+		public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
+		{
+			if (tile.WaterCovered)
 			{
 				return -100f;
 			}
