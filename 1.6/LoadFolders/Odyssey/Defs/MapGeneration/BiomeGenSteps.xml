@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GenStepDef>
+		<defName>RG_AncientPowerPole</defName>
+		<order>980</order>
+		<genStep Class="GenStep_ScatterThings">
+			<thingDef>RG_AncientPowerPole</thingDef>
+			<createUsedRect>true</createUsedRect>
+			<skipRoofed>true</skipRoofed>
+			<countPer10kCellsRange>6~12</countPer10kCellsRange>
+			<warnOnFail>false</warnOnFail>
+		</genStep>
+	</GenStepDef>
+</Defs>

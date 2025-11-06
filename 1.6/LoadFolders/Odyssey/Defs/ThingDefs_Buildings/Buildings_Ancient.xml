@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="NonDeconstructibleAncientBuildingBase">
+		<defName>RG_AncientPowerPole</defName>
+		<label>ancient power pole</label>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<description>Part of a long gone power network. No longer functional.</description>
+		<graphicData>
+			<texPath>Things/Building/Ruins/AncientPowerPole</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<drawSize>(5,5)</drawSize>
+			<shadowData>
+				<volume>(0.15, 0.10, 2.20)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>1200</WorkToBuild>
+		</statBases>
+		<fillPercent>0.25</fillPercent>
+		<passability>Impassable</passability>
+		<pathCost>150</pathCost>
+		<blockWind>true</blockWind>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<rotatable>false</rotatable>
+		<costList>
+			<WoodLog>25</WoodLog>
+		</costList>
+		<building>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+	</ThingDef>
+</Defs>
