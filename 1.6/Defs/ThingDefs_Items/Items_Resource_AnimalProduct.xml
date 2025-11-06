@@ -48,7 +48,7 @@
 			<MarketValue>25</MarketValue>
 		</statBases>
 	</ThingDef>
-	<ThingDef ParentName="EggFertBase">
+	<ThingDef ParentName="EggUnfertBase">
 		<defName>RG_EggWoollyStegosaurusUnfertilized</defName>
 		<label>woolly stegosaurus(unfert.)</label>
 		<description>A fertilized woolly stegosaurus egg. If all goes well, it should hatch into a baby woolly stegosaurus. It can be eaten raw, but it's much better cooked.</description>
@@ -69,5 +69,42 @@
 				<hatcherPawn>RG_WoollyStegosaurus</hatcherPawn>
 			</li>
 		</comps>
+	</ThingDef>
+	<!--====================  Rimclaw Eggs ===========================-->
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_RimclawEggFertilized</defName>
+		<label>rimclaw egg (fert.)</label>
+		<description>A fertilized rimclaw egg. If all goes well, it should hatch into a baby deathclaw. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggDeathclaw</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<statBases>
+			<MarketValue>125.0</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>8.5</hatcherDaystoHatch>
+				<hatcherPawn>RG_Rimclaw</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="EggUnfertBase">
+		<defName>RG_RimclawEggUnfertilized</defName>
+		<label>rimclaw egg (unfert.)</label>
+		<description>A fertilized rimclaw egg. If all goes well, it should hatch into a baby deathclaw. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggDeathclaw</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<statBases>
+			<MarketValue>125.0</MarketValue>
+		</statBases>
 	</ThingDef>
 </Defs>
