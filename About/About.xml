@@ -25,12 +25,6 @@ This mod is as lightweight as possible, adding the minimum of code required and 
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/tag/v2.3.1.0</downloadUrl>
 			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
 		</li>
-		<li>
-			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
-			<displayName>Vanilla Expanded Framework</displayName>
-			<downloadUrl>https://github.com/Vanilla-Expanded/VanillaExpandedFramework</downloadUrl>
-			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2023507013</steamWorkshopUrl>
-		</li>
 	</modDependencies>
 	<loadAfter>
 		<li>brrainz.harmony</li>
@@ -42,8 +36,8 @@ This mod is as lightweight as possible, adding the minimum of code required and 
 		<li>Ludeon.RimWorld.Odyssey</li>
 		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
 		<li>VanillaExpanded.VCEF</li>
-		<li>vanillaracesexpanded.android</li>
 		<li>OskarPotocki.VFE.Tribals</li>
+		<li>oskarpotocki.vfe.empire</li>
 	</loadAfter>
 	<loadBefore>
 		<li>Balthoraz.RimUniverse.BiomesModule</li>

@@ -130,6 +130,23 @@
 			</li>
 		</operations>
 	</Operation>
+	<!-- ================ Steel does not burn ================ -->
+	<Operation Class="ModSettingsFramework.PatchOperationModOption">
+		<defaultValue>True</defaultValue>
+		<label>Steel does not burn</label>
+		<tooltip>Makes it so steel wont burn because its steel. (Default: True)</tooltip>
+		<id>RG_SteelDoesNotBurn</id>
+		<category>RG_GeneralSettings</category>
+		<order>2</order>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/ThingDef[defName="Steel"]/stuffProps/statFactors/Flammability</xpath>
+				<value>
+					<Flammability>0</Flammability>
+				</value>
+			</li>
+		</operations>
+	</Operation>
 	<!-- ================ Bathe joy activity chance ================ -->
 	<Operation Class="ModSettingsFramework.PatchOperationSliderFloat">
 		<label>Base chance of bathing</label>
