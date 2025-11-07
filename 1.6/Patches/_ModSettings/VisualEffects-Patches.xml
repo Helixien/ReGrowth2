@@ -187,4 +187,10 @@
 		<label>Enable snow on walls</label>
 		<tooltip>Toggles the snow overlay on walls. (Default: True)</tooltip>
 	</Operation>
+	<!-- ================================ Puddles Settings ====================== -->
+	<Operation Class="ReGrowthCore.ReGrowthCore_Puddles">
+		<id>RG_ReGrowthCore_Puddles</id>
+		<category>RG_FXSettings</category>
+		<order>50</order>
+	</Operation>
 </Patch>

@@ -4,11 +4,8 @@
 	<RG.SpawnLeaves>Enable aspen leaf spawning.</RG.SpawnLeaves>
 	<RG.ColdFog>Cold fog</RG.ColdFog>
 	<RG.IceLayer>Ice layer</RG.IceLayer>
-	<RG.RainWaterPuddles>Rain water puddles</RG.RainWaterPuddles>
-	<RG.RainCleanWaterPuddles>Clean water puddles</RG.RainCleanWaterPuddles>
 	<RG.FogVelocity>Fog velocity</RG.FogVelocity>
 	<RG.FogTemp>Fog temperature</RG.FogTemp>
-	<RG.PuddleChance>Puddle spawn chance</RG.PuddleChance>
 	<RG.SpawnFogOnHotSprings>Spawn fogs on hot springs</RG.SpawnFogOnHotSprings>
 	<RG.SandDevilLeftTheMap>The dust devil has left the map.</RG.SandDevilLeftTheMap>
 	<RG.SandDevilDissipated>The dust devil has dissipated.</RG.SandDevilDissipated>
@@ -150,4 +147,11 @@
 
 	<RG.EnableScatteredFlames>Enable scattered flames</RG.EnableScatteredFlames>
 	<RG.EnableScatteredFlames.Desc>Toggles the scattered flames visual effect. (Default: True)</RG.EnableScatteredFlames.Desc>
+
+	<RG.RainWaterPuddles>Enable water puddles</RG.RainWaterPuddles>
+	<RG.RainWaterPuddles.Desc>Enable/disable formation of water puddles during rain.</RG.RainWaterPuddles.Desc>
+	<RG.RainCleanWaterPuddles>Clean water puddles</RG.RainCleanWaterPuddles>
+	<RG.RainCleanWaterPuddles.Desc>Enable/disable cleaning of water puddles on home area.</RG.RainCleanWaterPuddles.Desc>
+	<RG.PuddleChance>Puddle chance</RG.PuddleChance>
+	<RG.PuddleChance.Desc>Chance at which puddles will spawn on the map (Default 20%)</RG.PuddleChance.Desc>
 </LanguageData>

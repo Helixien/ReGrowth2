@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<!-- ================ Leaf Base ================ -->
 	<ThingDef Name="RG_BaseFilthLeaves" ParentName="BaseFilth" Abstract="True">

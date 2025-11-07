@@ -50,4 +50,48 @@
 		<solidTime>3.08</solidTime>
 		<fadeOutTime>2.8</fadeOutTime>
 	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_RandomGraphic_Thrown">
+		<defName>RG_Puddle</defName>
+		<randomGraphics>
+			<li>
+				<texPath>Things/Filth/Puddle/PuddleA</texPath>
+				<graphicClass>Graphic_Fleck</graphicClass>
+				<shaderType>Transparent</shaderType>
+				<renderInstanced>false</renderInstanced>
+			</li>
+		</randomGraphics>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.5</fadeInTime>
+		<solidTime>10.5</solidTime>
+		<fadeOutTime>1.5</fadeOutTime>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_RandomGraphic_Thrown">
+		<defName>RG_WaterSpatter</defName>
+		<randomGraphics>
+			<li>
+				<texPath>Things/Filth/WaterSpatter/SpatterA</texPath>
+				<graphicClass>Graphic_Fleck</graphicClass>
+				<shaderType>Transparent</shaderType>
+				<renderInstanced>false</renderInstanced>
+			</li>
+			<li>
+				<texPath>Things/Filth/WaterSpatter/SpatterB</texPath>
+				<graphicClass>Graphic_Fleck</graphicClass>
+				<shaderType>Transparent</shaderType>
+				<renderInstanced>false</renderInstanced>
+			</li>
+			<li>
+				<texPath>Things/Filth/WaterSpatter/SpatterC</texPath>
+				<graphicClass>Graphic_Fleck</graphicClass>
+				<shaderType>Transparent</shaderType>
+				<renderInstanced>false</renderInstanced>
+			</li>
+		</randomGraphics>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.1</fadeInTime>
+		<solidTime>0.2</solidTime>
+		<fadeOutTime>0.3</fadeOutTime>
+	</FleckDef>
 </Defs>
