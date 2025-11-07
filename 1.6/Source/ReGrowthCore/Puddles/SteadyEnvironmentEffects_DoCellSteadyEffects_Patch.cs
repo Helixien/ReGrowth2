@@ -18,21 +18,30 @@ namespace ReGrowthCore
                 return;
             }
 
-            if (___map.weatherManager.curWeather.rainRate > 0.1f && Rand.Value <= settings.puddleChance && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
+            if (___map.weatherManager.curWeather.snowRate <= 0f && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
             {
-                var terrain = c.GetTerrain(___map);
-                if (terrain.IsWater is false)
+                if (___map.weatherManager.curWeather.rainRate > 0.1f && Rand.Value <= settings.puddleChance && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
                 {
-                    if (c.GetEdifice(___map) is null)
+                    var terrain = c.GetTerrain(___map);
+                    if (terrain.IsWater is false)
                     {
-                        if (Rand.Chance(0.8f))
+                        if (c.GetEdifice(___map) is null)
                         {
-                            FleckMaker.Static(c.ToVector3Shifted(), ___map, RG_DefOf.RG_WaterSpatter, Rand.Range(0.5f, 1.5f));
+                            FilthMaker.TryMakeFilth(c, ___map, RG_DefOf.RG_FilthWater, 1);
                         }
-                        else
-                        {
-                            FleckMaker.Static(c.ToVector3Shifted(), ___map, RG_DefOf.RG_Puddle, Rand.Range(0.5f, 1.5f));
-                        }
+                    }
+                }
+
+                if ((float)___map.weatherManager.curWeatherAge >= 7500f && (___map.weatherManager.curWeather.rainRate <= 0f))
+                {
+                    Thing thing2 = c.GetThingList(___map).Where(delegate (Thing t)
+                    {
+                        return (t.def == RG_DefOf.RG_FilthWater || t.def == RG_DefOf.RG_FilthWaterSpatter);
+                    }).FirstOrDefault();
+
+                    if (thing2 != null && Rand.Value <= 0.2f)
+                    {
+                        ((Filth)thing2).ThinFilth();
                     }
                 }
             }
