@@ -25,7 +25,7 @@ namespace ReGrowthCore
                 buildings.AddRange(map.listerBuildings.allBuildingsColonist);
                 foreach (var building in buildings)
                 {
-                    if (building.def.building != null && building.def.building.isWall)
+                    if (building.IsWall())
                     {
                         UpdateWallSnowState(building);
                     }
@@ -50,6 +50,29 @@ namespace ReGrowthCore
 
         private bool ShouldHaveSnow(Building wall)
         {
+            if (ShouldHaveSnowIndividual(wall))
+            {
+                return true;
+            }
+            var otherWalls = new List<Thing>();
+            wall.Map.floodFiller.FloodFill(wall.Position, (IntVec3 x) => x.GetEdifice(wall.Map)?.IsWall() ?? false, delegate (IntVec3 x)
+            {
+                var edifice = x.GetEdifice(wall.Map);
+                if (edifice != null && edifice.IsWall())
+                {
+                    otherWalls.Add(edifice);
+                }
+            });
+            return otherWalls.Any(x => ShouldHaveSnowIndividual(x));
+        }
+
+        private bool ShouldHaveSnowIndividual(Thing wall)
+        {
+            var terrain = wall.Position.GetTerrain(wall.Map);
+            if (terrain.IsSubstructure)
+            {
+                return false;
+            }
             foreach (var adjCell in GenRadial.RadialCellsAround(wall.Position, 1f, true))
             {
                 if (adjCell.InBounds(wall.Map) && WeatherBuildupUtility.GetBuildupCategory(wall.Map.snowGrid.GetDepth(adjCell)) == WeatherBuildupCategory.Thick)

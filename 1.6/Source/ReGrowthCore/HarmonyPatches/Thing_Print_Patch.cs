@@ -15,7 +15,7 @@ namespace ReGrowthCore
 
         public static void Postfix(Thing __instance, SectionLayer layer)
         {
-            if (ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls && __instance.def.building != null && __instance.def.building.isWall)
+            if (ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls && __instance.IsWall())
             {
                 var manager = __instance.Map.GetComponent<WallSnowManager>();
                 if (manager.snowCoveredWalls.Contains(__instance))
@@ -32,6 +32,11 @@ namespace ReGrowthCore
                     }
                 }
             }
+        }
+
+        public static bool IsWall(this Thing t)
+        {
+            return t.def.building != null && t.def.building.isWall;
         }
     }
 }
