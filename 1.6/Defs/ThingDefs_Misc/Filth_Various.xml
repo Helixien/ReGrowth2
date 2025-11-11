@@ -80,10 +80,10 @@
 		<pathCost>2</pathCost>
 		<filth>
 			<rainWashes>false</rainWashes>
-			<cleaningWorkToReduceThickness>10</cleaningWorkToReduceThickness>
 			<canFilthAttach>false</canFilthAttach>
 			<maxThickness>2</maxThickness>
 			<allowsFire>false</allowsFire>
+			<disappearsInDays>0.04166~1</disappearsInDays>
 		</filth>
 	</ThingDef>
 	<ThingDef ParentName="BaseFilth">
@@ -103,10 +103,10 @@
 		<pathCost>2</pathCost>
 		<filth>
 			<rainWashes>false</rainWashes>
-			<cleaningWorkToReduceThickness>5</cleaningWorkToReduceThickness>
 			<canFilthAttach>true</canFilthAttach>
 			<maxThickness>5</maxThickness>
 			<allowsFire>false</allowsFire>
+			<disappearsInDays>0.04166~1</disappearsInDays>
 		</filth>
 	</ThingDef>
 </Defs>

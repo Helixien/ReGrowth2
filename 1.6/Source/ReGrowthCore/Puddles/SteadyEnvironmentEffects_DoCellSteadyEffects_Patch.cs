@@ -18,9 +18,12 @@ namespace ReGrowthCore
                 return;
             }
 
-            if (___map.weatherManager.curWeather.snowRate <= 0f && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
+            if (___map.weatherManager.curWeatherAge >= 2500 && ___map.weatherManager.curWeather.snowRate <= 0f && ___map.weatherManager.curWeather.rainRate > 0.1f && Rand.Value <= settings.puddleChance && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
             {
-                if (___map.weatherManager.curWeather.rainRate > 0.1f && Rand.Value <= settings.puddleChance && ___map.roofGrid != null && !___map.roofGrid.Roofed(c))
+                int maxPuddles = (___map.Size.x * ___map.Size.z) / 20;
+                int currentPuddles = ___map.listerThings.ThingsOfDef(RG_DefOf.RG_FilthWater).Count;
+
+                if (currentPuddles < maxPuddles)
                 {
                     var terrain = c.GetTerrain(___map);
                     if (terrain.IsWater is false)
@@ -29,19 +32,6 @@ namespace ReGrowthCore
                         {
                             FilthMaker.TryMakeFilth(c, ___map, RG_DefOf.RG_FilthWater, 1);
                         }
-                    }
-                }
-
-                if ((float)___map.weatherManager.curWeatherAge >= 7500f && (___map.weatherManager.curWeather.rainRate <= 0f))
-                {
-                    Thing thing2 = c.GetThingList(___map).Where(delegate (Thing t)
-                    {
-                        return (t.def == RG_DefOf.RG_FilthWater || t.def == RG_DefOf.RG_FilthWaterSpatter);
-                    }).FirstOrDefault();
-
-                    if (thing2 != null && Rand.Value <= 0.2f)
-                    {
-                        ((Filth)thing2).ThinFilth();
                     }
                 }
             }
