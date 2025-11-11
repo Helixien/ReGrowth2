@@ -50,6 +50,11 @@ namespace ReGrowthCore
 
         private bool ShouldHaveSnow(Building wall)
         {
+            var terrain = wall.Position.GetTerrain(wall.Map);
+            if (terrain.IsSubstructure)
+            {
+                return false;
+            }
             if (ShouldHaveSnowIndividual(wall))
             {
                 return true;
@@ -68,11 +73,6 @@ namespace ReGrowthCore
 
         private bool ShouldHaveSnowIndividual(Thing wall)
         {
-            var terrain = wall.Position.GetTerrain(wall.Map);
-            if (terrain.IsSubstructure)
-            {
-                return false;
-            }
             foreach (var adjCell in GenRadial.RadialCellsAround(wall.Position, 1f, true))
             {
                 if (adjCell.InBounds(wall.Map) && WeatherBuildupUtility.GetBuildupCategory(wall.Map.snowGrid.GetDepth(adjCell)) == WeatherBuildupCategory.Thick)
