@@ -25,7 +25,7 @@ namespace ReGrowthCore
                 buildings.AddRange(map.listerBuildings.allBuildingsColonist);
                 foreach (var building in buildings)
                 {
-                    if (building.IsWall())
+                    if (building.def.IsWall)
                     {
                         UpdateWallSnowState(building);
                     }
@@ -64,10 +64,10 @@ namespace ReGrowthCore
                 return true;
             }
             var otherWalls = new List<Thing>();
-            wall.Map.floodFiller.FloodFill(wall.Position, (IntVec3 x) => x.GetEdifice(wall.Map)?.IsWall() ?? false, delegate (IntVec3 x)
+            wall.Map.floodFiller.FloodFill(wall.Position, (IntVec3 x) => x.GetEdifice(wall.Map)?.def.IsWall ?? false, delegate (IntVec3 x)
             {
                 var edifice = x.GetEdifice(wall.Map);
-                if (edifice != null && edifice.IsWall())
+                if (edifice != null && edifice.def.IsWall)
                 {
                     otherWalls.Add(edifice);
                 }
@@ -101,7 +101,7 @@ namespace ReGrowthCore
 
         public Graphic GetSnowOverlayGraphic()
         {
-            if (snowOverlayGraphic == null)
+            //if (snowOverlayGraphic == null)
             {
                 var graphicData = new GraphicData();
                 graphicData.CopyFrom(ThingDefOf.Wall.graphicData);

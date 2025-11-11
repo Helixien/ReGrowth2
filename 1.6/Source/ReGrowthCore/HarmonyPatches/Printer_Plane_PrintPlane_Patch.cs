@@ -10,7 +10,7 @@ namespace ReGrowthCore
     {
         public static void Prefix(ref Vector3 center)
         {
-            if (Thing_Print_Patch.snowAltitudeTweak)
+            if (Thing_Print_Patch.printingSnow)
             {
                 center += Altitudes.AltIncVect * 5;
             }

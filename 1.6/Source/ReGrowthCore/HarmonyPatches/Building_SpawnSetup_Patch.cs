@@ -15,7 +15,7 @@ namespace ReGrowthCore
                 mineable.UpdateGraphic();
             }
 
-            if (__instance.def.building != null && __instance.def.building.isWall)
+            if (__instance.def.IsWall)
             {
                 var manager = __instance.Map.GetComponent<WallSnowManager>();
                 manager.UpdateWallSnowState(__instance);

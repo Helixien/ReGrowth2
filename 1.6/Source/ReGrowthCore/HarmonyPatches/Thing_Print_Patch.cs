@@ -11,32 +11,43 @@ namespace ReGrowthCore
     public static class Thing_Print_Patch
     {
         [ThreadStatic]
-        public static bool snowAltitudeTweak = false;
+        public static bool printingSnow = false;
 
         public static void Postfix(Thing __instance, SectionLayer layer)
         {
-            if (ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls && __instance.IsWall())
+            if (ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls && __instance.def.IsWall)
             {
                 var manager = __instance.Map.GetComponent<WallSnowManager>();
                 if (manager.snowCoveredWalls.Contains(__instance))
                 {
                     var graphic = manager.GetSnowOverlayGraphic();
-                    snowAltitudeTweak = true;
+                    printingSnow = true;
                     try
                     {
                         graphic.Print(layer, __instance, 0f);
                     }
                     finally
                     {
-                        snowAltitudeTweak = false;
+                        printingSnow = false;
                     }
                 }
             }
         }
+    }
 
-        public static bool IsWall(this Thing t)
+    [HarmonyPatch(typeof(Graphic_Linked), "ShouldLinkWith")]
+    public static class Graphic_Linked_ShouldLinkWith_Patch
+    {
+        public static void Postfix(ref bool __result, IntVec3 c, Thing parent)
         {
-            return t.def.building != null && t.def.building.isWall;
+            if (Thing_Print_Patch.printingSnow && __result)
+            {
+                var edifice = c.GetEdifice(parent.Map);
+                if (edifice is null || edifice.def.IsWall is false)
+                {
+                    __result = false;
+                }
+            }
         }
     }
 }

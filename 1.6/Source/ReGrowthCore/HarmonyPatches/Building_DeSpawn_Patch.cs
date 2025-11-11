@@ -13,7 +13,7 @@ namespace ReGrowthCore
             {
                 mineable.UnmarkSpaceRock();
             }
-            if (__instance.def.building != null && __instance.def.building.isWall)
+            if (__instance.def.IsWall)
             {
                 var mapComp = __instance.Map.GetComponent<WallSnowManager>();
                 if (mapComp.snowCoveredWalls.Contains(__instance))
