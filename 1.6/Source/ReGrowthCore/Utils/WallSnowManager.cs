@@ -55,6 +55,10 @@ namespace ReGrowthCore
             {
                 return false;
             }
+            if (IsOutside(wall) is false)
+            {
+                return false;
+            }
             if (ShouldHaveSnowIndividual(wall))
             {
                 return true;
@@ -69,6 +73,18 @@ namespace ReGrowthCore
                 }
             });
             return otherWalls.Any(x => ShouldHaveSnowIndividual(x));
+        }
+
+        private bool IsOutside(Thing wall)
+        {
+            foreach (var adjCell in GenRadial.RadialCellsAround(wall.Position, 1f, true))
+            {
+                if (adjCell.InBounds(wall.Map) && adjCell.UsesOutdoorTemperature(wall.Map))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private bool ShouldHaveSnowIndividual(Thing wall)
