@@ -50,8 +50,8 @@ namespace ReGrowthCore
 
         private bool ShouldHaveSnow(Building wall)
         {
-            var terrain = wall.Position.GetTerrain(wall.Map);
-            if (terrain.IsSubstructure)
+            var terrain = wall.Map.terrainGrid.FoundationAt(wall.Position);
+            if (terrain != null && terrain.IsSubstructure)
             {
                 return false;
             }
@@ -101,7 +101,7 @@ namespace ReGrowthCore
 
         public Graphic GetSnowOverlayGraphic()
         {
-            //if (snowOverlayGraphic == null)
+            if (snowOverlayGraphic == null)
             {
                 var graphicData = new GraphicData();
                 graphicData.CopyFrom(ThingDefOf.Wall.graphicData);
