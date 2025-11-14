@@ -43,15 +43,23 @@ namespace ReGrowthCore
             }
         }
 
+        private static bool? worldBeautificationIsActive;
         public static bool WorldBeautificationIsActive
         {
             get
             {
-                if (ModSettingsFrameworkSettings.GetModSettingsContainer(ReGrowthMod.modPack.PackageIdPlayerFacing).patchOperationStates.TryGetValue("RG_WorldMapBeautificationProject", out var value) && value)
+                if (worldBeautificationIsActive is null)
                 {
-                    return true;
+                    if (ModSettingsFrameworkSettings.GetModSettingsContainer(ReGrowthMod.modPack.PackageIdPlayerFacing).patchOperationStates.TryGetValue("RG_WorldMapBeautificationProject", out var value) && value)
+                    {
+                        worldBeautificationIsActive = true;
+                    }
+                    else
+                    {
+                        worldBeautificationIsActive = false;
+                    }
                 }
-                return false;
+                return worldBeautificationIsActive.Value;
             }
         }
 
