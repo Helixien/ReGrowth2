@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<!-- ================ Leaf Base ================ -->
 	<ThingDef Name="RG_BaseFilthLeaves" ParentName="BaseFilth" Abstract="True">
 		<filth>
 			<disappearsInDays>45~50</disappearsInDays>
@@ -12,7 +11,6 @@
 			<BeautyOutdoors>0</BeautyOutdoors>
 		</statBases>
 	</ThingDef>
-	<!-- ================ Leaf Filth ================ -->
 	<ThingDef ParentName="RG_BaseFilthLeaves">
 		<defName>RG_Filth_LeavesTreeOak</defName>
 		<label>leaves</label>
@@ -41,7 +39,6 @@
 			<texPath>Things/Filth/LeafShapeAnima</texPath>
 		</graphicData>
 	</ThingDef>
-	<!-- ================ Neutroamine Filth ================ -->
 	<ThingDef ParentName="BaseFilth">
 		<defName>RG_Filth_Neutroamine</defName>
 		<label>neutroamine</label>
@@ -62,12 +59,12 @@
 			<cleaningSound>Interact_CleanFilth_Fluid</cleaningSound>
 		</filth>
 	</ThingDef>
-	<!-- ================ Puddles ================ -->
 	<ThingDef ParentName="BaseFilth">
 		<defName>RG_FilthWater</defName>
 		<label>water</label>
 		<description>Water.</description>
-		<thingClass>Filth</thingClass>
+		<thingClass>ReGrowthCore.PuddleFilth</thingClass>
+		<tickerType>Normal</tickerType>
 		<statBases>
 			<Beauty>-3</Beauty>
 			<Cleanliness>-10</Cleanliness>
@@ -90,7 +87,8 @@
 		<defName>RG_FilthWaterSpatter</defName>
 		<label>water</label>
 		<description>Water.</description>
-		<thingClass>Filth</thingClass>
+		<thingClass>ReGrowthCore.PuddleFilth</thingClass>
+		<tickerType>Normal</tickerType>
 		<statBases>
 			<Beauty>-2</Beauty>
 			<Cleanliness>-6</Cleanliness>
