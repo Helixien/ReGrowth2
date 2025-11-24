@@ -114,22 +114,20 @@ namespace ReGrowthCore
 			return codes.AsEnumerable();
 		}
 
-		static World worldCache = null;
-		static TileTemperaturesComp compCache = null;
 		static FastRandom fastRandom = new FastRandom();
 
 		static public void ColdGlow(IntVec3 c, float temperature, Map map)
 		{
 			if (ReGrowthCore_SimpleFX.ModSettings.considerOutdoors)
 			{
-				if (worldCache == null) worldCache = Current.Game.World;
-				//Check if the world has changed (loaded a new save)
-				if (Current.Game.World != worldCache || compCache == null)
+				try
 				{
-					worldCache = Current.Game.World;
-					compCache = worldCache?.GetComponent<TileTemperaturesComp>();
+					if (map.mapTemperature.OutdoorTemp < 0f) return;
 				}
-				else if (Find.World.tileTemperatures.GetOutdoorTemp(map.Tile) < 0f) return;
+				catch
+				{
+					return;
+				}
 			}
 			if (temperature < 0f && map == Current.gameInt.CurrentMap && CameraDriver.lastViewRect.ExpandedBy(64).Contains(c))
 			{
