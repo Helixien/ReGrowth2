@@ -104,7 +104,7 @@ namespace ReGrowthCore
             foreach (var adj in GenAdj.AdjacentCells)
             {
                 var nearbyCell = adj + cell;
-                if (nearbyCell.GetTerrain(map).IsWater)
+                if (map.terrainGrid.waterCells.Contains(nearbyCell))
                 {
                     nearbyWaterCount++;
                 }
@@ -130,7 +130,7 @@ namespace ReGrowthCore
                 }
                 return false;
             }
-            var cells = pawn.Map.AllCells.Where(x => CellValidator(x)).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
+            var cells = pawn.Map.terrainGrid.waterCells.Where(x => CellValidator(x)).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
                 .ThenBy(x => pawn.Position.DistanceTo(x)).Take(10);
             if (cells.TryRandomElement(out var cell))
             {

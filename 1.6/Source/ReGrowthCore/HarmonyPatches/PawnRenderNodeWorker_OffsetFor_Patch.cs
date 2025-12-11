@@ -15,7 +15,7 @@ namespace ReGrowthCore
             ref Vector3 __result)
         {
             var pawn = node.tree.pawn;
-            if (!parms.Portrait && node is PawnRenderNode_Body && (pawn.CurJob?.swimming ?? false))
+            if (node is PawnRenderNode_Body && pawn.RaceProps.Humanlike && !parms.Portrait && (pawn.CurJob?.swimming ?? false))
             {
                 __result.z -= 0.5f;
                 Rot4 bodyFacing = pawn.Rotation;

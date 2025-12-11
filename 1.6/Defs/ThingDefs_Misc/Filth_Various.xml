@@ -64,7 +64,7 @@
 		<label>water</label>
 		<description>Water.</description>
 		<thingClass>ReGrowthCore.PuddleFilth</thingClass>
-		<tickerType>Normal</tickerType>
+		<tickerType>Long</tickerType>
 		<statBases>
 			<Beauty>-3</Beauty>
 			<Cleanliness>-10</Cleanliness>
@@ -88,7 +88,7 @@
 		<label>water</label>
 		<description>Water.</description>
 		<thingClass>ReGrowthCore.PuddleFilth</thingClass>
-		<tickerType>Normal</tickerType>
+		<tickerType>Long</tickerType>
 		<statBases>
 			<Beauty>-2</Beauty>
 			<Cleanliness>-6</Cleanliness>

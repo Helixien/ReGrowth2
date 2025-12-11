@@ -6,12 +6,11 @@ namespace ReGrowthCore
     [HotSwappable]
     public class PuddleFilth : Filth
     {
-        public override void Tick()
+        public override void TickLong()
         {
-            base.Tick();
-            if (base.Spawned && base.Map.weatherManager.RainRate > 0.1f && this.IsHashIntervalTick(60))
+            if (base.Map.weatherManager.RainRate > 0.1f)
             {
-                disappearAfterTicks += 60;
+                disappearAfterTicks += GenTicks.TickLongInterval;
             }
         }
     }
