@@ -1,4 +1,4 @@
-using Verse;
+﻿using Verse;
 
 namespace ReGrowthCore
 {
@@ -8,7 +8,7 @@ namespace ReGrowthCore
         public static bool DubsBadHygieneActive;
         static ModCompatibility()
         {
-            DubsBadHygieneActive = ModsConfig.IsActive("Dubwise.DubsBadHygiene") || ModsConfig.IsActive("Dubwise.DubsBadHygiene.Lite");
+            DubsBadHygieneActive = ModLister.AnyModActiveNoSuffix(["Dubwise.DubsBadHygiene", "Dubwise.DubsBadHygiene.Lite"]);
         }
 
         public static void CleanHygiene(Pawn pawn)

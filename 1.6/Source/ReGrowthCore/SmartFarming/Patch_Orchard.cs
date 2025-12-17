@@ -17,7 +17,7 @@ namespace ReGrowthCore
 		static Job Postfix(Job __result, IntVec3 c, Pawn pawn)
 		{
 			//Is relevant? Plants that need clearance only...
-			if (!__result?.plantDefToSow?.plant?.blockAdjacentSow ?? true) return __result;
+			if (__result?.plantDefToSow?.plant?.blockAdjacentSow != true) return __result;
 
 			Map map = pawn.Map;
 

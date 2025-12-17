@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace ReGrowthCore
@@ -33,8 +33,8 @@ namespace ReGrowthCore
                     worldOverlayMat.CopyPropertiesFromMaterial(mat);
                     worldOverlayMat.shader = mat.shader;
                     Texture2D texture = ContentFinder<Texture2D>.Get(extension.overlayPath);
-                    worldOverlayMat.SetTexture("_MainTex", texture);
-                    worldOverlayMat.SetTexture("_MainTex2", texture);
+                    worldOverlayMat.SetTexture(MainTex, texture);
+                    worldOverlayMat.SetTexture(MainTex2, texture);
                 }
             }
         }

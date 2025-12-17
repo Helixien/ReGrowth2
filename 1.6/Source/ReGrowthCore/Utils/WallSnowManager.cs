@@ -8,6 +8,7 @@ using Verse;
 namespace ReGrowthCore
 {
     [HotSwappable]
+    [StaticConstructorOnStartup]
     public class WallSnowManager : MapComponent
     {
         public HashSet<Thing> snowCoveredWalls = new HashSet<Thing>();
@@ -19,6 +20,8 @@ namespace ReGrowthCore
         private int currentBatchIndex = 0;
         private const int WALLS_PER_TICK = 50;
 
+        private static List<ThingDef> wallDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.IsWall).ToList();
+
         public WallSnowManager(Map map) : base(map)
         {
         }
@@ -28,7 +31,7 @@ namespace ReGrowthCore
             if (!ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls)
                 return;
 
-            if (Find.TickManager.TicksGame % GenTicks.TickRareInterval == 0)
+            if (map.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
                 int currentTick = Find.TickManager.TicksGame;
                 if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL)
@@ -44,16 +47,16 @@ namespace ReGrowthCore
         {
             eligibleWalls.Clear();
             wallsToProcess.Clear();
-            var allWalls = map.listerBuildings.allBuildingsColonist
-                .Concat(map.listerBuildings.allBuildingsNonColonist)
-                .Where(b => b.def.IsWall);
 
-            foreach (var wall in allWalls)
+            foreach (var wallDef in wallDefs)
             {
-                if (IsWallOutside(wall))
+                foreach (var wallThing in map.listerThings.ThingsOfDef(wallDef))
                 {
-                    eligibleWalls.Add(wall);
-                    wallsToProcess.Add(wall);
+                    if (wallThing is Building wall && IsWallOutside(wall))
+                    {
+                        eligibleWalls.Add(wall);
+                        wallsToProcess.Add(wall);
+                    }
                 }
             }
 

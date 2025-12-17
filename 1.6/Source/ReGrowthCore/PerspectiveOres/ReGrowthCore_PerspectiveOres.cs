@@ -1,4 +1,4 @@
-using ModSettingsFramework;
+﻿using ModSettingsFramework;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,9 @@ namespace ReGrowthCore
             Scribe_Collections.Look(ref skippedMineableDefs, "skippedMineableDefs", LookMode.Value);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                skippedMineableDefs ??= new HashSet<string>() { DefDatabase<ThingDef>.GetNamed("MineableComponentsIndustrial").defName };
+                skippedMineableDefs ??= new HashSet<string>() { DefDatabase<ThingDef>.GetNamed("MineableComponentsIndustrial")?.defName };
+                // Just in case
+                skippedMineableDefs.RemoveWhere(x => x.NullOrEmpty());
             }
         }
 

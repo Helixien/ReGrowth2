@@ -13,7 +13,7 @@ namespace ReGrowthCore
 	{
 		public static bool Postfix(bool __result, WorkGiver_Scanner __instance)
 		{
-			return ReGrowthCore_SmartFarming.ModSettings.enabled && (ReGrowthCore_SmartFarming.agriWorkTypes.Contains(__instance.def.index)) ? true : __result;
+			return __result || (ReGrowthCore_SmartFarming.ModSettings.enabled && ReGrowthCore_SmartFarming.agriWorkTypes.Contains(__instance.def.index));
 		}
 	}
 

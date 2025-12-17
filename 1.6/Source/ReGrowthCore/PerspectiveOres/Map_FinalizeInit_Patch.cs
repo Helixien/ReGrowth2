@@ -22,7 +22,7 @@ namespace ReGrowthCore
             Dictionary<int, Color> lumpColors = new Dictionary<int, Color>(); //lumpID, associated stone
             int nextLumpID = 0;
 
-            var list = map.listerThings.listsByGroup[2];
+            var list = map.listerThings.listsByGroup[(int)ThingRequestGroup.Everything];
             var settings = ModSettings_PerspectiveOres;
             if (settings.skippedMineableDefs is null)
             {

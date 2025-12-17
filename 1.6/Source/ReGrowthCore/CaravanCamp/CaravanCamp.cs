@@ -66,9 +66,9 @@ namespace ReGrowthCore
             }
         }
 
-        public override void Tick()
+        public override void TickInterval(int delta)
         {
-            base.Tick();
+            base.TickInterval(delta);
             if (IsEmpty && (savedCamp is null || Find.TickManager.TicksGame - savedCamp.ticksSaved
                 >= ReGrowthUtils.MakeCampPatchWorker.preserveSavedCampsForDays * GenDate.TicksPerDay))
             {

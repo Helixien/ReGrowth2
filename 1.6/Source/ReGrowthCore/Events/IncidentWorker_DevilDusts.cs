@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -16,10 +16,10 @@ namespace ReGrowthCore
             var takenCells = new List<IntVec3>();
             for (int i = 0; i < devilDustCount; i++)
             {
-                var devilDust = ThingMaker.MakeThing(RG_DefOf.RG_DustDevil);
                 if (CellFinder.TryFindRandomCellNear(spawnCenter, map, 50, (IntVec3 c) => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map)
                 && !map.areaManager.Home.ActiveCells.Contains(c) && !takenCells.Contains(c), out var result))
                 {
+                    var devilDust = ThingMaker.MakeThing(RG_DefOf.RG_DustDevil);
                     GenSpawn.Spawn(devilDust, result, map);
                     devilDusts.Add(devilDust);
                     takenCells.Add(result);

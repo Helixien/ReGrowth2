@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -42,59 +42,59 @@ namespace ReGrowthCore
             });
             Toil goToil = Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
             yield return goToil;
-            Toil batheToil = new()
+            Toil batheToil = ToilMaker.MakeToil();
+            batheToil.initAction = delegate
             {
-                initAction = delegate
+                bathStartTick = Find.TickManager.TicksGame;
+                pawn.jobs.posture = Rand.Bool ? PawnPosture.LayingOnGroundNormal : PawnPosture.LayingOnGroundFaceUp;
+            };
+            batheToil.tickAction = delegate
+            {
+                // Can't use tick interval here, as bad hygiene doesn't really support it.
+                // Pawn hygiene drops after 10 ticks of not increasing hygiene,
+                // but tick interval could be up to 15 ticks. So it's going to cause issues.
+                if (ModCompatibility.DubsBadHygieneActive)
                 {
-                    bathStartTick = Find.TickManager.TicksGame;
-                    pawn.jobs.posture = Rand.Bool ? PawnPosture.LayingOnGroundNormal : PawnPosture.LayingOnGroundFaceUp;
-                },
-                tickAction = delegate
+                    ModCompatibility.CleanHygiene(pawn);
+                }
+            };
+            batheToil.tickIntervalAction = delegate(int delta)
+            {
+                if (pawn.IsHashIntervalTick(60, delta))
                 {
-                    if (ModCompatibility.DubsBadHygieneActive)
+                    TerrainDef terrain = pawn.Position.GetTerrain(Map);
+                    if (terrain.IsHotSpring())
                     {
-                        ModCompatibility.CleanHygiene(pawn);
-                    }
-                    if (pawn.IsHashIntervalTick(60))
-                    {
-                        TerrainDef terrain = pawn.Position.GetTerrain(Map);
-                        if (terrain.IsHotSpring())
+                        Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Hypothermia);
+                        if (hediff != null)
                         {
-                            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Hypothermia);
-                            if (hediff != null)
-                            {
-                                float value = hediff.Severity * 0.027f;
-                                value = Mathf.Clamp(value, 0.0015f, 0.015f);
-                                hediff.Severity -= value / 2f;
-                            }
-                        }
-                        else if (terrain.IsWater)
-                        {
-                            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Heatstroke);
-                            if (hediff != null)
-                            {
-                                float ambientTemperature = pawn.AmbientTemperature;
-                                if (hediff != null && ambientTemperature < 60)
-                                {
-                                    float value = hediff.Severity * 0.027f;
-                                    value = Mathf.Clamp(value, 0.0015f, 0.015f);
-                                    hediff.Severity -= value / 2f;
-                                }
-                            }
+                            float value = hediff.Severity * 0.027f;
+                            value = Mathf.Clamp(value, 0.0015f, 0.015f);
+                            hediff.Severity -= value / 2f;
                         }
                     }
-                    pawn.GainComfortFromCellIfPossible(1, false);
-                    if (Find.TickManager.TicksGame > bathStartTick + job.def.joyDuration)
+                    else if (terrain.IsWater)
                     {
-                        DoBatheEffects();
-                        OnComplection();
-                        EndJobWith(JobCondition.Succeeded);
+                        Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Heatstroke);
+                        if (hediff != null && pawn.AmbientTemperature < 60)
+                        {
+                            float value = hediff.Severity * 0.027f;
+                            value = Mathf.Clamp(value, 0.0015f, 0.015f);
+                            hediff.Severity -= value / 2f;
+                        }
                     }
-                    else if (JoyUtility.JoyTickCheckEnd(pawn, 1))
-                    {
-                        DoBatheEffects();
-                        OnComplection();
-                    }
+                }
+                pawn.GainComfortFromCellIfPossible(delta, false);
+                if (Find.TickManager.TicksGame > bathStartTick + job.def.joyDuration)
+                {
+                    DoBatheEffects();
+                    OnComplection();
+                    EndJobWith(JobCondition.Succeeded);
+                }
+                else if (JoyUtility.JoyTickCheckEnd(pawn, delta))
+                {
+                    DoBatheEffects();
+                    OnComplection();
                 }
             };
             batheToil.AddFinishAction(delegate
@@ -103,13 +103,12 @@ namespace ReGrowthCore
             });
             batheToil.socialMode = RandomSocialMode.SuperActive;
             batheToil.defaultCompleteMode = ToilCompleteMode.Never;
-            yield return new Toil
+            var toil = ToilMaker.MakeToil();
+            toil.initAction = delegate
             {
-                initAction = delegate ()
-                {
-                    OnComplection();
-                }
+                OnComplection();
             };
+            yield return toil;
             yield return batheToil;
         }
 
