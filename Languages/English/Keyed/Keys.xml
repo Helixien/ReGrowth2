@@ -152,6 +152,10 @@
 	<RG.RainWaterPuddles.Desc>Enable/disable formation of water puddles during rain.</RG.RainWaterPuddles.Desc>
 	<RG.RainCleanWaterPuddles>Clean water puddles</RG.RainCleanWaterPuddles>
 	<RG.RainCleanWaterPuddles.Desc>Enable/disable cleaning of water puddles on home area.</RG.RainCleanWaterPuddles.Desc>
-	<RG.PuddleChance>Puddle chance</RG.PuddleChance>
-	<RG.PuddleChance.Desc>Chance at which puddles will spawn on the map (Default 20%)</RG.PuddleChance.Desc>
+  <RG.PuddlesPerTickNormal>Puddles per tick (normal speed)</RG.PuddlesPerTickNormal>
+  <RG.PuddlesPerTickNormal.Desc>Amount of puddles that will be spawned each tick during rain while playing on normal game speed. Having too many puddles spawn will cause stutters until reaching maximum amount of puddles, especially at higher game speed. (Default {0})</RG.PuddlesPerTickNormal.Desc>
+  <RG.PuddlesPerTickFast>Puddles per tick (fast speed)</RG.PuddlesPerTickFast>
+  <RG.PuddlesPerTickFast.Desc>Amount of puddles that will be spawned each tick during rain while playing on fast game speed. Having too many puddles spawn will cause stutters until reaching maximum amount of puddles, especially at higher game speed. (Default {0})</RG.PuddlesPerTickFast.Desc>
+  <RG.PuddlesPerTickUltrafast>Puddles per tick (ultrafast+ speed)</RG.PuddlesPerTickUltrafast>
+  <RG.PuddlesPerTickUltrafast.Desc>Amount of puddles that will be spawned each tick during rain while playing on ultrafast (or faster) game speed. Having too many puddles spawn will cause stutters until reaching maximum amount of puddles, especially at higher game speed. (Default {0})</RG.PuddlesPerTickUltrafast.Desc>
 </LanguageData>
