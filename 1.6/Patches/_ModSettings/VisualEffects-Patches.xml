@@ -155,29 +155,6 @@
 			</li>
 		</operations>
 	</Operation>
-	<!-- ================================ Toggle Perspective Trees ====================== -->
-	<Operation Class="ModSettingsFramework.PatchOperationModOption">
-		<defaultValue>True</defaultValue>
-		<label>Enable perspective trees</label>
-		<tooltip>Enable the alterations to the tree draw layer so items/chunks/pawns are not drawn in front of it. It should work with most tree-adding mods. This does the same as the mod "Perspective: Trees" from Owlchemist. (Default: True)</tooltip>
-		<id>RG_DisablePerspectiveTrees</id>
-		<category>RG_FXSettings</category>
-		<order>30</order>
-		<operations>
-			<li Class="PatchOperationReplace">
-				<xpath>Defs/ThingDef[@Name="TreeBase" or defName="Plant_TreeArchean" or defName="Plant_TreeSnagroot" or defName="Plant_MagmaCactus" or defName="Plant_Willowgill" or defName="Boomshroom"]/altitudeLayer</xpath>
-				<value>
-					<altitudeLayer>Pawn</altitudeLayer>
-				</value>
-			</li>
-			<li MayRequire="ludeon.rimworld.ideology" Class="PatchOperationReplace">
-				<xpath>Defs/ThingDef[defName="Plant_TreeGauranlen"]/comps/li[@Class="CompProperties_TreeConnection"]/spawningPodOffset</xpath>
-				<value>
-					<spawningPodOffset>(-0.15, 3.2, -0.55)</spawningPodOffset>
-				</value>
-			</li>
-		</operations>
-	</Operation>
 
 	<!-- ================================ Snow On Walls ====================== -->
 	<Operation Class="ReGrowthCore.ReGrowthCore_SnowOnWalls">
