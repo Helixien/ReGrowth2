@@ -9,7 +9,7 @@
 	</supportedVersions>
 	<packageId>ReGrowth.BOTR.Core</packageId>
 	<url>https://steamcommunity.com/sharedfiles/filedetails/?id=2260097569</url>
-	<modVersion IgnoreIfNoMatchingField="True">5.1-rev3</modVersion>
+	<modVersion IgnoreIfNoMatchingField="True">5.1-rev4</modVersion>
 	<modIconPath IgnoreIfNoMatchingField="True">UI/RG_ModIcon</modIconPath>
 	<description>ReGrowth: Core is both a content mod and a small framework, aiming to overhaul and improve on Rimworlds vanilla biomes, add new and unique features and biomes, replace many of the vanilla plant textures with HD ones and, in combination with its companion mods, add new plants that fit perfectly into the vanilla artstyle. On top of that, it adds a lot of new weather types, many with custom visual effects to spice up your game.
 
