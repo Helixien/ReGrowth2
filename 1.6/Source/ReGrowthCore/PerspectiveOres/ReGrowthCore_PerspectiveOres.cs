@@ -1,7 +1,6 @@
 ﻿using ModSettingsFramework;
 using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -9,7 +8,7 @@ namespace ReGrowthCore
 {
     public class ReGrowthCore_PerspectiveOres : PatchOperationWorker
     {
-        public HashSet<string> skippedMineableDefs = new HashSet<string>();
+        public HashSet<string> skippedMineableDefs = [nameof(ThingDefOf.MineableComponentsIndustrial)]; // Need to use string here, as ThingDef aren't initialized yet
         public static Vector2 scrollPos;
 
         public override void ExposeData()
@@ -17,7 +16,7 @@ namespace ReGrowthCore
             Scribe_Collections.Look(ref skippedMineableDefs, "skippedMineableDefs", LookMode.Value);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                skippedMineableDefs ??= new HashSet<string>() { DefDatabase<ThingDef>.GetNamed("MineableComponentsIndustrial")?.defName };
+                skippedMineableDefs ??= [nameof(ThingDefOf.MineableComponentsIndustrial)]; // Need to use string here, as ThingDef aren't initialized yet
                 // Just in case
                 skippedMineableDefs.RemoveWhere(x => x.NullOrEmpty());
             }
@@ -56,7 +55,8 @@ namespace ReGrowthCore
 
         public void ResetMineables()
         {
-            skippedMineableDefs = new HashSet<string>() { DefDatabase<ThingDef>.GetNamed("MineableComponentsIndustrial").defName }; ;
+            skippedMineableDefs = [ThingDefOf.MineableComponentsIndustrial?.defName]; ;
+            skippedMineableDefs.RemoveWhere(x => x == null);
         }
 
         public const int lineHeight = 22; //Text.LineHeight + options.verticalSpacing;
