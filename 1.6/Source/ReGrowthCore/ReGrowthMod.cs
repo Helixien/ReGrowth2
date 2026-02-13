@@ -82,7 +82,7 @@ namespace ReGrowthCore
     {
         static Startup()
         {
-
+            ReGrowthCore_SmartFarming.CacheDefData();
             new Harmony("Helixien.ReGrowthCore").PatchAll();
 
         }

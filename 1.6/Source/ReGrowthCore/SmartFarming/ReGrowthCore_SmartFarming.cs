@@ -30,7 +30,7 @@ namespace ReGrowthCore
 		public float pettyJobs = 0.2f;
 		public float minTempAllowed = -3f;
 
-		static ReGrowthCore_SmartFarming()
+		public static void CacheDefData()
 		{
 			agriWorkTypes = DefDatabase<WorkGiverDef>.AllDefsListForReading
 				.Where(x => x.workType == WorkTypeDefOf.Growing)
