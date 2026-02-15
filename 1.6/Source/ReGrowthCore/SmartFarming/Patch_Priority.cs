@@ -23,10 +23,10 @@ namespace ReGrowthCore
 	{
 		public static float Postfix(float __result, Pawn pawn, TargetInfo t, WorkGiver_Scanner __instance)
 		{
-			if (!ReGrowthCore_SmartFarming.agriWorkTypes.Contains(__instance.def.index)) return __result;
+			if (!ReGrowthCore_SmartFarming.agriWorkTypes.Contains(__instance.def.index) || t.Cell.IsValid is false) return __result;
 
 			Map map = pawn.Map;
-			var zone = map.zoneManager.zoneGrid[t.cellInt.z * map.info.sizeInt.x + t.cellInt.x];
+			var zone = map.zoneManager.ZoneAt(t.Cell);
 
 			if (zone == null)
 			{

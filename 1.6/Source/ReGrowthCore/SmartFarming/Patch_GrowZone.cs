@@ -206,7 +206,7 @@ namespace ReGrowthCore
 			}
 
 			var map = pawn.Map;
-			var zone = map.zoneManager.zoneGrid[c.z * map.info.sizeInt.x + c.x];
+			var zone = map.zoneManager.ZoneAt(c);
 			if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
 			{
 				if (ReGrowthCore_SmartFarming.ModSettings.autoCutBlighted)
@@ -255,13 +255,13 @@ namespace ReGrowthCore
 			}
 			return true;
 		}
-		
+
 		static Job Postfix(Job __result, WorkGiver_GrowerSow __instance, Pawn pawn, IntVec3 c, bool forced = false)
 		{
 			if (__result == null)
 			{
 				var map = pawn.Map;
-				var zone = map.zoneManager.zoneGrid[c.z * map.info.sizeInt.x + c.x];
+				var zone = map.zoneManager.ZoneAt(c);
 				if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
 				{
 					if (zoneData.sowMode == SowMode.Force)
@@ -545,7 +545,7 @@ namespace ReGrowthCore
 			Map map = pawn?.Map;
 
 			//We don't check the zone type because it's faster for the collection lookup to return with nothing than it is to cast the zone
-			int zoneID = map?.zoneManager.zoneGrid[c.z * map.info.sizeInt.x + c.x]?.ID ?? -1;
+			int zoneID = map?.zoneManager.ZoneAt(c)?.ID ?? -1;
 			if (zoneID == -1) return true;
 
 			if (ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) && mapComp.growZoneRegistry.TryGetValue(zoneID, out ZoneData zoneData))
