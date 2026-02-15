@@ -327,16 +327,15 @@
 		<label>rimclaw</label>
 		<race>RG_Rimclaw</race>
 		<combatPower>650</combatPower>
-		<alternateGraphicChance>0.66</alternateGraphicChance>
 		<canArriveManhunter>true</canArriveManhunter>
 		<lifeStages>
 			<li>
 				<bodyGraphicData>
-					<texPath>Things/Pawn/Animal/ReGrowth/Rimclaw/Rimclaw</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/Rimclaw/BabyRimclaw</texPath>
 					<drawSize>1.0</drawSize>
 				</bodyGraphicData>
 				<dessicatedBodyGraphicData>
-					<texPath>Things/Pawn/Animal/Emu/Dessicated_Emu</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/Rimclaw/dessicated_BabyRimclaw_east</texPath>
 					<drawSize>1.0</drawSize>
 				</dessicatedBodyGraphicData>
 			</li>
@@ -350,7 +349,7 @@
 					</shadowData>
 				</bodyGraphicData>
 				<dessicatedBodyGraphicData>
-					<texPath>Things/Pawn/Animal/Emu/Dessicated_Emu</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/Rimclaw/dessicated_Rimclaw_east</texPath>
 					<drawSize>1.6</drawSize>
 				</dessicatedBodyGraphicData>
 			</li>
@@ -364,18 +363,10 @@
 					</shadowData>
 				</bodyGraphicData>
 				<dessicatedBodyGraphicData>
-					<texPath>Things/Pawn/Animal/Emu/Dessicated_Emu</texPath>
+					<texPath>Things/Pawn/Animal/ReGrowth/Rimclaw/dessicated_Rimclaw_east</texPath>
 					<drawSize>3</drawSize>
 				</dessicatedBodyGraphicData>
 			</li>
 		</lifeStages>
-		<alternateGraphics>
-			<li>
-				<texPath>Things/Pawn/Animal/Rimclaw/RimclawB</texPath>
-			</li>
-			<li>
-				<texPath>Things/Pawn/Animal/Rimclaw/RimclawC</texPath>
-			</li>
-		</alternateGraphics>
 	</PawnKindDef>
 </Defs>
