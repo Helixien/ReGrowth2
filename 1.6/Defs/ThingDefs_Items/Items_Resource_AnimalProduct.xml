@@ -47,6 +47,12 @@
 		<statBases>
 			<MarketValue>25</MarketValue>
 		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>4.32</hatcherDaystoHatch>
+				<hatcherPawn>RG_WoollyStegosaurus</hatcherPawn>
+			</li>
+		</comps>
 	</ThingDef>
 	<ThingDef ParentName="EggUnfertBase">
 		<defName>RG_EggWoollyStegosaurusUnfertilized</defName>
@@ -63,12 +69,6 @@
 		<statBases>
 			<MarketValue>25</MarketValue>
 		</statBases>
-		<comps>
-			<li Class="CompProperties_Hatcher">
-				<hatcherDaystoHatch>4.32</hatcherDaystoHatch>
-				<hatcherPawn>RG_WoollyStegosaurus</hatcherPawn>
-			</li>
-		</comps>
 	</ThingDef>
 	<!--====================  Rimclaw Eggs ===========================-->
 	<ThingDef ParentName="EggFertBase">
