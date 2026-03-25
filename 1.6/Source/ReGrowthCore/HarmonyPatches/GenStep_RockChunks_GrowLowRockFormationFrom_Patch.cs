@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace ReGrowthCore
 {
+    [HotSwappable]
     [HarmonyPatch(typeof(GenStep_RockChunks), "GrowLowRockFormationFrom")]
     public static class GenStep_RockChunks_GrowLowRockFormationFrom_Patch
     {
@@ -82,7 +83,10 @@ namespace ReGrowthCore
                 }
 
                 List<CellRect> occupiedByNewBoulders = new List<CellRect>();
-                TrySpawnThingAt(actualClusterCenter, largeBoulderDef, map, occupiedByNewBoulders);
+                if (!MapGenerator.PlayerStartSpot.IsValid || actualClusterCenter.DistanceTo(MapGenerator.PlayerStartSpot) >= 10)
+                {
+                    TrySpawnThingAt(actualClusterCenter, largeBoulderDef, map, occupiedByNewBoulders);
+                }
 
                 List<IntVec3> mediumBoulderRelativeCenters = new List<IntVec3>
                 {
@@ -94,9 +98,13 @@ namespace ReGrowthCore
                 int spawnedMediumCount = 0;
                 for (int i = 0; i < mediumBoulderRelativeCenters.Count && spawnedMediumCount < numMediumToSpawn; i++)
                 {
-                    if (TrySpawnThingAt(actualClusterCenter + mediumBoulderRelativeCenters[i], mediumBoulderDef, map, occupiedByNewBoulders))
+                    IntVec3 mediumPos = actualClusterCenter + mediumBoulderRelativeCenters[i];
+                    if (!MapGenerator.PlayerStartSpot.IsValid || mediumPos.DistanceTo(MapGenerator.PlayerStartSpot) >= 10)
                     {
-                        spawnedMediumCount++;
+                        if (TrySpawnThingAt(mediumPos, mediumBoulderDef, map, occupiedByNewBoulders))
+                        {
+                            spawnedMediumCount++;
+                        }
                     }
                 }
 
