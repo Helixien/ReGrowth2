@@ -37,6 +37,7 @@ namespace ReGrowthCore
                     worldOverlayMat.SetTexture(MainTex2, texture);
                 }
             }
+            base.TickOverlay(map, lerpFactor);
         }
     }
 }
