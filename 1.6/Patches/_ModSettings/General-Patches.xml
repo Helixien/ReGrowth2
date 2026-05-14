@@ -266,6 +266,9 @@
 		<id>RG_RealisticFactionPlacement</id>
 		<category>RG_GeneralSettings</category>
 		<order>35</order>
+		<mods>
+			<li>Vanilla Expanded Framework</li>
+		</mods>
 		<operations>
 			<li Class="PatchOperationAddModExtension">
 				<xpath>Defs/FactionDef[defName="OutlanderCivil" or defName="OutlanderRough"]</xpath>
