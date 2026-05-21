@@ -15,7 +15,7 @@ public static class SteadyEnvironmentEffects_SteadyEnvironmentEffectsTick_Patch
             return;
         }
 
-        if (___map.weatherManager.curWeatherAge >= 2500 && ___map.weatherManager.curWeather.snowRate <= 0f && ___map.weatherManager.curWeather.rainRate > 0.1f && ___map.roofGrid != null)
+        if (___map.IsHashIntervalTick(60) && ___map.weatherManager.curWeatherAge >= 2500 && ___map.weatherManager.curWeather.snowRate <= 0f && ___map.weatherManager.curWeather.rainRate > 0.1f && ___map.roofGrid != null)
         {
             var area = ___map.Area;
             var currentPuddles = ___map.listerThings.ThingsOfDef(RG_DefOf.RG_FilthWater).Count;

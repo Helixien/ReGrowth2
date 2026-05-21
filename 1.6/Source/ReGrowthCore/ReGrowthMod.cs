@@ -85,6 +85,15 @@ namespace ReGrowthCore
             ReGrowthCore_SmartFarming.CacheDefData();
             new Harmony("Helixien.ReGrowthCore").PatchAll();
 
+            foreach (var def in DefDatabase<ThingDef>.AllDefsListForReading)
+            {
+                if (def.HasModExtension<BoulderProperties>())
+                {
+                    def.minifiedDef = null;
+                    def.blueprintDef = null;
+                    def.installBlueprintDef = null;
+                }
+            }
         }
     }
 }

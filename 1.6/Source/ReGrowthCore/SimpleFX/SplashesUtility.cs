@@ -66,9 +66,29 @@ namespace ReGrowthCore
 			if (Prefs.DevMode) Log.Message("[Simple FX: Splashes] The following terrains have been defined as being hard:\n - " + string.Join("\n - ", report));
 		}
 
+		private static readonly FastRandom deterministicRand = new FastRandom();
+
+		private static int GetCellSeed(Map map, IntVec3 c)
+		{
+			return map.uniqueID ^ c.x ^ (c.z << 16);
+		}
+
+		private static Vector3 GetDeterministicOffset(Map map, IntVec3 c)
+		{
+			deterministicRand.Reinitialise(GetCellSeed(map, c));
+			Vector3 vector = c.ToVector3Fast();
+			return new Vector3(vector.x + ((deterministicRand.Next(100) - 50) / 100f), vector.y, vector.z + ((deterministicRand.Next(100) - 50) / 100f));
+		}
+
+		private static bool PassesNatureFilter(Map map, IntVec3 c)
+		{
+			deterministicRand.Reinitialise(GetCellSeed(map, c) + 1);
+			return deterministicRand.Next(100) < (ReGrowthCore_SimpleFX.ModSettings.natureFilter * 100);
+		}
+
 		public static void ProcessSplashes(Map map)
 		{
-			if (fastRandom.NextBool() && fastRandom.NextBool() && activeMapHardGrid != null) //This looks dumb, but it's gating more complex code behind 2 ultra-fast random bool checks.
+			if (deterministicRand.NextBool() && deterministicRand.NextBool() && activeMapHardGrid != null) //This looks dumb, but it's gating more complex code behind 2 ultra-fast random bool checks.
 			{
 				if (fleckSystemCache == null) Find.CurrentMap.flecks.systems.TryGetValue(RG_DefOf.RG_Splash.fleckSystemClass, out fleckSystemCache);
 
@@ -79,7 +99,7 @@ namespace ReGrowthCore
 
 				for (int i = chunkStart; i < chunkEnd; ++i)
 				{
-					if (fastRandom.Next(adjustedSplashRate) == 0)
+					if (deterministicRand.Next(adjustedSplashRate) == 0)
 					{
 						var splashAt = activeMapHardGrid[i];
 						if (!CameraDriver.lastViewRect.Contains(splashAt.ToIntVec3())) continue;
@@ -97,16 +117,16 @@ namespace ReGrowthCore
 
 			//Generate a working list
 			List<Vector3> workingList = new List<Vector3>();
-			fastRandom.Reinitialise(map.uniqueID); //Keep random cells consistent
 			for (int i = map.info.NumCells; i-- > 0;)
 			{
 				//Fetch the def cell by cell
 				TerrainDef terrainDef = map.terrainGrid.topGrid[i];
+				var cell = map.cellIndices.IndexToCell(i);
 				//The cell must be a valid def, not roofed, and not fogged
 				if (hardTerrains.Contains(terrainDef.index) &&
-					(!terrainDef.natural || fastRandom.Next(100) < (ReGrowthCore_SimpleFX.ModSettings.natureFilter * 100)) &&
+					(!terrainDef.natural || PassesNatureFilter(map, cell)) &&
 					map.roofGrid.roofGrid[i] == null &&
-					!map.fogGrid.IsFogged(i)) workingList.Add(map.cellIndices.IndexToCell(i).ToVector3Fast().RandomOffset());
+					!map.fogGrid.IsFogged(i)) workingList.Add(GetDeterministicOffset(map, cell));
 			}
 
 			//Record
@@ -118,52 +138,42 @@ namespace ReGrowthCore
 		public static void UpdateCache(Map map, IntVec3 c, TerrainDef def = null)
 		{
 			if (map == null) return;
-			fastRandom.Reinitialise(map.uniqueID); //Make sure the vectors match
-			Vector3 vector = c.ToVector3Fast().RandomOffset();
+			Vector3 vector = GetDeterministicOffset(map, c);
 			if (hardGrids.TryGetValue(map.uniqueID, out Vector3[] hardGrid))
 			{
 				if (hardGrid.NullOrEmpty())
 				{
-					hardGrid = new Vector3[map.info?.NumCells ?? 0];
-					if (hardGrid.NullOrEmpty())
-					{
-						Log.Warning("[Simple FX: Splashes] Could not setup cache for map ID #" + map.uniqueID);
-						return;
-					}
+					hardGrid = new Vector3[0];
 				}
 
 				//Add the new cell if relevant
 				if (def == null) def = map.terrainGrid.TerrainAt(map.cellIndices.CellToIndex(c));
-				bool isHard = hardTerrains.Contains(def.index) && !c.Roofed(map);
+				bool isHard = hardTerrains.Contains(def.index) &&
+				              (!def.natural || PassesNatureFilter(map, c)) &&
+				              !c.Roofed(map) &&
+				              !map.fogGrid.IsFogged(c);
+				var list = new List<Vector3>(hardGrid);
+				bool contains = list.Contains(vector);
 
 				//Filter out this cell
 				if (isHard)
 				{
-					for (int i = hardGrid.Length; i-- > 0;) if (vector == hardGrid[i]) return; //No changes needed
-
-					//Not found, so append a new vector3 record to the end of the array
-					var newLength = hardGrid.Length + 1;
-					Vector3[] replacementArray = new Vector3[newLength];
-					System.Array.Copy(hardGrid, replacementArray, newLength - 1);
-					replacementArray[newLength - 1] = vector;
-					hardGrids[map.uniqueID] = replacementArray;
+					if (!contains)
+					{
+						list.Add(vector);
+						hardGrids[map.uniqueID] = list.ToArray();
+						SetActiveGrid(map);
+					}
 				}
 				else
 				{
-					Vector3[] replacementArray = new Vector3[hardGrid.Length - 1];
-					bool oldArrayIsDirty = false;
-					for (int i = replacementArray.Length; i-- > 0;)
+					if (contains)
 					{
-						var tmp = hardGrid[i];
-						if (vector != tmp) replacementArray[i] = tmp;
-						else oldArrayIsDirty = true;
+						list.Remove(vector);
+						hardGrids[map.uniqueID] = list.ToArray();
+						SetActiveGrid(map);
 					}
-					//Not found, no changes needed
-					if (oldArrayIsDirty) hardGrids[map.uniqueID] = replacementArray;
-					else return;
 				}
-
-				SetActiveGrid(map);
 			}
 		}
 
@@ -172,6 +182,13 @@ namespace ReGrowthCore
 			//Update the active grid.
 			if (map != null && Find.CurrentMap?.uniqueID == map.uniqueID && hardGrids.TryGetValue(map.uniqueID, out activeMapHardGrid))
 			{
+				if (activeMapHardGrid.Length == 0)
+				{
+					arrayChunks = 0;
+					adjustedSplashRate = 1;
+					activeMapID = -1;
+					return;
+				}
 				arrayChunks = (int)System.Math.Ceiling(activeMapHardGrid.Length / (float)chunkSize);
 				chunkIndex = 0;
 				//Adjusted splash rate

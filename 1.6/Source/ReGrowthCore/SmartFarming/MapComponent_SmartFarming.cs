@@ -137,6 +137,11 @@ namespace ReGrowthCore
 				var field = zone.GetType().GetField("allowSow");
 				if (field != null)
 				{
+					bool currentAllowSow = (bool)field.GetValue(zone);
+					if (!currentAllowSow && zoneData.sowMode == SowMode.On)
+					{
+						zoneData.sowMode = SowMode.Off;
+					}
 					field.SetValue(zone, zoneData.sowMode != SowMode.Off);
 				}
 			}
