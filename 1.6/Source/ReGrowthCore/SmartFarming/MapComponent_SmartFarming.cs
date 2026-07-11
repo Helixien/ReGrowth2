@@ -365,6 +365,7 @@ namespace ReGrowthCore
 
 		void UpdateCommonCache()
 		{
+			if (world == null || !tile.Valid || map.PocketMapParent is not null) return;
 			tempOffsetCache = map.gameConditionManager.AggregateTemperatureOffset();
 			currentDay = GenDate.DayOfYear(Current.gameInt.tickManager.TicksAbs, latitude);
 			baseTemperature = world.grid[tile].temperature;
