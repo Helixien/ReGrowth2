@@ -35,19 +35,25 @@ namespace ReGrowthCore
 				Log.Message("[Smart Farming] Tried to register a component on a map that already was registered. Did the cache not flush properly? " + ex);
 			}
 
-			tile = map.Parent is PocketMapParent parent ? parent.sourceMap.Tile : map.Tile;
-			//Cache some frequently used getters that don't change
-			latitude = Find.WorldGrid.LongLatOf(tile).x;
-			world = Find.World;
-			worldAverage = Season.Winter.GetMiddleTwelfth(0f).GetBeginningYearPct();
-			float latitudeAb = System.Math.Abs(latitude);
-			int tmp = (int)(30000f * (latitudeAb > 90f ? 90f / latitudeAb : latitudeAb / 90f));
-			sunrise = 15000 + tmp;
-			sunset = 47500 + tmp;
+            if (Find.World != null && map.PocketMapParent is null)
+            {
+                tile = map.Parent is PocketMapParent parent ? parent.sourceMap.Tile : map.Tile;
+				if (tile.Valid)
+                {
+                    //Cache some frequently used getters that don't change
+                    latitude = Find.WorldGrid.LongLatOf(tile).x;
+                    world = Find.World;
+                    worldAverage = Season.Winter.GetMiddleTwelfth(0f).GetBeginningYearPct();
+                    float latitudeAb = System.Math.Abs(latitude);
+                    int tmp = (int)(30000f * (latitudeAb > 90f ? 90f / latitudeAb : latitudeAb / 90f));
+                    sunrise = 15000 + tmp;
+                    sunset = 47500 + tmp;
 
-			//Cache longitude tuning
-			if (world.grid.LongLatOf(tile).y >= 0f) longitudeTuning = TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
-			else longitudeTuning = -TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                    //Cache longitude tuning
+                    if (world.grid.LongLatOf(tile).y >= 0f) longitudeTuning = TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                    else longitudeTuning = -TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                }
+            }
 
 			//Add placeholder registy if missing
 			if (growZoneRegistry == null) growZoneRegistry = new Dictionary<int, ZoneData>();
