@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using Verse;
@@ -10,9 +10,9 @@ namespace ReGrowthCore
 {
 	public class RGW_VolcanicIceSheet_BiomeWorker : BiomeWorker
 	{
-        public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
-        {
-            if (tile.WaterCovered)
+		public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
+		{
+			if (tile.WaterCovered)
 			{
 				return -100f;
 			}
@@ -45,7 +45,8 @@ namespace ReGrowthCore
 						return true;
 					}
 				}
-				catch { };
+				catch { }
+				;
 			}
 			return false;
 		}

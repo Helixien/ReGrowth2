@@ -7,14 +7,13 @@ namespace ReGrowthCore
 	[DefOf]
 	public static class RG_DefOf
 	{
-		//public static ThingDef RG_Filth_Water;
-		//
-		//public static ThingDef RG_Filth_WaterSpatter;
-		//
+		public static ThingDef RG_FilthWater;
+		
+		public static ThingDef RG_FilthWaterSpatter;
+		
 		//public static ThingDef RG_IceOverlay;
 		//
 		//public static ThingDef RG_Mote_FrostGlow;
-
 
 		public static ThingDef RG_DustDevil;
 

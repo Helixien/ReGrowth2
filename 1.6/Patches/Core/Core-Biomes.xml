@@ -35,6 +35,12 @@
 					</wildPlants>
 				</value>
 			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/BiomeDef[defName="BorealForest"]/wildAnimals</xpath>
+				<value>
+					<RG_WoollyStegosaurus>0.15</RG_WoollyStegosaurus>
+				</value>
+			</li>
 			<!-- ================ Biome Tundra ================ -->
 			<li Class="PatchOperationReplace">
 				<xpath>/Defs/BiomeDef[defName = "Tundra"]/wildPlants</xpath>
@@ -74,6 +80,12 @@
 					</wildPlants>
 				</value>
 			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/BiomeDef[defName="Tundra"]/wildAnimals</xpath>
+				<value>
+					<RG_WoollyStegosaurus>0.05</RG_WoollyStegosaurus>
+				</value>
+			</li>
 			<!-- ================ Biome Cold Bog ================ -->
 			<li Class="PatchOperationReplace">
 				<xpath>/Defs/BiomeDef[defName = "ColdBog"]/wildPlants</xpath>
@@ -109,6 +121,12 @@
 						<RG_SychiCap>0.08</RG_SychiCap>
 						<RG_Plant_TreeWhiteWillow>0.15</RG_Plant_TreeWhiteWillow>
 					</wildPlants>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/BiomeDef[defName="ColdBog"]/wildAnimals</xpath>
+				<value>
+					<RG_WoollyStegosaurus>0.025</RG_WoollyStegosaurus>
 				</value>
 			</li>
 			<!-- ================ Biome Temperate Forest ================ -->

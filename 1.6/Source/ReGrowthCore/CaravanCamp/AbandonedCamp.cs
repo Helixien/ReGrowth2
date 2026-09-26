@@ -2,6 +2,7 @@ using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace ReGrowthCore
@@ -78,7 +79,28 @@ namespace ReGrowthCore
                 CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, draftColonists: false, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
                 map.Parent.GetComponent<TimedDetectionRaids>()?.StartDetectionCountdown(240000, 60000);
                 CameraJumper.TryJump(pawn);
-                FloodFillerFog.DebugRefogMap(map);
+                var cellToUnfog = IntVec3.Invalid;
+                if (map.mapPawns.FreeColonistsSpawned.Any())
+                {
+                    cellToUnfog = map.mapPawns.FreeColonistsSpawned.RandomElement().Position;
+                }
+                else
+                {
+                    var playerPawns = map.mapPawns.AllPawns.Where(x => x.Faction == Faction.OfPlayer);
+                    if (playerPawns.Any())
+                    {
+                        cellToUnfog = playerPawns.RandomElement().Position;
+                    }
+                }
+                if (cellToUnfog.IsValid)
+                {
+                    map.fogGrid.SetAllFogged();
+                    foreach (IntVec3 allCell in map.AllCells)
+                    {
+                        map.mapDrawer.MapMeshDirty(allCell, MapMeshFlagDefOf.FogOfWar);
+                    }
+                    FloodFillerFog.FloodUnfog(cellToUnfog, map);
+                }
             }, "GeneratingMap", doAsynchronously: true, GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap);
         }
     }

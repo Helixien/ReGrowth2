@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -11,7 +11,7 @@ namespace ReGrowthCore
         {
             TerrainDef terrDef = __instance.pawn.Map.terrainGrid.TerrainAt(__instance.pawn.Position);
             __state = (terrDef, terrDef.generatedFilth);
-            if (terrDef.TryGetBiomeSpecificTerrain(__instance.pawn.Map, out var biomeTerrain) 
+            if (terrDef.TryGetBiomeSpecificTerrain(__instance.pawn.Map, out var biomeTerrain)
                 && biomeTerrain.generatedFilth != null)
             {
                 terrDef.generatedFilth = biomeTerrain.generatedFilth;

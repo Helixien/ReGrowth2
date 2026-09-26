@@ -1,7 +1,8 @@
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(GenStep_Asteroid), nameof(GenStep_Asteroid.SpawnOres))]
     public static class GenStep_Asteroid_SpawnOres_Patch

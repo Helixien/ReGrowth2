@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace ReGrowthCore
                 }
                 if (color != null)
                 {
-                    terrainMatCache[key] = graphic.GetColoredVersion(def.graphic.Shader, 
+                    terrainMatCache[key] = graphic.GetColoredVersion(def.graphic.Shader,
                         color.color, Color.white).MatSingle;
                 }
                 else

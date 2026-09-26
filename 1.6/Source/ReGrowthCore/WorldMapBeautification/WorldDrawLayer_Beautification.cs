@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using RimWorld.Planet;
 using UnityEngine;
@@ -47,18 +47,15 @@ namespace ReGrowthCore
 
                 Vector3 tileCenter = Find.WorldGrid.GetTileCenter(worldGrid[i].tile);
 
-
                 if (singleTile.PrimaryBiome?.GetModExtension<BiomesKitControl>() is { } modExt)
                 {
                     bool noRoads = !singleTile.PrimaryBiome.allowRoads || surfaceTile?.potentialRoads == null;
                     bool noRivers = !singleTile.PrimaryBiome.allowRivers || surfaceTile?.potentialRivers == null;
 
-
                     // --- Unique Hills ---
                     if (modExt.uniqueHills && noRoads && noRivers)
                     {
                         string path = "WorldMaterials/BiomesKit/" + singleTile.PrimaryBiome.defName + "/Hills/";
-
 
                         switch (singleTile.hilliness)
                         {
@@ -180,7 +177,6 @@ namespace ReGrowthCore
 
             yield break; // must yield because Regenerate is IEnumerable
         }
-
 
         private static string SnowSuffix(float temp, float semi, float snowy, float verySnowy, float fullySnowy)
         {

@@ -1,8 +1,9 @@
 using System;
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(GenSpawn), "Spawn", new Type[] { typeof(Thing), typeof(IntVec3),
         typeof(Map), typeof(Rot4), typeof(WipeMode), typeof(bool), typeof(bool) })]

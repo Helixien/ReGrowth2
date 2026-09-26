@@ -8,6 +8,13 @@ namespace ReGrowthCore
 {
     public class TerrainByBiome
     {
+        private static readonly int AlphaAddTex = Shader.PropertyToID("_AlphaAddTex");
+        private static readonly int BurnTex = Shader.PropertyToID("_BurnTex");
+        private static readonly int BurnColor = Shader.PropertyToID("_BurnColor");
+        private static readonly int ScrollSpeed = Shader.PropertyToID("_ScrollSpeed");
+        private static readonly int BurnScale = Shader.PropertyToID("_BurnScale");
+        private static readonly int PollutionTintColor = Shader.PropertyToID("_PollutionTintColor");
+
         public string label;
         public List<BiomeDef> biomes;
 
@@ -40,7 +47,7 @@ namespace ReGrowthCore
 
         public Graphic graphicPolluted = BaseContent.BadGraphic;
 
-        public Material DrawMatSingle(TerrainDef def) 
+        public Material DrawMatSingle(TerrainDef def)
         {
             if (graphic != null && graphic != BaseContent.BadGraphic)
             {
@@ -98,7 +105,7 @@ namespace ReGrowthCore
                     graphic = GraphicDatabase.Get<Graphic_Terrain>(texturePath, shader, Vector2.one, def.DrawColor, 2000 + def.renderPrecedence);
                     if (shader == ShaderDatabase.TerrainFadeRough || shader == ShaderDatabase.TerrainWater)
                     {
-                        graphic.MatSingle.SetTexture("_AlphaAddTex", TexGame.AlphaAddTex);
+                        graphic.MatSingle.SetTexture(AlphaAddTex, TexGame.AlphaAddTex);
                     }
                 }
 
@@ -116,15 +123,15 @@ namespace ReGrowthCore
                     Material matSingle = graphicPolluted.MatSingle;
                     if (texture2D != null)
                     {
-                        matSingle.SetTexture("_BurnTex", texture2D);
+                        matSingle.SetTexture(BurnTex, texture2D);
                     }
-                    matSingle.SetColor("_BurnColor", pollutionColor);
-                    matSingle.SetVector("_ScrollSpeed", pollutionOverlayScrollSpeed);
-                    matSingle.SetVector("_BurnScale", pollutionOverlayScale);
-                    matSingle.SetColor("_PollutionTintColor", pollutionTintColor);
+                    matSingle.SetColor(BurnColor, pollutionColor);
+                    matSingle.SetVector(ScrollSpeed, pollutionOverlayScrollSpeed);
+                    matSingle.SetVector(BurnScale, pollutionOverlayScale);
+                    matSingle.SetColor(PollutionTintColor, pollutionTintColor);
                     if (ShaderPolluted(def) == ShaderDatabase.TerrainFadeRoughPolluted)
                     {
-                        matSingle.SetTexture("_AlphaAddTex", TexGame.AlphaAddTex);
+                        matSingle.SetTexture(AlphaAddTex, TexGame.AlphaAddTex);
                     }
                 }
             });

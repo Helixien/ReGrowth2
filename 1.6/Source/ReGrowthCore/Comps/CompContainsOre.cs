@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Verse;
 using RimWorld;
@@ -70,7 +71,7 @@ namespace ReGrowthCore
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             base.PostDestroy(mode, previousMap);
-            if (parent.def.GetModExtension<BoulderProperties>() is BoulderProperties extension)
+            if (mode != DestroyMode.Vanish && parent.def.GetModExtension<BoulderProperties>() is BoulderProperties extension)
             {
                 int amount = extension.chunksToSpawn.RandomInRange;
                 for (int i = 0; i < amount; i++)

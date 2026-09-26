@@ -28,8 +28,9 @@ namespace ReGrowthCore
                     !comp.growZoneRegistry.ContainsKey(__instance.ID) //Zone data not yet made?
                 )
                 {
-                    comp.growZoneRegistry.Add(__instance.ID, new ZoneData());
-                    comp.growZoneRegistry[__instance.ID].Init(comp, __instance);
+                    var zoneData = new ZoneData();
+                    comp.growZoneRegistry.Add(__instance.ID, zoneData);
+                    zoneData.Init(comp, __instance);
                     if (Prefs.DevMode && ReGrowthCore_SmartFarming.ModSettings.logging) Log.Message("Zone ID " + __instance.ID + " registered.");
                 }
             }

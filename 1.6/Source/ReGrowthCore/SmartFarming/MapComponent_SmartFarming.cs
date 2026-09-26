@@ -10,11 +10,12 @@ namespace ReGrowthCore
 {
 	public class MapComponent_SmartFarming : MapComponent
 	{
-		int ticks, currentDay, tile, hour, sunrise, sunset, lastMessageDay = -1;
+		int currentDay, hour, sunrise, sunset, lastMessageDay = -1;
+		PlanetTile tile;
 		public Dictionary<int, ZoneData> growZoneRegistry = new Dictionary<int, ZoneData>();
 		public float tempOffsetCache, latitude, longitudeTuning, baseTemperature, worldAverage, sunLow, sunHigh;
 		List<string> report = new List<string>();
-		RimWorld.Planet.World world;
+		World world;
 
 		public MapComponent_SmartFarming(Map map) : base(map) { }
 
@@ -34,19 +35,25 @@ namespace ReGrowthCore
 				Log.Message("[Smart Farming] Tried to register a component on a map that already was registered. Did the cache not flush properly? " + ex);
 			}
 
-			tile = map.Parent is PocketMapParent parent ? parent.sourceMap.Tile : map.Tile;
-			//Cache some frequently used getters that don't change
-			latitude = Find.WorldGrid.LongLatOf(tile).x;
-			world = Find.World;
-			worldAverage = Season.Winter.GetMiddleTwelfth(0f).GetBeginningYearPct();
-			float latitudeAb = System.Math.Abs(latitude);
-			int tmp = (int)(30000f * (latitudeAb > 90f ? 90f / latitudeAb : latitudeAb / 90f));
-			sunrise = 15000 + tmp;
-			sunset = 47500 + tmp;
+            if (Find.World != null && map.PocketMapParent is null)
+            {
+                tile = map.Parent is PocketMapParent parent ? parent.sourceMap.Tile : map.Tile;
+				if (tile.Valid)
+                {
+                    //Cache some frequently used getters that don't change
+                    latitude = Find.WorldGrid.LongLatOf(tile).x;
+                    world = Find.World;
+                    worldAverage = Season.Winter.GetMiddleTwelfth(0f).GetBeginningYearPct();
+                    float latitudeAb = System.Math.Abs(latitude);
+                    int tmp = (int)(30000f * (latitudeAb > 90f ? 90f / latitudeAb : latitudeAb / 90f));
+                    sunrise = 15000 + tmp;
+                    sunset = 47500 + tmp;
 
-			//Cache longitude tuning
-			if (world.grid.LongLatOf(tile).y >= 0f) longitudeTuning = TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
-			else longitudeTuning = -TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                    //Cache longitude tuning
+                    if (world.grid.LongLatOf(tile).y >= 0f) longitudeTuning = TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                    else longitudeTuning = -TemperatureTuning.SeasonalTempVariationCurve.Evaluate(world.grid.DistanceFromEquatorNormalized(tile));
+                }
+            }
 
 			//Add placeholder registy if missing
 			if (growZoneRegistry == null) growZoneRegistry = new Dictionary<int, ZoneData>();
@@ -56,14 +63,15 @@ namespace ReGrowthCore
 			{
 				if (zone is IPlantToGrowSettable && !growZoneRegistry.ContainsKey(zone.ID))
 				{
-					growZoneRegistry.Add(zone.ID, new ZoneData());
-					growZoneRegistry[zone.ID].Init(this, zone);
+					var zoneData = new ZoneData();
+					growZoneRegistry.Add(zone.ID, zoneData);
+					zoneData.Init(this, zone);
 					CalculateAll(zone);
 				}
 			}
 
 			//Sanity check
-			var allValidZones = map.zoneManager.AllZones.Where(x => x is IPlantToGrowSettable).Select(y => y.ID);
+			var allValidZones = map.zoneManager.AllZones.Where(x => x is IPlantToGrowSettable).Select(y => y.ID).ToList();
 			foreach (var zoneData in growZoneRegistry.ToList())
 			{
 				int zoneID = zoneData.Key;
@@ -82,6 +90,13 @@ namespace ReGrowthCore
 			var tmp2 = this.map.mapPawns.FreeColonistsAndPrisoners;
 		}
 
+		public override void MapRemoved()
+		{
+			base.MapRemoved();
+
+			ReGrowthCore_SmartFarming.compCache.Remove(map.uniqueID);
+		}
+
 		private void CalculateAverages(Zone zone, ZoneData zoneData)
 		{
 			int numOfCells = zone.cells.Count, numOfPlants = 0, newPlants = 0;
@@ -97,7 +112,7 @@ namespace ReGrowthCore
 
 				//Plant tally
 				Plant plant = map.thingGrid.ThingAt(index, ThingCategory.Plant) as Plant;
-				if (plant != null && plant.def.index == (zone as IPlantToGrowSettable).GetPlantDefToGrow()?.index)
+				if (plant != null && plant.def.index == ((IPlantToGrowSettable)zone).GetPlantDefToGrow()?.index)
 				{
 					growth += plant.growthInt;
 					++numOfPlants;
@@ -128,6 +143,11 @@ namespace ReGrowthCore
 				var field = zone.GetType().GetField("allowSow");
 				if (field != null)
 				{
+					bool currentAllowSow = (bool)field.GetValue(zone);
+					if (!currentAllowSow && zoneData.sowMode == SowMode.On)
+					{
+						zoneData.sowMode = SowMode.Off;
+					}
 					field.SetValue(zone, zoneData.sowMode != SowMode.Off);
 				}
 			}
@@ -141,7 +161,7 @@ namespace ReGrowthCore
 				return -1;
 			}
 
-			ThingDef plant = (zone as IPlantToGrowSettable).GetPlantDefToGrow();
+			ThingDef plant = ((IPlantToGrowSettable)zone).GetPlantDefToGrow();
 			if (plant == null) return -1;
 
 			//Prepare variables
@@ -153,7 +173,7 @@ namespace ReGrowthCore
 
 			while (simulatedGrowth < growthNeeded && simulatedGrowth != -1)
 			{
-				simulatedGrowth = SimulateDay(numOfDays, simulatedGrowth, zone, plant, zoneData, world, tile, simulationReport);
+				simulatedGrowth = SimulateDay(numOfDays, simulatedGrowth, zone, plant, zoneData, simulationReport);
 
 				if (++numOfDays > 360)
 				{
@@ -167,13 +187,13 @@ namespace ReGrowthCore
 			{
 				string reportPrint = simulationReport.Count > 0 ? ("\n" + string.Join("\n", simulationReport)) : "skipped";
 				report.Add(" - " + (forSowing ? "new sowing " : "") + "report for " +
-					zone.Position.ToString() + " (" + (zone as IPlantToGrowSettable).GetPlantDefToGrow()?.defName + ") : " + reportPrint);
+					zone.Position.ToString() + " (" + ((IPlantToGrowSettable)zone).GetPlantDefToGrow()?.defName + ") : " + reportPrint);
 			}
 
 			return simulatedGrowth == -1 ? -1 : (numOfDays * 60000) + Find.TickManager.TicksAbs;
 		}
 
-		int SimulateDay(int numOfDays, int simulatedGrowth, Zone zone, ThingDef plant, ZoneData zoneData, RimWorld.Planet.World world, int tile, List<string> simulationReport)
+		int SimulateDay(int numOfDays, int simulatedGrowth, Zone zone, ThingDef plant, ZoneData zoneData, List<string> simulationReport)
 		{
 			int ticksOfLight = 32500; // 32500 = 60,000 ticks * .54167, only the hours this plant is "awake"
 
@@ -240,7 +260,7 @@ namespace ReGrowthCore
 		{
 			//Reset
 			zoneData.nutritionYield = 0f;
-			var plantDefToGrow = (zone as IPlantToGrowSettable).GetPlantDefToGrow();
+			var plantDefToGrow = ((IPlantToGrowSettable)zone).GetPlantDefToGrow();
 			if (plantDefToGrow == null) return;
 
 			//Fetch plant's produce
@@ -258,8 +278,42 @@ namespace ReGrowthCore
 			var pawns = map.mapPawns.FreeColonistsAndPrisoners;
 			foreach (Pawn pawn in pawns)
 			{
-				totalHungerRate += (Need_Food.BaseHungerRate(pawn.ageTracker.CurLifeStage, pawn.def) * 60000f) * HungerCategory.Fed.HungerMultiplier() * pawn.health.hediffSet.GetHungerRateFactor(null) *
-				(pawn.story?.traits?.HungerRateFactor ?? 1f);
+				// Base hunger rate per day, assuming pawn is fed
+				var hungerRate= (Need_Food.BaseHungerRate(pawn.ageTracker.CurLifeStage, pawn.def) * GenDate.TicksPerDay) * HungerCategory.Fed.HungerMultiplier() *
+				                // Include hunger rate from hediffs
+				                pawn.health.hediffSet.GetHungerRateFactor() *
+				                // Include hunger rate from traits, if a pawn has any traits
+				                (pawn.story?.traits?.HungerRateFactor ?? 1f);
+
+				if (ModsConfig.BiotechActive)
+				{
+					// Lactating pawns have a static hunger rate added on top, only multiplied by metabolic efficiency
+					var lactating = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Lactating).TryGetComp<HediffComp_Lactating>();
+					if (lactating != null)
+						hungerRate += lactating.AddedNutritionPerDay();
+
+					// Consider the pawn's genes, if any
+					if (pawn.genes != null)
+					{
+						var metabolism = 0;
+						foreach (var gene in pawn.genes.GenesListForReading)
+						{
+							if (!gene.Overridden)
+								metabolism += gene.def.biostatMet;
+						}
+
+						hungerRate *= GeneTuning.MetabolismToFoodConsumptionFactorCurve.Evaluate(metabolism);
+					}
+
+					// TODO: Remove if fixed in vanilla (assuming this is a bug)
+					// Lactating pawns have the extra nutrition from lactation applied twice. The second time ignores metabolic efficiency.
+					// It's done in HediffComp_Lactating:TryCharge method, where it directly reduces the pawn's food level.
+					// This is likely a bug, since the pawn's info tab doesn't include this info at all - only the one affected by metabolic efficiency.
+					if (lactating != null)
+						hungerRate += lactating.AddedNutritionPerDay();
+				}
+
+				totalHungerRate += hungerRate;
 			}
 			return totalHungerRate;
 		}
@@ -270,9 +324,8 @@ namespace ReGrowthCore
 			{
 				return;
 			}
-			if (++ticks == 2500) //Hourly
+			if (map.IsHashIntervalTick(GenDate.TicksPerHour)) //Hourly
 			{
-				ticks = 0;
 				ProcessZones();
 			}
 		}
@@ -294,7 +347,7 @@ namespace ReGrowthCore
 			if (growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
 			{
 				//Sanity check
-				if (map == null || map.gameConditionManager == null)
+				if (map?.gameConditionManager == null)
 				{
 					Log.Message("[Smart Farming] Tried to process an unknown zone.");
 					return;
@@ -306,7 +359,7 @@ namespace ReGrowthCore
 				zoneData.minHarvestDay = CalculateDaysToHarvest(zone, zoneData, false);
 				zoneData.minHarvestDayForNewlySown = CalculateDaysToHarvest(zone, zoneData, true);
 				CalculateYield(zone, zoneData);
-				var plantDefToGrow = (zone as IPlantToGrowSettable).GetPlantDefToGrow();
+				var plantDefToGrow = ((IPlantToGrowSettable)zone).GetPlantDefToGrow();
 				//Sanity check on alwaysSow in case settings were changed
 				if (ReGrowthCore_SmartFarming.ModSettings.coldSowing && zoneData.sowMode == SowMode.Smart && plantDefToGrow != null && !plantDefToGrow.plant.dieIfLeafless &&
 					(plantDefToGrow.plant.forceIsTree || plantDefToGrow.plant.harvestTag == "Wood"))
@@ -318,6 +371,7 @@ namespace ReGrowthCore
 
 		void UpdateCommonCache()
 		{
+			if (world == null || !tile.Valid || map.PocketMapParent is not null) return;
 			tempOffsetCache = map.gameConditionManager.AggregateTemperatureOffset();
 			currentDay = GenDate.DayOfYear(Current.gameInt.tickManager.TicksAbs, latitude);
 			baseTemperature = world.grid[tile].temperature;
@@ -329,7 +383,7 @@ namespace ReGrowthCore
 		public int HarvestNow(Zone zone, bool roofCheck = true, bool checkSensitivity = true)
 		{
 			if (zone == null) return 0;
-			ThingDef crop = (zone as IPlantToGrowSettable).GetPlantDefToGrow();
+			ThingDef crop = ((IPlantToGrowSettable)zone).GetPlantDefToGrow();
 			if (crop == null) return 0;
 
 			int result = 0;

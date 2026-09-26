@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<BodyPartDef>
+		<defName>RG_Spikes</defName>
+		<label>spikes</label>
+		<hitPoints>20</hitPoints>
+		<frostbiteVulnerability>0</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+	</BodyPartDef>
+</Defs>

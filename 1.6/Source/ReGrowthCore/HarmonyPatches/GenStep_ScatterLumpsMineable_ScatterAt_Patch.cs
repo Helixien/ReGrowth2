@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(GenStep_ScatterLumpsMineable), nameof(GenStep_ScatterLumpsMineable.ScatterAt))]
     public static class GenStep_ScatterLumpsMineable_ScatterAt_Patch

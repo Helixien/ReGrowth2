@@ -18,7 +18,6 @@ namespace ReGrowthCore
             FixLists();
             var fakeMap = new Map();
             var camp = new CaravanCamp();
-            fakeMap.uniqueID = Find.UniqueIDsManager.GetNextMapID();
             fakeMap.generationTick = GenTicks.TicksGame;
             fakeMap.info.Size = WorldObjectDefOf.Camp.overrideMapSize ?? Find.World.info.initialMapSize;
             fakeMap.info.parent = camp;

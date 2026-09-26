@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +8,7 @@ namespace ReGrowthCore
 {
     public class WeatherOverlay_FogMotes : SkyOverlay
     {
-        public static Dictionary<Map, CachedResult<List<IntVec3>>> unroofedCells = new ();
+        public static Dictionary<Map, CachedResult<List<IntVec3>>> unroofedCells = new();
 
         public override void DrawOverlay(Map map)
         {

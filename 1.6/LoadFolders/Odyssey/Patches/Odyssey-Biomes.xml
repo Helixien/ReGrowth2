@@ -22,6 +22,54 @@
 					</wildPlants>
 				</value>
 			</li>
+			<!-- ================ Scarland ================ -->
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/BiomeDef[defName = "Scarlands"]/wildPlants</xpath>
+				<value>
+					<wildPlants>
+						<Plant_Thornvine>8.0</Plant_Thornvine>
+						<Plant_GrayGrass MayRequire="Ludeon.RimWorld.Biotech">2</Plant_GrayGrass>
+						<Plant_Brambles_Leafless>1.0</Plant_Brambles_Leafless>
+						<Plant_Ripthorn MayRequire="Ludeon.RimWorld.Biotech">0.8</Plant_Ripthorn>
+						<Plant_TreeSnagroot>0.4</Plant_TreeSnagroot>
+						<Plant_Witchwood MayRequire="Ludeon.RimWorld.Biotech">0.5</Plant_Witchwood>
+						<!-- ================ New plants ================ -->
+						<RG_Plant_ToxiGrass>1</RG_Plant_ToxiGrass>
+						<RG_Plant_TallToxiGrass>0.5</RG_Plant_TallToxiGrass>
+						<RG_Plant_MutatedFungus>0.2</RG_Plant_MutatedFungus>
+						<RG_Plant_GlowLeaf>0.4</RG_Plant_GlowLeaf>
+						<RG_Plant_LureWeed>0.15</RG_Plant_LureWeed>
+						<RG_Plant_MutatedFern>2</RG_Plant_MutatedFern>
+						<RG_Plant_TreeToxipine>0.5</RG_Plant_TreeToxipine>
+						<RG_Plant_TreeSplitpine>0.2</RG_Plant_TreeSplitpine>
+						<RG_Plant_TreeToxiTeak>0.2</RG_Plant_TreeToxiTeak>
+						<RG_Tripaloski>0.25</RG_Tripaloski>
+					</wildPlants>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/BiomeDef[defName = "Scarlands"]/extraGenSteps</xpath>
+				<value>
+					<li>RG_AncientPowerPole</li>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>/Defs/BiomeDef[defName = "Scarlands"]/terrainsByFertility</xpath>
+				<value>
+					<terrainsByFertility>
+						<li>
+							<terrain>AncientMegastructure</terrain>
+							<min>-999</min>
+							<max>0.5</max>
+						</li>
+						<li>
+							<terrain>Soil</terrain>
+							<min>0.5</min>
+							<max>999</max>
+						</li>
+					</terrainsByFertility>
+				</value>
+			</li>
 		</operations>
 	</Operation>
 </Patch>

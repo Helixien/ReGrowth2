@@ -1,7 +1,8 @@
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(CompressibilityDeciderUtility), "IsSaveCompressible")]
     public static class CompressibilityDeciderUtility_IsSaveCompressible_Patch
@@ -10,7 +11,6 @@ namespace RimWorld
         {
             if (__result && t is Mineable mineable && mineable.IsSpaceRock())
             {
-                Log.Message("Space rock is not compressible");
                 __result = false;
             }
         }

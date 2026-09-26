@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Verse;
@@ -18,7 +18,7 @@ namespace ReGrowthCore
                 if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder lb && lb.LocalIndex == 4)
                 {
                     yield return new CodeInstruction(OpCodes.Ldloc_S, 4);
-                    yield return new CodeInstruction(OpCodes.Call, 
+                    yield return new CodeInstruction(OpCodes.Call,
                         AccessTools.Method(typeof(CellInspectorDrawer_DrawMapInspector_Patch), "TerrainLabelReplacement"));
                 }
             }

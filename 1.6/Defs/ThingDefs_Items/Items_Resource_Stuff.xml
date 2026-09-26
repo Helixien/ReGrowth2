@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--====================  Dinosaurs Hides ===========================-->
+    <ThingDef ParentName="LeatherBase">
+        <defName>RG_DinosaursHideHeavy</defName>
+        <label>heavy dinosaurs hide</label>
+        <description>Heavy hide from larger, tougher theropod or sauropod. It's reasonbly good at protection.</description>
+        <graphicData>
+            <color>(129,50,41)</color>
+        </graphicData>
+        <statBases>
+            <MarketValue>3.3</MarketValue>
+            <StuffPower_Armor_Sharp>1.36</StuffPower_Armor_Sharp>
+            <StuffPower_Armor_Blunt>0.20</StuffPower_Armor_Blunt>
+            <StuffPower_Insulation_Cold>20</StuffPower_Insulation_Cold>
+            <StuffPower_Insulation_Heat>16</StuffPower_Insulation_Heat>
+        </statBases>
+        <stuffProps>
+            <color>(129,50,41)</color>
+            <commonality>0.05</commonality>
+            <statFactors>
+                <MaxHitPoints>1.5</MaxHitPoints>
+                <Beauty>1.5</Beauty>
+            </statFactors>
+        </stuffProps>
+    </ThingDef>
+	<!--====================  Wool ===========================-->
+	<ThingDef ParentName="WoolBase">
+		<defName>RG_WoolStegosaurus</defName>
+		<label>woolly stegosaurus wool</label>
+		<description>Thick and coarse wool of a woolly stegosaurus. Quite warm.</description>
+		<possessionCount>25</possessionCount>
+		<graphicData>
+			<color>(103,118,139)</color>
+		</graphicData>
+		<stuffProps>
+			<color>(103,118,139)</color>
+			<commonality>0.05</commonality>
+		</stuffProps>
+		<statBases>
+			<StuffPower_Armor_Sharp>0.90</StuffPower_Armor_Sharp>
+			<StuffPower_Insulation_Cold>40</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>19</StuffPower_Insulation_Heat>
+			<MarketValue>4</MarketValue>
+		</statBases>
+	</ThingDef>
+</Defs>

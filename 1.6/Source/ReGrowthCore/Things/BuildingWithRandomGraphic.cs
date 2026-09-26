@@ -1,9 +1,9 @@
-﻿using Verse;
+using Verse;
 
 namespace ReGrowthCore
 {
     public class BuildingWithRandomGraphic : Building
-	{
+    {
         public override void PostMake()
         {
             base.PostMake();

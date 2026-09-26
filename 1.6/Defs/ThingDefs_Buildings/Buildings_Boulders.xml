@@ -64,7 +64,8 @@
 		</statBases>
 		<building>
 			<isResourceRock>false</isResourceRock>
-			<isNaturalRock>false</isNaturalRock>
+			<isNaturalRock>true</isNaturalRock>
+			<ai_neverTrashThis>true</ai_neverTrashThis>
 			<mineableScatterCommonality>0</mineableScatterCommonality>
 			<mineableScatterLumpSizeRange>2~4</mineableScatterLumpSizeRange>
 		</building>
@@ -101,7 +102,8 @@
 		</statBases>
 		<building>
 			<isResourceRock>false</isResourceRock>
-			<isNaturalRock>false</isNaturalRock>
+			<isNaturalRock>true</isNaturalRock>
+			<ai_neverTrashThis>true</ai_neverTrashThis>
 			<mineableScatterCommonality>0</mineableScatterCommonality>
 			<mineableScatterLumpSizeRange>2~4</mineableScatterLumpSizeRange>
 		</building>

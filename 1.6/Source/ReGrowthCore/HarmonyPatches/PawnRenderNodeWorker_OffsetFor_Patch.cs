@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using LudeonTK;
 using UnityEngine;
 using Verse;
@@ -11,11 +11,11 @@ namespace ReGrowthCore
     {
         public static float xOffset = 0.17f;
         public static float zOffset = 0.035f;
-        public static void Postfix(PawnRenderNodeWorker __instance, PawnRenderNode node, PawnDrawParms parms, 
+        public static void Postfix(PawnRenderNodeWorker __instance, PawnRenderNode node, PawnDrawParms parms,
             ref Vector3 __result)
         {
             var pawn = node.tree.pawn;
-            if (!parms.Portrait && node is PawnRenderNode_Body && (pawn.CurJob?.swimming ?? false))
+            if (node is PawnRenderNode_Body && pawn.RaceProps.Humanlike && !parms.Portrait && (pawn.CurJob?.swimming ?? false))
             {
                 __result.z -= 0.5f;
                 Rot4 bodyFacing = pawn.Rotation;

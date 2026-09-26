@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 using Verse;
 
@@ -14,8 +14,8 @@ namespace ReGrowthCore
                 if (parms.Portrait is false && parms.pawn.IsBathingNow())
                 {
                     var transparency = 0.5f;
-                    if (__instance is PawnRenderNodeWorker_Body 
-                        && __instance is not PawnRenderNodeWorker_AttachmentBody 
+                    if (__instance is PawnRenderNodeWorker_Body
+                        && __instance is not PawnRenderNodeWorker_AttachmentBody
                         || node is PawnRenderNode_Body)
                     {
                         transparency = 0.1f;
@@ -24,7 +24,7 @@ namespace ReGrowthCore
                 }
             }
         }
-    
+
         private static bool NodeIsBodyOrHasParentBody(PawnRenderNode node)
         {
             if (node is PawnRenderNode_Body)

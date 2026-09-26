@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -12,9 +12,9 @@ namespace ReGrowthCore
 {
 	public class BiomeWorker_BlackSwamp : BiomeWorker
 	{
-        public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
-        {
-            if (tile.WaterCovered)
+		public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
+		{
+			if (tile.WaterCovered)
 			{
 				return -100f;
 			}
@@ -33,9 +33,9 @@ namespace ReGrowthCore
 			Vector3 tileCenter = Find.WorldGrid.GetTileCenter(planetTile.tileId);
 			var value = BiomePerlin.GetNoiseFor(biome).GetValue(tileCenter);
 			if (value >= 0.6)
-            {
+			{
 				return (15f + (tile.temperature - 7f) + (tile.rainfall - 600f) / 180f + tile.swampiness * 3f) + 1;
-            }
+			}
 			return -100f;
 		}
 	}

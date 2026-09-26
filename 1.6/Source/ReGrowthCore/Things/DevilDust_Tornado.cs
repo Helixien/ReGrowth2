@@ -10,7 +10,7 @@ using Verse.Sound;
 
 namespace ReGrowthCore
 {
-    [StaticConstructorOnStartup]
+	[StaticConstructorOnStartup]
 	public class DevilDust_Tornado : ThingWithComps
 	{
 		private Vector2 realPosition;
@@ -24,6 +24,8 @@ namespace ReGrowthCore
 		private int ticksLeftToDisappear = -1;
 
 		private Sustainer sustainer;
+
+		private CompWindSource windComp;
 
 		private static MaterialPropertyBlock matPropertyBlock = new MaterialPropertyBlock();
 
@@ -115,6 +117,8 @@ namespace ReGrowthCore
 				leftFadeOutTicks = -1;
 				ticksLeftToDisappear = DurationTicks.RandomInRange;
 			}
+
+			windComp = GetComp<CompWindSource>();
 			CreateSustainer();
 		}
 
@@ -129,9 +133,11 @@ namespace ReGrowthCore
 				Log.Error("Tornado sustainer is null.");
 				CreateSustainer();
 			}
-			sustainer.Maintain();
+			// If sustainer was null, and we're at a place where game is being setup (loading), this may throw
+			// errors due to a null sustainer since LongEventHandler.ExecuteWhenFinished may not execute instantly.
+			sustainer?.Maintain();
 			UpdateSustainerVolume();
-			GetComp<CompWindSource>().wind = 5f * FadeInOutFactor;
+			windComp.wind = 5f * FadeInOutFactor;
 			if (leftFadeOutTicks > 0)
 			{
 				leftFadeOutTicks--;
@@ -149,12 +155,12 @@ namespace ReGrowthCore
 			var movedPosition = realPosition.Moved(direction, 17f / 600f);
 			var cell = new Vector3(movedPosition.x, 0f, movedPosition.y).ToIntVec3();
 			if (this.Map is null)
-            {
+			{
 				Destroy();
 				return;
-            }
+			}
 			if (cell.IsValid && this.Map != null)
-            {
+			{
 				if (!cell.InBounds(this.Map) || !cell.Roofed(this.Map))
 				{
 					realPosition = movedPosition;
@@ -189,8 +195,7 @@ namespace ReGrowthCore
 				if (this.IsHashIntervalTick(4) && !CellImmuneToDamage(base.Position))
 				{
 					//float num = Rand.Range(0.6f, 1f);
-					Vector3 a = new Vector3(realPosition.x, 0f, realPosition.y);
-					a.y = AltitudeLayer.MoteOverhead.AltitudeFor();
+					Vector3 a = realPosition with { y = AltitudeLayer.MoteOverhead.AltitudeFor() };
 					ThrowDevilDustPuff(a + Vector3Utility.RandomHorizontalOffset(1.5f), base.Map, Rand.Range(1.5f, 3f), new ColorInt(191, 161, 127).ToColor);
 				}
 			}
@@ -215,16 +220,16 @@ namespace ReGrowthCore
 			}
 		}
 
-        public override void DrawAt(global::UnityEngine.Vector3 drawLoc, bool flip = false)
-        {
-            Rand.PushState();
-            Rand.Seed = thingIDNumber;
-            for (int i = 0; i < 90; i++)
-            {
-                DrawTornadoPart(PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
-            }
-            Rand.PopState();
-        }
+		public override void DrawAt(global::UnityEngine.Vector3 drawLoc, bool flip = false)
+		{
+			Rand.PushState();
+			Rand.Seed = thingIDNumber;
+			for (int i = 0; i < 90; i++)
+			{
+				DrawTornadoPart(PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
+			}
+			Rand.PopState();
+		}
 
 		private void DrawTornadoPart(float distanceFromCenter, float initialAngle, float speedMultiplier, float colorMultiplier)
 		{

@@ -66,9 +66,9 @@ namespace ReGrowthCore
             }
         }
 
-        public override void Tick()
+        public override void TickInterval(int delta)
         {
-            base.Tick();
+            base.TickInterval(delta);
             if (IsEmpty && (savedCamp is null || Find.TickManager.TicksGame - savedCamp.ticksSaved
                 >= ReGrowthUtils.MakeCampPatchWorker.preserveSavedCampsForDays * GenDate.TicksPerDay))
             {
@@ -90,7 +90,8 @@ namespace ReGrowthCore
         private void RestoreCampMap()
         {
             SyncGrids(Map.terrainGrid.underGrid, savedCamp.terrainGrid.underGrid, delegate (int i, TerrainDef def)
-            {   if (def is null) return;
+            {
+                if (def is null) return;
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetUnderTerrain(cell, def);
             });

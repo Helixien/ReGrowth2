@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System;
 using System.Text;
 using UnityEngine;
-using static ReGrowthCore.ZoneData;
 using Verse.AI;
 using System.Reflection;
 using System.Linq;
+using static ReGrowthCore.ZoneData;
 
 namespace ReGrowthCore
 {
@@ -90,17 +90,13 @@ namespace ReGrowthCore
 
 		static IEnumerable<Gizmo> GetMultiZoneGizmos(MapComponent_SmartFarming comp, ZoneData zoneData, Zone thisZone)
 		{
-			ZoneData basisZoneData = zoneData;
-			Zone basisZone = null;
-			var selected = Find.Selector.selected;
-			for (int i = selected.Count; i-- > 0;)
+			var firstSelectedGrowZone = Find.Selector.SelectedObjects.OfType<Zone>().FirstOrDefault(z => z is IPlantToGrowSettable);
+			if (thisZone != firstSelectedGrowZone)
 			{
-				if (selected[i] is Zone growZone && growZone is IPlantToGrowSettable && comp.growZoneRegistry.TryGetValue(growZone.ID, out basisZoneData))
-				{
-					basisZone = growZone;
-					break;
-				}
+				yield break;
 			}
+
+			var basisZoneData = zoneData;
 
 			yield return new Command_Action()
 			{
@@ -169,7 +165,8 @@ namespace ReGrowthCore
 					break;
 			}
 			yield return priorityGizmo;
-			if (basisZone != null && basisZone != thisZone)
+
+			if (Find.Selector.selected.Count > 1)
 			{
 				yield return new Command_Action()
 				{
@@ -178,11 +175,17 @@ namespace ReGrowthCore
 					icon = ResourceBank.mergeZones,
 					action = () =>
 					{
-						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("SmartFarming.Icon.ConfirmMergeZones".Translate(), () => zoneData.MergeZones(thisZone, basisZone)));
+						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("SmartFarming.Icon.ConfirmMergeZones".Translate(), () =>
+						{
+							var selectedGrowZones = Find.Selector.SelectedObjects.OfType<Zone>()
+								.Where(z => z is IPlantToGrowSettable)
+								.ToList();
+
+							zoneData.MergeZones(thisZone, selectedGrowZones);
+						}));
 					}
 				};
 			}
-			yield break;
 		}
 	}
 
@@ -191,8 +194,8 @@ namespace ReGrowthCore
 	[HarmonyPriority(HarmonyLib.Priority.Last)]
 	static class Patch_JobOnCell
 	{
-		private static int lastBlightCheckTick = -1;
-		private static readonly Dictionary<int, bool> zoneBlightCache = new Dictionary<int, bool>();
+	private static int lastBlightCheckTick = -1;
+	private static readonly Dictionary<int, bool> zoneBlightCache = new Dictionary<int, bool>();
 
 		static bool Prefix(Pawn pawn, IntVec3 c)
 		{
@@ -203,7 +206,7 @@ namespace ReGrowthCore
 			}
 
 			var map = pawn.Map;
-			var zone = map.zoneManager.zoneGrid[c.z * map.info.sizeInt.x + c.x];
+			var zone = map.zoneManager.ZoneAt(c);
 			if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
 			{
 				if (ReGrowthCore_SmartFarming.ModSettings.autoCutBlighted)
@@ -252,6 +255,179 @@ namespace ReGrowthCore
 			}
 			return true;
 		}
+
+		static Job Postfix(Job __result, WorkGiver_GrowerSow __instance, Pawn pawn, IntVec3 c, bool forced = false)
+		{
+			if (__result == null)
+			{
+				var map = pawn.Map;
+				var zone = map.zoneManager.ZoneAt(c);
+				if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
+				{
+					if (zoneData.sowMode == SowMode.Force)
+					{
+						if (c.GetVacuum(pawn.Map) >= 0.5f)
+						{
+							return null;
+						}
+						if (WorkGiver_Grower.wantedPlantDef == null)
+						{
+							WorkGiver_Grower.wantedPlantDef = WorkGiver_Grower.CalculateWantedPlantDef(c, map);
+							if (WorkGiver_Grower.wantedPlantDef == null)
+							{
+								return null;
+							}
+						}
+						List<Thing> thingList = c.GetThingList(map);
+						Zone_Growing zone_Growing = c.GetZone(map) as Zone_Growing;
+						bool flag = false;
+						for (int i = 0; i < thingList.Count; i++)
+						{
+							Thing thing = thingList[i];
+							if (thing.def == WorkGiver_Grower.wantedPlantDef)
+							{
+								return null;
+							}
+							if ((thing is Blueprint || thing is Frame) && thing.Faction == pawn.Faction)
+							{
+								flag = true;
+							}
+						}
+						if (flag)
+						{
+							Thing edifice = c.GetEdifice(map);
+							if (edifice == null || edifice.def.fertility < 0f)
+							{
+								return null;
+							}
+						}
+						if (WorkGiver_Grower.wantedPlantDef.plant.diesToLight)
+						{
+							if (!c.Roofed(map) && !map.GameConditionManager.IsAlwaysDarkOutside)
+							{
+								JobFailReason.Is(WorkGiver_GrowerSow.CantSowCavePlantBecauseUnroofedTrans);
+								return null;
+							}
+							if (map.glowGrid.GroundGlowAt(c, ignoreCavePlants: true) > 0f)
+							{
+								JobFailReason.Is(WorkGiver_GrowerSow.CantSowCavePlantBecauseOfLightTrans);
+								return null;
+							}
+						}
+						if (WorkGiver_Grower.wantedPlantDef.plant.interferesWithRoof && c.Roofed(pawn.Map))
+						{
+							return null;
+						}
+						Plant plant = c.GetPlant(map);
+						if (plant != null && plant.def.plant.blockAdjacentSow)
+						{
+							if (!pawn.CanReserve(plant, 1, -1, null, forced) || plant.IsForbidden(pawn))
+							{
+								return null;
+							}
+							if (zone_Growing != null && !zone_Growing.allowCut)
+							{
+								return null;
+							}
+							if (!forced && plant.TryGetComp<CompPlantPreventCutting>(out var comp2) && comp2.PreventCutting)
+							{
+								return null;
+							}
+							if (!PlantUtility.PawnWillingToCutPlant_Job(plant, pawn))
+							{
+								return null;
+							}
+							return JobMaker.MakeJob(JobDefOf.CutPlant, plant);
+						}
+						Thing thing2 = PlantUtility.AdjacentSowBlocker(WorkGiver_Grower.wantedPlantDef, c, map);
+						if (thing2 != null)
+						{
+							if (thing2 is Plant plant2 && pawn.CanReserveAndReach(plant2, PathEndMode.Touch, Danger.Deadly, 1, -1, null, forced) && !plant2.IsForbidden(pawn))
+							{
+								IPlantToGrowSettable plantToGrowSettable = plant2.Position.GetPlantToGrowSettable(plant2.Map);
+								if (plantToGrowSettable == null || plantToGrowSettable.GetPlantDefToGrow() != plant2.def)
+								{
+									Zone_Growing zone_Growing2 = c.GetZone(map) as Zone_Growing;
+									Zone_Growing zone_Growing3 = plant2.Position.GetZone(map) as Zone_Growing;
+									if ((zone_Growing2 != null && !zone_Growing2.allowCut) || (zone_Growing3 != null && !zone_Growing3.allowCut && plant2.def == zone_Growing3.GetPlantDefToGrow()))
+									{
+										return null;
+									}
+									if (!forced && thing2.TryGetComp(out CompPlantPreventCutting comp3) && comp3.PreventCutting)
+									{
+										return null;
+									}
+									if (PlantUtility.TreeMarkedForExtraction(plant2))
+									{
+										return null;
+									}
+									if (!PlantUtility.PawnWillingToCutPlant_Job(plant2, pawn))
+									{
+										return null;
+									}
+									return JobMaker.MakeJob(JobDefOf.CutPlant, plant2);
+								}
+							}
+							return null;
+						}
+						if (WorkGiver_Grower.wantedPlantDef.plant.sowMinSkill > 0 && ((pawn.skills != null && pawn.skills.GetSkill(SkillDefOf.Plants).Level < WorkGiver_Grower.wantedPlantDef.plant.sowMinSkill) || (pawn.IsColonyMech && pawn.RaceProps.mechFixedSkillLevel < WorkGiver_Grower.wantedPlantDef.plant.sowMinSkill)))
+						{
+							JobFailReason.Is("UnderAllowedSkill".Translate(WorkGiver_Grower.wantedPlantDef.plant.sowMinSkill), __instance.def.label);
+							return null;
+						}
+						for (int j = 0; j < thingList.Count; j++)
+						{
+							Thing thing3 = thingList[j];
+							if (!thing3.def.BlocksPlanting())
+							{
+								continue;
+							}
+							if (!pawn.CanReserve(thing3, 1, -1, null, forced))
+							{
+								return null;
+							}
+							if (thing3.def.category == ThingCategory.Plant)
+							{
+								if (thing3.IsForbidden(pawn))
+								{
+									return null;
+								}
+								if (zone_Growing != null && !zone_Growing.allowCut)
+								{
+									return null;
+								}
+								if (!forced && plant.TryGetComp<CompPlantPreventCutting>(out var comp4) && comp4.PreventCutting)
+								{
+									return null;
+								}
+								if (!PlantUtility.PawnWillingToCutPlant_Job(thing3, pawn))
+								{
+									return null;
+								}
+								if (PlantUtility.TreeMarkedForExtraction(thing3))
+								{
+									return null;
+								}
+								return JobMaker.MakeJob(JobDefOf.CutPlant, thing3);
+							}
+							if (thing3.def.EverHaulable)
+							{
+								return HaulAIUtility.HaulAsideJobFor(pawn, thing3);
+							}
+							return null;
+						}
+						if (!WorkGiver_Grower.wantedPlantDef.CanNowPlantAt(c, map) || !pawn.CanReserve(c, 1, -1, null, forced))
+						{
+							return null;
+						}
+						Job job = JobMaker.MakeJob(JobDefOf.Sow, c);
+						job.plantDefToSow = WorkGiver_Grower.wantedPlantDef;
+						return job;
+					}
+				}
+			}
+			return __result;
+	}
 	}
 
 	//This adds information to the inspector window
@@ -266,13 +442,19 @@ namespace ReGrowthCore
 				.Where(m => m != null);
 		}
 		static float totalHungerRate = 0f;
+		static int lastRecalculateTick = 0;
 		static string Postfix(string __result, Zone __instance)
 		{
 			Map map = __instance.Map;
 			if (ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) && mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData))
 			{
-				//Update the hunger cache only when it's being viewed
-				if (totalHungerRate == 0f || Find.TickManager.TicksGame % 480 == 0)
+				// Update the hunger cache only when it's being viewed.
+				// Since this code is tied to FPS, rather that tick speed, we can't use "Find.TickManager.TicksGame % 480 == 0",
+				// as this code may be called on ticks 479 and 481, but not 480. Likewise, we may just pause on tick 480, causing
+				// constant recalculations. As an alternative, we keep track of when last we recalculated the hunger rate, and
+				// do it again if 480 ticks have passed. And as a precaution against reloading the game, we do it if last recalculation
+				// tick happened in the future, instead of the past.
+				if (totalHungerRate == 0f || Find.TickManager.TicksGame >= lastRecalculateTick + 480 || Find.TickManager.TicksGame < lastRecalculateTick)
 				{
 					try
 					{
@@ -283,6 +465,8 @@ namespace ReGrowthCore
 						Log.Warning("[Smart Farming] Error calculating hunger rate" + ex);
 						totalHungerRate = 1f;
 					}
+
+					lastRecalculateTick = Find.TickManager.TicksGame;
 				}
 
 				StringBuilder builder = new StringBuilder(__result, 10);
@@ -361,7 +545,7 @@ namespace ReGrowthCore
 			Map map = pawn?.Map;
 
 			//We don't check the zone type because it's faster for the collection lookup to return with nothing than it is to cast the zone
-			int zoneID = map?.zoneManager.zoneGrid[c.z * map.info.sizeInt.x + c.x]?.ID ?? -1;
+			int zoneID = map?.zoneManager.ZoneAt(c)?.ID ?? -1;
 			if (zoneID == -1) return true;
 
 			if (ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) && mapComp.growZoneRegistry.TryGetValue(zoneID, out ZoneData zoneData))

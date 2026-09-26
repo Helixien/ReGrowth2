@@ -1,6 +1,7 @@
 using HarmonyLib;
+using RimWorld;
 
-namespace RimWorld
+namespace ReGrowthCore
 {
     [HarmonyPatch(typeof(Skyfaller), nameof(Skyfaller.SpawnThings))]
     public static class Skyfaller_SpawnThings_Patch

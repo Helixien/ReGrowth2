@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Linq;
 using System.Text;
@@ -52,7 +52,7 @@ namespace ReGrowthCore
             return comfortRange;
         }
 
-        public static bool IsGoodSpotForBathing(Map map, IntVec3 cell, FloatRange comfortRange, 
+        public static bool IsGoodSpotForBathing(Map map, IntVec3 cell, FloatRange comfortRange,
             StringBuilder failReason = null, Pawn pawn = null)
         {
             if (cell.GetZone(map) is not Zone_Bathe)
@@ -104,7 +104,7 @@ namespace ReGrowthCore
             foreach (var adj in GenAdj.AdjacentCells)
             {
                 var nearbyCell = adj + cell;
-                if (nearbyCell.GetTerrain(map).IsWater)
+                if (map.terrainGrid.waterCells.Contains(nearbyCell))
                 {
                     nearbyWaterCount++;
                 }
@@ -130,7 +130,7 @@ namespace ReGrowthCore
                 }
                 return false;
             }
-            var cells = pawn.Map.AllCells.Where(x => CellValidator(x)).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
+            var cells = pawn.Map.terrainGrid.waterCells.Where(x => CellValidator(x)).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
                 .ThenBy(x => pawn.Position.DistanceTo(x)).Take(10);
             if (cells.TryRandomElement(out var cell))
             {

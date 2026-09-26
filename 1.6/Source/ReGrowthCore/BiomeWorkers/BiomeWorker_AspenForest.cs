@@ -6,13 +6,13 @@ namespace ReGrowthCore
 {
 	public class BiomeWorker_AspenForest : BiomeWorker
 	{
-        public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
-        {
-            if (tile.WaterCovered)
+		public override float GetScore(BiomeDef biome, Tile tile, PlanetTile planetTile)
+		{
+			if (tile.WaterCovered)
 			{
 				return -100f;
 			}
-			if (tile.temperature < -5f)
+			if (tile.temperature is < -5f or > 0f)
 			{
 				return 0f;
 			}
@@ -22,10 +22,9 @@ namespace ReGrowthCore
 			}
 			var tileCenter = Find.WorldGrid.GetTileCenter(planetTile.tileId);
 			float value = BiomePerlin.GetNoiseFor(biome).GetValue(tileCenter);
-			float tileTemperature = 0f - tile.temperature;
-			if (value >= 0.05f && tileTemperature >= 0)
+			if (value >= 0.05f)
 			{
-				return tileTemperature + value;
+				return -tile.temperature + value;
 			}
 			return 0f;
 		}

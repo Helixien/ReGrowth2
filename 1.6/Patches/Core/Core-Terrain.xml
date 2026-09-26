@@ -80,5 +80,6 @@
 				<xpath>/Defs/TerrainDef[defName = "AncientConcrete"]/color</xpath>
 			</li>
 		</operations>
+
 	</Operation>
 </Patch>
