@@ -32,6 +32,7 @@
 			<destroyShakeAmount>0</destroyShakeAmount>
 			<supportsWallAttachments>true</supportsWallAttachments>
 			<mineablePreventMeteorite>true</mineablePreventMeteorite>
+			<mineablePreventNaturalRockOnSurface>true</mineablePreventNaturalRockOnSurface>
 			<canLandGravshipOn>true</canLandGravshipOn>
 		</building>
 		<damageMultipliers>
