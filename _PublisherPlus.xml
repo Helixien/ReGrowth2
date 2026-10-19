@@ -2,7 +2,7 @@
 <Configuration>
   <Excluded>
     <exclude>.git</exclude>
-    <exclude>.unity</exclude>
+    <exclude>.vscode</exclude>
     <exclude>1.4\Source</exclude>
     <exclude>1.5\Source</exclude>
     <exclude>1.6\.vscode</exclude>
