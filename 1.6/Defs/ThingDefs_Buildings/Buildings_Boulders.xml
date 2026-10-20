@@ -24,7 +24,7 @@
 		<building>
 			<isEdifice>true</isEdifice>
 			<isInert>true</isInert>
-			<isNaturalRock>true</isNaturalRock>
+			<isNaturalRock>false</isNaturalRock>
 			<isAirtight>false</isAirtight>
 			<claimable>false</claimable>
 			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
@@ -32,7 +32,6 @@
 			<destroyShakeAmount>0</destroyShakeAmount>
 			<supportsWallAttachments>true</supportsWallAttachments>
 			<mineablePreventMeteorite>true</mineablePreventMeteorite>
-			<mineablePreventNaturalRockOnSurface>true</mineablePreventNaturalRockOnSurface>
 			<canLandGravshipOn>true</canLandGravshipOn>
 		</building>
 		<damageMultipliers>
@@ -65,7 +64,7 @@
 		</statBases>
 		<building>
 			<isResourceRock>false</isResourceRock>
-			<isNaturalRock>true</isNaturalRock>
+			<isNaturalRock>false</isNaturalRock>
 			<ai_neverTrashThis>true</ai_neverTrashThis>
 			<mineableScatterCommonality>0</mineableScatterCommonality>
 			<mineableScatterLumpSizeRange>2~4</mineableScatterLumpSizeRange>
@@ -103,7 +102,7 @@
 		</statBases>
 		<building>
 			<isResourceRock>false</isResourceRock>
-			<isNaturalRock>true</isNaturalRock>
+			<isNaturalRock>false</isNaturalRock>
 			<ai_neverTrashThis>true</ai_neverTrashThis>
 			<mineableScatterCommonality>0</mineableScatterCommonality>
 			<mineableScatterLumpSizeRange>2~4</mineableScatterLumpSizeRange>
