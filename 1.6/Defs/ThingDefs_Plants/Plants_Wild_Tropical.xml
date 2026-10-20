@@ -274,6 +274,7 @@
 			<Beauty>1</Beauty>
 			<BeautyOutdoors>1</BeautyOutdoors>
 		</statBases>
+		<blockWind>false</blockWind>
 		<plant>
 			<growDays>6</growDays>
 			<harvestWork>205</harvestWork>

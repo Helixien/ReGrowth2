@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--====================================== Aspen Grass ======================================== -->
+	<ThingDef ParentName="RG_GrassBase">
+		<defName>RG_Plant_AspenGrass</defName>
+		<description>Wild tall grass. Grows in aspen forest regions where there is a little light and minimally fertile ground.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_AspenGrass</texPath>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="RG_TallGrassBase">
+		<defName>RG_Plant_TallAspenGrass</defName>
+		<description>Wild tall grass. Grows in aspen forest regions where there is a little light and minimally fertile ground.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_AspenGrass</texPath>
+		</graphicData>
+	</ThingDef>
+	
+	<!--====================================== Aspen Fern ======================================== -->	
+	<ThingDef ParentName="BushBase">
+		<defName>RG_Plant_AspenFern</defName>
+		<label>fern</label>
+		<description>A short shrub with long, fine leaves. Grows in forests in aspen forests.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_AspenFern</texPath>
+			<drawSize>1.15</drawSize>
+			<shadowData>
+				<volume>(0.55, 0.2, 0.2)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconScale>0.85</uiIconScale>
+		<plant>
+			<growDays>3</growDays>
+			<leaflessGraphicPath>Things/Plant/_Leafless/RG_Fern_Leafless</leaflessGraphicPath>
+			<pollutedGraphicPath>Things/Plant/_Polluted/RG_Fern_Polluted</pollutedGraphicPath>
+			<harvestWork>60</harvestWork>
+		</plant>
+	</ThingDef>
+	<ThingDef ParentName="PlantBase">
+		<defName>RG_Plant_SaffronCushion</defName>
+		<label>saffron cushion</label>
+		<description>Wild carpet shrubs with yellow leafs that grows in aspen forests. Shrubs takes a long time to grow, but is very frost-resistant.</description>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>0.6</Flammability>
+			<Nutrition>0.15</Nutrition>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Plant/RG_SaffronCushion</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<hideAtSnowOrSandDepth>0.5</hideAtSnowOrSandDepth>
+		<ingestible/>
+		<plant>
+			<fertilityMin>0.05</fertilityMin>
+			<fertilitySensitivity>0.2</fertilitySensitivity>
+			<growDays>15</growDays>
+			<leaflessGraphicPath>Things/Plant/_Leafless/RG_CarpetScrubs_Leafless</leaflessGraphicPath>
+			<pollutedGraphicPath>Things/Plant/_Polluted/RG_CarpetScrubs_Polluted</pollutedGraphicPath>
+			<harvestWork>75</harvestWork>
+			<maxMeshCount>4</maxMeshCount>
+			<wildClusterRadius>4</wildClusterRadius>
+			<wildClusterWeight>8</wildClusterWeight>
+			<visualSizeRange>0.5~0.8</visualSizeRange>
+			<topWindExposure>0.3</topWindExposure>
+			<wildOrder>1</wildOrder>
+		</plant>
+	</ThingDef>
+	<ThingDef ParentName="PlantBase">
+		<defName>RG_Plant_Deathbell</defName>
+		<label>deathbell</label>
+		<description>A purple flower which grows in large clusters. It is said to grow where unfortunate deaths have taken place in the past.</description>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Nutrition>0.18</Nutrition>
+			<Beauty>4</Beauty>
+			<BeautyOutdoors>4</BeautyOutdoors>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Plant/RG_Deathbell</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<hideAtSnowOrSandDepth>0.6</hideAtSnowOrSandDepth>
+		<ingestible/>
+		<plant>
+			<fertilitySensitivity>0.0</fertilitySensitivity>
+			<growDays>2.5</growDays>
+			<mustBeWildToSow>true</mustBeWildToSow>
+			<sowResearchPrerequisites/>
+			<sowTags>
+				<li>Ground</li>
+			</sowTags>
+			<fertilityMin>0.05</fertilityMin>
+			<maxMeshCount>9</maxMeshCount>
+			<visualSizeRange>0.4~0.6</visualSizeRange>
+			<topWindExposure>0.2</topWindExposure>
+			<wildClusterRadius>4</wildClusterRadius>
+			<wildClusterWeight>8</wildClusterWeight>
+			<wildOrder>1</wildOrder>
+			<purpose>Beauty</purpose>
+		</plant>
+	</ThingDef>
+	<ThingDef ParentName="PlantBase">
+		<defName>RG_Plant_RedMountainFlower</defName>
+		<label>mountain flower</label>
+		<description>A tiny red flower which grows in large clusters.</description>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Nutrition>0.18</Nutrition>
+			<Beauty>4</Beauty>
+			<BeautyOutdoors>4</BeautyOutdoors>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Plant/RG_RedMountainFlower</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<hideAtSnowOrSandDepth>0.6</hideAtSnowOrSandDepth>
+		<ingestible/>
+		<plant>
+			<fertilitySensitivity>0.0</fertilitySensitivity>
+			<growDays>2.5</growDays>
+			<mustBeWildToSow>true</mustBeWildToSow>
+			<sowResearchPrerequisites/>
+			<sowTags>
+				<li>Ground</li>
+			</sowTags>
+			<fertilityMin>0.05</fertilityMin>
+			<maxMeshCount>9</maxMeshCount>
+			<visualSizeRange>0.3~0.4</visualSizeRange>
+			<topWindExposure>0.3</topWindExposure>
+			<wildClusterRadius>4</wildClusterRadius>
+			<wildClusterWeight>8</wildClusterWeight>
+			<wildOrder>1</wildOrder>
+			<purpose>Beauty</purpose>
+		</plant>
+	</ThingDef>
+	<ThingDef ParentName="PlantBase">
+		<defName>RG_BogBeacon</defName>
+		<label>bog beacon</label>
+		<description>A glowing mushroom with a long stem growing in clusters. It grows exclusively in aspen forests.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_BogBeacon</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Nutrition>0.4</Nutrition>
+			<Beauty>2</Beauty>
+			<BeautyOutdoors>2</BeautyOutdoors>
+		</statBases>
+		<selectable>true</selectable>
+		<neverMultiSelect>false</neverMultiSelect>
+		<pathCost>5</pathCost>
+		<ingestible/>
+		<plant>
+			<fertilityMin>0.04</fertilityMin>
+			<fertilitySensitivity>0.15</fertilitySensitivity>
+			<growDays>18</growDays>
+			<maxMeshCount>4</maxMeshCount>
+			<dieIfLeafless>true</dieIfLeafless>
+			<harvestYield>12</harvestYield>
+			<harvestTag>Standard</harvestTag>
+			<harvestedThingDef>RawFungus</harvestedThingDef>
+			<neverBlightable>true</neverBlightable>
+			<visualSizeRange>0.5~0.8</visualSizeRange>
+			<topWindExposure>0.1</topWindExposure>
+			<purpose>Food</purpose>
+		</plant>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(214,183,84,0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="DeciduousTreeBase">
+		<defName>RG_Plant_TreeAspenRed</defName>
+		<label>aspen tree</label>
+		<description>A genetically modified cold-biome tree known for its thin, white, paper-like bark and colourful leaves.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_TreeRedAspen</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shadowData>
+				<volume>(0.15, 0.3, 0.1)</volume>
+				<offset>(-0.03,0,-0.44)</offset>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<Beauty>2</Beauty>
+			<BeautyOutdoors>2</BeautyOutdoors>
+		</statBases>
+		<ingestible/>
+		<plant>
+			<growDays>20</growDays>
+			<harvestWork>800</harvestWork>
+			<harvestYield>27</harvestYield>
+			<immatureGraphicPath>Things/Plant/_Immature/RG_TreeYellowAspen_Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/_Leafless/RG_TreeBirch_Leafless</leaflessGraphicPath>
+		</plant>
+		<comps>
+			<li Class="CompProperties_Spawner">
+				<compClass>ReGrowthCore.CompLeavesSpawner</compClass>
+				<thingToSpawn>RG_Filth_LeavesAspenRedTree</thingToSpawn>
+				<spawnCount>2</spawnCount>
+				<spawnIntervalRange>60000~120000</spawnIntervalRange>
+				<spawnMaxAdjacent>3</spawnMaxAdjacent>
+				<saveKeysPrefix>aspenLeaves</saveKeysPrefix>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="DeciduousTreeBase">
+		<defName>RG_Plant_TreeAspenYellow</defName>
+		<label>aspen tree</label>
+		<description>A genetically modified cold-biome tree known for its thin, white, paper-like bark and colourful leaves.</description>
+		<graphicData>
+			<texPath>Things/Plant/RG_TreeYellowAspen</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shadowData>
+				<volume>(0.15, 0.3, 0.1)</volume>
+				<offset>(-0.03,0,-0.44)</offset>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<Beauty>2</Beauty>
+			<BeautyOutdoors>2</BeautyOutdoors>
+		</statBases>
+		<ingestible/>
+		<plant>
+			<growDays>20</growDays>
+			<harvestWork>800</harvestWork>
+			<harvestYield>27</harvestYield>
+			<immatureGraphicPath>Things/Plant/_Immature/RG_TreeRedAspen_Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/_Leafless/RG_TreeBirch_Leafless</leaflessGraphicPath>
+		</plant>
+		<comps>
+			<li Class="CompProperties_Spawner">
+				<compClass>ReGrowthCore.CompLeavesSpawner</compClass>
+				<thingToSpawn>RG_Filth_LeavesAspenYellowTree</thingToSpawn>
+				<spawnCount>2</spawnCount>
+				<spawnIntervalRange>60000~120000</spawnIntervalRange>
+				<spawnMaxAdjacent>3</spawnMaxAdjacent>
+				<saveKeysPrefix>aspenLeaves</saveKeysPrefix>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

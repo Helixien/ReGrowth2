@@ -8,6 +8,7 @@
 				<value>
 					<li>BorealForest</li>
 					<li>AridShrubland</li>
+					<li>RG_AspenForest</li>
 					<li MayRequire="Ludeon.RimWorld.Odyssey">GlacialPlain</li>
 					<li MayRequire="Ludeon.RimWorld.Odyssey">Glowforest</li>
 				</value>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<FeatureDef>
+		<defName>RG_AspenForest</defName>
+		<workerClass>FeatureWorker_Biome</workerClass>
+		<order>500</order>
+		<rootBiomes>
+			<li>RG_AspenForest</li>
+		</rootBiomes>
+		<acceptableBiomes>
+			<li>RG_AspenForest</li>
+		</acceptableBiomes>
+		<nameMaker>RG_NamerAspenForest</nameMaker>
+	</FeatureDef>
+</Defs>

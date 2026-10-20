@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<RulePackDef>
+		<defName>RG_NamerAspenForest</defName>
+		<include>
+			<li>WorldFeatureNamerCommon</li>
+		</include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name(p=0.3)->[aspenForest_adjective] [narrative_name]</li>
+				<li>r_name(p=0.2)->the [narrative_name] [terrain_word]</li>
+				<li>aspenForest_adjective(p=2)->golden</li>
+				<li>aspenForest_adjective->amber</li>
+				<li>aspenForest_adjective->quaking</li>
+				<li>aspenForest_adjective->whispering</li>
+				<li>aspenForest_adjective->misty</li>
+				<li>aspenForest_adjective->sun-dappled</li>
+				<li>aspenForest_adjective->leaflit</li>
+				<li>aspenForest_adjective->shimmering</li>
+				<li>terrain_word(p=3)->aspen forest</li>
+				<li>terrain_word(p=2)->aspenwood</li>
+				<li>terrain_word(p=2)->wood</li>
+				<li>terrain_word(p=2)->grove</li>
+				<li>terrain_word->woods</li>
+				<li>terrain_word->vale</li>
+				<li>terrain_word->glen</li>
+				<li>terrain_word->hollows</li>
+				<li>terrain_word->uplands</li>
+				<li>terrain_word->foothills</li>
+				<li>terrain_word->woodland</li>
+				<li>terrain_word->thicket</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+</Defs>
