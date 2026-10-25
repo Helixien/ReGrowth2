@@ -21,6 +21,7 @@
 		<li IfModActive="Ludeon.RimWorld.Anomaly">1.6/LoadFolders/Anomaly</li>
 		<li IfModActive="Ludeon.RimWorld.Odyssey">1.6/LoadFolders/Odyssey</li>
 		<li IfModActive="OskarPotocki.VanillaFactionsExpanded.Core">1.6/LoadFolders/Vanilla Expanded Framework</li>
+		<li IfModActive="VanillaExpanded.VExplorationE">1.6/LoadFolders/Vanilla Landmarks Expanded</li>
 	</v1.6>
 	<v1.7>
 		<li>/</li>
@@ -31,5 +32,6 @@
 		<li IfModActive="Ludeon.RimWorld.Anomaly">1.6/LoadFolders/Anomaly</li>
 		<li IfModActive="Ludeon.RimWorld.Odyssey">1.6/LoadFolders/Odyssey</li>
 		<li IfModActive="OskarPotocki.VanillaFactionsExpanded.Core">1.6/LoadFolders/Vanilla Expanded Framework</li>
+		<li IfModActive="VanillaExpanded.VExplorationE">1.6/LoadFolders/Vanilla Landmarks Expanded</li>
 	</v1.7>
 </loadFolders>
