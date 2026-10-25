@@ -28,6 +28,8 @@ namespace ReGrowthCore
 		public static TerrainDef RG_HotSpringDeep;
 
 		public static JobDef RG_Bathe;
+		public static WeatherDef RG_Windy;
+		public static WeatherDef RG_FogStorm;
 		public static GameConditionDef Aurora;
 		public static ThingDef RG_Filth_Neutroamine;
 		public static FleckDef RG_Splash;

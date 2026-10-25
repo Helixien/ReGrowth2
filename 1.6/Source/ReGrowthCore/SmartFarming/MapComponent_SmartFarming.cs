@@ -271,8 +271,7 @@ namespace ReGrowthCore
 
 			//Calculate the yield
 			float num = plantDefToGrow.plant.harvestYield * Current.gameInt.storyteller.difficulty.cropYieldFactor * zone.cells.Count;
-			if (zoneData.nutritionCache == 0) zoneData.nutritionCache = plantDefToGrow?.plant?.harvestedThingDef?.GetStatValueAbstract(StatDefOf.Nutrition, null) ?? 0;
-			zoneData.nutritionYield = zoneData.nutritionCache * num;
+			zoneData.nutritionYield = plantDefToGrow.plant.harvestedThingDef.GetStatValueAbstract(StatDefOf.Nutrition, null) * num;
 		}
 
 		public float CalculateTotalHungerRate()

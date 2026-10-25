@@ -10,6 +10,7 @@ namespace ReGrowthCore
         {
             WeatherManager_CurWeatherPerceived_Patch.weathers.Clear();
             WeatherOverlay_FogMotes.unroofedCells.Clear();
+            SplashesUtility.hardGridSets.Clear();
         }
     }
 }

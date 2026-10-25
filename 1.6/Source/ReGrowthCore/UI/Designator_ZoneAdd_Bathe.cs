@@ -31,7 +31,7 @@ namespace ReGrowthCore
             {
                 return false;
             }
-            return c.GetTerrain(Map).IsWater && c.Walkable(Map);
+            return c.GetTerrain(Map).IsWater && c.Walkable(Map) && !Map.pollutionGrid.IsPolluted(c);
         }
 
         public override Zone MakeNewZone()

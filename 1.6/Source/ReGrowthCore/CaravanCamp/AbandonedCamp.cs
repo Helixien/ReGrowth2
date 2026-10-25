@@ -72,7 +72,8 @@ namespace ReGrowthCore
             Find.WorldObjects.Remove(this);
             LongEventHandler.QueueLongEvent(delegate
             {
-                GetOrGenerateMapUtility.GetOrGenerateMap(camp.Tile, WorldObjectDefOf.Camp.overrideMapSize ?? Find.World.info.initialMapSize, WorldObjectDefOf.Camp);
+                var size = camp.savedCamp?.mapSize.IsValid is true ? camp.savedCamp.mapSize : WorldObjectDefOf.Camp.overrideMapSize ?? Find.World.info.initialMapSize;
+                GetOrGenerateMapUtility.GetOrGenerateMap(camp.Tile, size, WorldObjectDefOf.Camp);
                 var map = camp.Map;
                 Pawn pawn = caravan.PawnsListForReading[0];
                 map.Parent.SetFaction(caravan.Faction);

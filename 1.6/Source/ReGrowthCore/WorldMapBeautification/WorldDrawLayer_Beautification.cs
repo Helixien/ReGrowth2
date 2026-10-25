@@ -86,6 +86,17 @@ namespace ReGrowthCore
                             case Hilliness.Mountainous: hillSizeMultiplier *= modExt.mountainSizeMultiplier; break;
                             case Hilliness.Impassable: hillSizeMultiplier *= modExt.impassableSizeMultiplier; break;
                         }
+                        if (path != null && ContentFinder<Texture2D>.Get(path, reportFailure: false) == null)
+                        {
+                            path = singleTile.hilliness switch
+                            {
+                                Hilliness.SmallHills => "WorldMaterials/BiomesKit/Default/Hills/SmallHills",
+                                Hilliness.LargeHills => "WorldMaterials/BiomesKit/Default/Hills/LargeHills",
+                                Hilliness.Mountainous => "WorldMaterials/BiomesKit/Default/Hills/Mountains",
+                                Hilliness.Impassable => "WorldMaterials/BiomesKit/Default/Hills/Impassable",
+                                _ => null
+                            };
+                        }
                         if (path != null && ContentFinder<Texture2D>.Get(path, reportFailure: false) != null)
                         {
                             Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit, 3600);

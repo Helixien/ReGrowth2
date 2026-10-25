@@ -14,6 +14,7 @@ namespace ReGrowthCore
             {
                 terrain.Item2.DoWork(terrain.Item1);
             }
+            ReGrowthUtils.PrewarmBatheMaterials(map);
         }
     }
 }

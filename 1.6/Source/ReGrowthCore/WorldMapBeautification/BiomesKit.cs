@@ -168,7 +168,7 @@ namespace ReGrowthCore
 		{
 			BiomesKitControl biomesKit = biomeDef.GetModExtension<BiomesKitControl>();
 			bool spawnsBiome = biomeDef.workerClass.Name == "UniversalBiomeWorker";
-			if (!spawnsBiome && biomesKit.setHills == null && biomesKit.setElevation == null && biomesKit.randomizeHilliness == false)
+			if (spawnsBiome is false && biomesKit.setHills is null && biomesKit.spawnHills is null && biomesKit.setElevation is null && biomesKit.randomizeHilliness is false)
 			{
 				return;
 			}
@@ -343,6 +343,8 @@ namespace ReGrowthCore
 				bool enoughLandNeighbors = true;
 				if (biomesKit.minimumLandNeighbors > 0)
 				{
+					tmpNeighbors.Clear();
+					worldGrid.GetTileNeighbors(tileID, tmpNeighbors);
 					for (int i = 0; i < tmpNeighbors.Count; i++)
 					{
 						if (worldGrid[tmpNeighbors[i]].biome != BiomeDefOf.Ocean)

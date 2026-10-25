@@ -29,17 +29,21 @@ namespace ReGrowthCore
         private const float MaxUsableWindIntensity = 1.5f;
         private const float MinUsableWindIntensity = 1.2f;
         private const float WindChangeStep = 0.025f;
+        private const float MinActualWindForBonus = 0.5f;
         public static void TryChangePowerOutput(CompPowerPlantWind comp, ref float num)
         {
-            float prevValue = Mathf.Abs(comp.cachedPowerOutput) / Mathf.Abs(comp.Props.PowerConsumption);
-            if (comp.parent.Map.weatherManager.CurWeatherPerceived?.GetModExtension<WeatherExtension>()?.increasesWindTurbinesOutput ?? false)
+            if (num < MinActualWindForBonus) return;
+            var weatherManager = comp.parent.Map.weatherManager;
+            if (weatherManager.CurWeatherPerceived?.GetModExtension<WeatherExtension>()?.increasesWindTurbinesOutput ?? false)
             {
                 float targetValue = Mathf.Lerp(MinUsableWindIntensity, MaxUsableWindIntensity, num / MaxUsableWindIntensity);
-                float minValue = targetValue > prevValue ? Mathf.Min(targetValue, prevValue + WindChangeStep) : Mathf.Max(targetValue, prevValue - WindChangeStep);
-                num = Mathf.Min(minValue, targetValue);
+                if (targetValue <= num) return;
+                var prevValue = Mathf.Abs(comp.cachedPowerOutput) / Mathf.Abs(comp.Props.PowerConsumption);
+                num = targetValue > prevValue ? Mathf.Min(targetValue, prevValue + WindChangeStep) : Mathf.Max(targetValue, prevValue - WindChangeStep);
             }
-            else if (comp.parent.Map.weatherManager.lastWeather?.GetModExtension<WeatherExtension>()?.increasesWindTurbinesOutput ?? false)
+            else if (weatherManager.lastWeather?.GetModExtension<WeatherExtension>()?.increasesWindTurbinesOutput ?? false)
             {
+                var prevValue = Mathf.Abs(comp.cachedPowerOutput) / Mathf.Abs(comp.Props.PowerConsumption);
                 float diff = Mathf.Abs(num - prevValue);
                 if (diff > WindChangeStep)
                 {

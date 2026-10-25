@@ -445,8 +445,8 @@ namespace ReGrowthCore
 				.Select(t => AccessTools.DeclaredMethod(t, "GetInspectString"))
 				.Where(m => m != null);
 		}
-		static float totalHungerRate = 0f;
-		static int lastRecalculateTick = 0;
+
+		static readonly Dictionary<int, (float rate, int tick)> hungerCache = [];
 		static string Postfix(string __result, Zone __instance)
 		{
 			if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
@@ -456,26 +456,20 @@ namespace ReGrowthCore
 			Map map = __instance.Map;
 			if (ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) && mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData))
 			{
-				// Update the hunger cache only when it's being viewed.
-				// Since this code is tied to FPS, rather that tick speed, we can't use "Find.TickManager.TicksGame % 480 == 0",
-				// as this code may be called on ticks 479 and 481, but not 480. Likewise, we may just pause on tick 480, causing
-				// constant recalculations. As an alternative, we keep track of when last we recalculated the hunger rate, and
-				// do it again if 480 ticks have passed. And as a precaution against reloading the game, we do it if last recalculation
-				// tick happened in the future, instead of the past.
-				if (totalHungerRate == 0f || Find.TickManager.TicksGame >= lastRecalculateTick + 480 || Find.TickManager.TicksGame < lastRecalculateTick)
+				var tick = Find.TickManager.TicksGame;
+				if (!hungerCache.TryGetValue(map.uniqueID, out var cached) || cached.rate == 0f || tick >= cached.tick + 480 || tick < cached.tick)
 				{
 					try
 					{
-						totalHungerRate = mapComp.CalculateTotalHungerRate();
+						hungerCache[map.uniqueID] = (mapComp.CalculateTotalHungerRate(), tick);
 					}
 					catch (Exception ex)
 					{
 						Log.Warning("[Smart Farming] Error calculating hunger rate" + ex);
-						totalHungerRate = 1f;
+						hungerCache[map.uniqueID] = (1f, tick);
 					}
-
-					lastRecalculateTick = Find.TickManager.TicksGame;
 				}
+				var totalHungerRate = hungerCache[map.uniqueID].rate;
 
 				StringBuilder builder = new StringBuilder(__result, 10);
 				if (zoneData.averageGrowth < (__instance as IPlantToGrowSettable).GetPlantDefToGrow()?.plant.harvestMinGrowth)
@@ -529,6 +523,10 @@ namespace ReGrowthCore
 
 		static void Prefix(Plant __instance)
 		{
+			if (ReGrowthCore_SmartFarming.ModSettings.enabled is false)
+			{
+				return;
+			}
 			Map map = __instance.Map;
 			if (__instance.def.plant.dieIfLeafless && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) &&
 				map.zoneManager.ZoneAt(__instance.Position) is Zone zone && zone is IPlantToGrowSettable)

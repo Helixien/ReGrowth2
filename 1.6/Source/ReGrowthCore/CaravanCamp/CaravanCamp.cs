@@ -131,29 +131,32 @@ namespace ReGrowthCore
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.roofGrid.SetRoof(cell, def);
             });
-            var ticksPassed = Math.Min(Find.TickManager.TicksGame - savedCamp.ticksSaved, MaxSimulatedTicks);
+            var ticksPassed = Find.TickManager.TicksGame - savedCamp.ticksSaved;
             var map = Map;
             var num = Mathf.CeilToInt((float)map.Area * 0.0006f);
             var area = map.Area;
             for (var i = 0; i < ticksPassed; i += GenTicks.TickRareInterval)
             {
-                var delta = Math.Min(GenTicks.TickRareInterval, ticksPassed - i);
+                var stepTicks = Math.Min(GenTicks.TickRareInterval, ticksPassed - i);
                 foreach (var item in itemsRottables)
                 {
                     if (item.Value.parent.Destroyed is false)
                     {
-                        item.Value.TickInterval(delta);
+                        item.Value.TickInterval(stepTicks);
                     }
                 }
-                for (int j = 0; j < num; j++)
+                for (int t = 0; t < stepTicks; t++)
                 {
-                    if (map.steadyEnvironmentEffects.cycleIndex >= area)
+                    for (int j = 0; j < num; j++)
                     {
-                        map.steadyEnvironmentEffects.cycleIndex = 0;
+                        if (map.steadyEnvironmentEffects.cycleIndex >= area)
+                        {
+                            map.steadyEnvironmentEffects.cycleIndex = 0;
+                        }
+                        var c = map.cellsInRandomOrder.Get(map.steadyEnvironmentEffects.cycleIndex);
+                        DoCellSteadyEffects(map.steadyEnvironmentEffects, c);
+                        map.steadyEnvironmentEffects.cycleIndex++;
                     }
-                    var c = map.cellsInRandomOrder.Get(map.steadyEnvironmentEffects.cycleIndex);
-                    DoCellSteadyEffects(map.steadyEnvironmentEffects, c);
-                    map.steadyEnvironmentEffects.cycleIndex++;
                 }
             }
         }
@@ -202,10 +205,13 @@ namespace ReGrowthCore
             }
         }
 
-        private const int MaxSimulatedTicks = 15 * GenDate.TicksPerDay;
-
         private void SyncGrids<T>(T[] mapGrid, T[] savedGrid, Action<int, T> syncAction)
         {
+            if (savedGrid?.Length != mapGrid.Length)
+            {
+                Log.ErrorOnce("ReGrowth: Saved camp grid size does not match the generated camp map. Skipping grid restoration.", 882345);
+                return;
+            }
             for (int i = mapGrid.Count() - 1; i >= 0; i--)
             {
                 var mapValue = mapGrid[i];
@@ -223,6 +229,7 @@ namespace ReGrowthCore
             var map = Map;
             savedCamp = new SavedCamp
             {
+                mapSize = map.info.Size,
                 buildings = map.listerThings.AllThings.OfType<Building>().ToList(),
                 plants = map.listerThings.AllThings.OfType<Plant>().ToList(),
                 items = map.listerThings.AllThings.Where(x => x.def.category == ThingCategory.Item).ToList(),

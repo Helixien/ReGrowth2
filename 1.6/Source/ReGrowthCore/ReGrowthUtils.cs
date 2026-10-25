@@ -77,6 +77,25 @@ namespace ReGrowthCore
             }
         }
 
+        public static void PrewarmBatheMaterials(Map map)
+        {
+            foreach (var pawn in map.mapPawns.AllPawnsSpawned)
+            {
+                if (!pawn.IsBathingNow()) continue;
+                for (var rot = Rot4.North; rot.AsInt < 4; rot.AsInt++)
+                {
+                    var bodyMat = pawn.Drawer.renderer.BodyGraphic?.MatAt(rot);
+                    if (bodyMat != null) GetBatheMat(bodyMat, 0.1f);
+                    if (pawn.apparel?.WornApparel is null) continue;
+                    foreach (var apparel in pawn.apparel.WornApparel)
+                    {
+                        var mat = apparel.Graphic?.MatAt(rot);
+                        if (mat != null) GetBatheMat(mat, 0.5f);
+                    }
+                }
+            }
+        }
+
         public static bool TryGetBiomeSpecificTerrain(this TerrainDef def, Map map, out TerrainByBiome terrain)
         {
             terrain = null;
