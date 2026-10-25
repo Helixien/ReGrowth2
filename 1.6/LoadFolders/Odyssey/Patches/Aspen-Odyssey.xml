@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Give Aspen Forest the same Odyssey feature permissions as Boreal Forest. -->
+	<Operation Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Odyssey">
+		<operations>
+			<!-- Natural features and coastal formations -->
+			<li Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+				<xpath>/Defs/TileMutatorDef[@Name="BaseLakeMut" or @Name="BaseCoastMut" or defName="Pond" or defName="Wetland" or defName="HotSprings" or defName="Cliffs" or defName="Basin" or defName="TerraformingScar" or defName="Iceberg" or defName="Fertile"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+				<match Class="PatchOperationAdd">
+					<xpath>/Defs/TileMutatorDef[@Name="BaseLakeMut" or @Name="BaseCoastMut" or defName="Pond" or defName="Wetland" or defName="HotSprings" or defName="Cliffs" or defName="Basin" or defName="TerraformingScar" or defName="Iceberg" or defName="Fertile"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+					<value>
+						<li MayRequire="Ludeon.RimWorld.Odyssey">RG_AspenForest</li>
+					</value>
+				</match>
+			</li>
+			<!-- Ancient structures and vents -->
+			<li Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+				<xpath>/Defs/TileMutatorDef[@Name="AncientStructureMutBase" or @Name="BaseAncientVentMut"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+				<match Class="PatchOperationAdd">
+					<xpath>/Defs/TileMutatorDef[@Name="AncientStructureMutBase" or @Name="BaseAncientVentMut"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+					<value>
+						<li MayRequire="Ludeon.RimWorld.Odyssey">RG_AspenForest</li>
+					</value>
+				</match>
+			</li>
+			<!-- Plant, terrain and weather modifiers -->
+			<li Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+				<xpath>/Defs/TileMutatorDef[defName="PlantGrove" or defName="WildPlants" or defName="ArcheanTrees" or defName="FoggyMutator" or defName="WetClimate" or defName="DryGround"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+				<match Class="PatchOperationAdd">
+					<xpath>/Defs/TileMutatorDef[defName="PlantGrove" or defName="WildPlants" or defName="ArcheanTrees" or defName="FoggyMutator" or defName="WetClimate" or defName="DryGround"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+					<value>
+						<li MayRequire="Ludeon.RimWorld.Odyssey">RG_AspenForest</li>
+					</value>
+				</match>
+			</li>
+			<!-- Mixed-biome borders in either direction -->
+			<li Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+				<xpath>/Defs/TileMutatorDef[defName="MixedBiome"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+				<match Class="PatchOperationAdd">
+					<xpath>/Defs/TileMutatorDef[defName="MixedBiome"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
+					<value>
+						<li MayRequire="Ludeon.RimWorld.Odyssey">RG_AspenForest</li>
+					</value>
+				</match>
+			</li>
+			<!-- Let Odyssey features suppress Aspen's ordinary pond patches. -->
+			<li Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+				<xpath>/Defs/BiomeDef[defName="RG_AspenForest"]/terrainPatchMakers/li[thresholds/li[terrain="WaterShallow" or terrain="WaterDeep"]]/isPond</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>/Defs/BiomeDef[defName="RG_AspenForest"]/terrainPatchMakers/li[thresholds/li[terrain="WaterShallow" or terrain="WaterDeep"]]/isPond</xpath>
+					<value>
+						<isPond MayRequire="Ludeon.RimWorld.Odyssey">true</isPond>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName="RG_AspenForest"]/terrainPatchMakers/li[thresholds/li[terrain="WaterShallow" or terrain="WaterDeep"]]</xpath>
+					<value>
+						<isPond MayRequire="Ludeon.RimWorld.Odyssey">true</isPond>
+					</value>
+				</nomatch>
+			</li>
+		</operations>
+	</Operation>
+</Patch>
