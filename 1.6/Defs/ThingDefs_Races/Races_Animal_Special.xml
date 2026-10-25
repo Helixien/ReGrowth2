@@ -206,6 +206,7 @@
 		<statBases>
 			<MoveSpeed>5.20</MoveSpeed>
 			<MarketValue>2500</MarketValue>
+			<Wildness>0.80</Wildness>
 			<ComfyTemperatureMin>-8</ComfyTemperatureMin>
 			<ComfyTemperatureMax>75</ComfyTemperatureMax>
 			<ArmorRating_Sharp>0.50</ArmorRating_Sharp>

@@ -129,7 +129,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkSandstone</chunkDefToSpawn>
-				<chunksToSpawn>4~6</chunksToSpawn>
+				<chunksToSpawn>2~3</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -142,7 +142,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkSandstone</chunkDefToSpawn>
-				<chunksToSpawn>2~3</chunksToSpawn>
+				<chunksToSpawn>4~6</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -156,7 +156,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkGranite</chunkDefToSpawn>
-				<chunksToSpawn>4~6</chunksToSpawn>
+				<chunksToSpawn>2~3</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -169,7 +169,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkGranite</chunkDefToSpawn>
-				<chunksToSpawn>2~3</chunksToSpawn>
+				<chunksToSpawn>4~6</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -183,7 +183,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkLimestone</chunkDefToSpawn>
-				<chunksToSpawn>4~6</chunksToSpawn>
+				<chunksToSpawn>2~3</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -196,7 +196,7 @@
 		<modExtensions>
 			<li Class="ReGrowthCore.BoulderProperties">
 				<chunkDefToSpawn>ChunkLimestone</chunkDefToSpawn>
-				<chunksToSpawn>2~3</chunksToSpawn>
+				<chunksToSpawn>4~6</chunksToSpawn>
 			</li>
 		</modExtensions>
 	</ThingDef>

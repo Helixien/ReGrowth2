@@ -19,6 +19,8 @@
 		<hideAtSnowOrSandDepth>0.5</hideAtSnowOrSandDepth>
 		<ingestible/>
 		<plant>
+			<growMinGlow>0</growMinGlow>
+			<growOptimalGlow>0</growOptimalGlow>
 			<fertilityMin>0.05</fertilityMin>
 			<fertilitySensitivity>0.2</fertilitySensitivity>
 			<leaflessGraphicPath>Things/Plant/_Leafless/RG_CarpetPlant_Leafless</leaflessGraphicPath>
