@@ -6,7 +6,7 @@
 	<SmartFarming.Icon.Off.Desc>Keine Pflanzen aussäen.</SmartFarming.Icon.Off.Desc>
 	<SmartFarming.Icon.Smart>Smart</SmartFarming.Icon.Smart>
 	<SmartFarming.Icon.Smart.Desc>Säe die Pflanzen so lange aus, bis ihr voraussichtliches Wachstum die Mindestertragsschwelle erreicht hat, bevor sie voraussichtlich an Kälte oder Toxinen sterben.</SmartFarming.Icon.Smart.Desc>
-	<SmartFarming.Icon.Force>Kraft</SmartFarming.Icon.Force>
+	<SmartFarming.Icon.Force>Erzwingen</SmartFarming.Icon.Force>
 	<SmartFarming.Icon.Force.Desc>Aussaat von Pflanzen unabhängig vom Status der Saison..</SmartFarming.Icon.Force.Desc>
 	<SmartFarming.Icon.HarvestNow>Jetzt ernten</SmartFarming.Icon.HarvestNow>
 	<SmartFarming.Icon.HarvestNow.Desc>Markiere alle Pflanzen in dieser Zone für die Ernte, auch wenn sie noch nicht ausgewachsen sind..</SmartFarming.Icon.HarvestNow.Desc>
@@ -28,7 +28,7 @@
 	<SmartFarming.Settings.ProcessedFoodLabel>Faktor erwartete Nahrung:</SmartFarming.Settings.ProcessedFoodLabel>
 	
 	<SmartFarming.Settings.UseAverageTemperature>Verwenden Sie die Vorhersage der Durchschnittstemperatur anstelle der niedrigen</SmartFarming.Settings.UseAverageTemperature>
-	<SmartFarming.Settings.UseAverageTemperature.Desc>Verwende bei der Wettervorhersage für die Smart-Sat-Funktion die Durchschnittstemperatur für den Tag anstelle des Tiefstwertes. Die Verwendung der Durchschnittstemperatur verlängert die Wachstumsperiode und birgt das Risiko, dass einige Pflanzen verloren gehen..</SmartFarming.Settings.UseAverageTemperature.Desc>
+	<SmartFarming.Settings.UseAverageTemperature.Desc>Verwende bei der Wettervorhersage für die Smart-Saat-Funktion die Durchschnittstemperatur für den Tag anstelle des Tiefstwertes. Die Verwendung der Durchschnittstemperatur verlängert die Wachstumsperiode und birgt das Risiko, dass einige Pflanzen verloren gehen..</SmartFarming.Settings.UseAverageTemperature.Desc>
 	
 	<SmartFarming.Settings.UseAverageFertility>Verwendung der durchschnittlichen Fruchtbarkeit in der Zone anstelle der schwächsten</SmartFarming.Settings.UseAverageFertility>
 	<SmartFarming.Settings.UseAverageFertility.Desc>Verwende bei der Vorhersage des Pflanzenwachstums die durchschnittliche Fruchtbarkeit der Zone anstelle der schwächsten Fruchtbarkeit der Zone.</SmartFarming.Settings.UseAverageFertility.Desc>

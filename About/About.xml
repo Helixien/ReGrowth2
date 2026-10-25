@@ -3,7 +3,6 @@
 	<name>ReGrowth 2</name>
 	<author>Helixien</author>
 	<supportedVersions>
-		<li>1.4</li>
 		<li>1.5</li>
 		<li>1.6</li>
 		<li>1.7</li>
@@ -12,9 +11,9 @@
 	<url>https://steamcommunity.com/sharedfiles/filedetails/?id=2260097569</url>
 	<modVersion IgnoreIfNoMatchingField="True">5.2-rev2</modVersion>
 	<modIconPath IgnoreIfNoMatchingField="True">UI/RG_ModIcon</modIconPath>
-	<description>ReGrowth: Core is both a content mod and a small framework, aiming to overhaul and improve on Rimworlds vanilla biomes, add new and unique features and biomes, replace many of the vanilla plant textures with HD ones and, in combination with its companion mods, add new plants that fit perfectly into the vanilla artstyle. On top of that, it adds a lot of new weather types, many with custom visual effects to spice up your game.
+	<description>ReGrowth: Core is both a content mod and a small framework, aiming to overhaul and improve on RimWorld's vanilla biomes, add new and unique features and biomes, replace many of the vanilla plant textures with HD ones and, in combination with its companion mods, add new plants that fit perfectly into the vanilla art style. On top of that, it adds a lot of new weather types, many with custom visual effects to spice up your game.
 
-ReGrowth is, at its core, a mod deeply influenced by the philosophy of the Vanilla Expanded Series. Everything it adds fits into Vanilla Rimworld. Every system (like for example new terrain) is designed to mimic how similar vanilla systems work while also being as friendly to your games performance as possible. NOTHING in this mod will absolutely tank your FPS and the few features that do cost some performance are optional.
+ReGrowth is, at its core, a mod deeply influenced by the philosophy of the Vanilla Expanded Series. Everything it adds fits into Vanilla Rimworld. Every system (like for example new terrain) is designed to mimic how similar vanilla systems work while also being as friendly to your game's performance as possible. NOTHING in this mod will absolutely tank your FPS and the few features that do cost some performance are optional.
 
 This mod is the Core, which is a requirement for all other ReGrowth mods. Please note the new terrain will only be seen in new biomes that use them, not in vanilla biomes.
 

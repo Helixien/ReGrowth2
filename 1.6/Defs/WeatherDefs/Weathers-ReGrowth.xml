@@ -109,7 +109,7 @@
 		<defName>RG_FogStorm</defName>
 		<label>fog storm</label>
 		<isBad>true</isBad>
-		<description>Rolling fog and heavy wind reduces the accuracy of ranged weapons.</description>
+		<description>Rolling fog and heavy wind reduce the accuracy of ranged weapons.</description>
 		<windSpeedFactor>1.0</windSpeedFactor>
 		<accuracyMultiplier>0.25</accuracyMultiplier>
 		<favorability>Bad</favorability>

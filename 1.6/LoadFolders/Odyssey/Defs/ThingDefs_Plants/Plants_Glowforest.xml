@@ -3,7 +3,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_Plant_Nightguide</defName>
 		<label>nightguide</label>
-		<description>text.todo</description>
+		<description>A hardy plant that grows in clusters across glowforests, taking root even in poor or polluted soil.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_Nightguide</texPath>
 			<graphicClass>Graphic_Random</graphicClass>

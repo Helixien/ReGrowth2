@@ -53,7 +53,7 @@
 	<SmartFarming.Icon.Off>Off</SmartFarming.Icon.Off>
 	<SmartFarming.Icon.Off.Desc>Do not sow any plants.</SmartFarming.Icon.Off.Desc>
 	<SmartFarming.Icon.Smart>Smart</SmartFarming.Icon.Smart>
-	<SmartFarming.Icon.Smart.Desc>Sow plants so long as its predicted growth will reach the minimum harvest threshold before it is expected to die from cold or toxin.</SmartFarming.Icon.Smart.Desc>
+	<SmartFarming.Icon.Smart.Desc>Sow plants as long as their predicted growth will reach the minimum harvest threshold before they are expected to die from cold or toxins.</SmartFarming.Icon.Smart.Desc>
 	<SmartFarming.Icon.Force>Force</SmartFarming.Icon.Force>
 	<SmartFarming.Icon.Force.Desc>Sow plants regardless of grow season status.</SmartFarming.Icon.Force.Desc>
 	<SmartFarming.Icon.HarvestNow>Harvest now</SmartFarming.Icon.HarvestNow>
@@ -98,7 +98,7 @@
 
 	<SmartFarming.Settings.AutoHarvestNow>Harvest early if threatened</SmartFarming.Settings.AutoHarvestNow>
 	<SmartFarming.Settings.AutoHarvestNow.Desc>If tonight's weather is going to be deadly cold, designate all plants for an immediate harvest.</SmartFarming.Settings.AutoHarvestNow.Desc>
-	<SmartFarming.Message.AutoHarvestNow>Plants designated for an early harvest due tonight's forecasted weather.</SmartFarming.Message.AutoHarvestNow>
+	<SmartFarming.Message.AutoHarvestNow>Plants designated for an early harvest due to tonight's forecast.</SmartFarming.Message.AutoHarvestNow>
 
 	<SmartFarming.Settings.OrchardAlignment>Alignment gizmo</SmartFarming.Settings.OrchardAlignment>
 	<SmartFarming.Settings.OrchardAlignment.Desc>Enables a gizmo that prompts pawns to plant trees in careful rows.</SmartFarming.Settings.OrchardAlignment.Desc>
@@ -109,7 +109,7 @@
 	<SmartFarming.Settings.ProcessedFood.Desc>When grow zones give an estimated potential nutrition yield, it multiplies the raw food's nutrition by this value. For reference, a Simple Meal multiplies the value by 1.8, Fine Meals by 1.2, and Lavish Meals by 1.0.</SmartFarming.Settings.ProcessedFood.Desc>
 
 	<SmartFarming.Settings.MinTempSlider>Minimum temperature allowance (Mod default: {0}, Min: {1}, Max: {2}): </SmartFarming.Settings.MinTempSlider>
-	<SmartFarming.Settings.MinTemp>When predicting the weather of the earliest harvest day, consider anything below this temperature unacceptable. Plants can potentially die at 0C, but can usually survive if it's only barely freezing for a few hours. However, random daily temperatre deviation may reduce accuracy.</SmartFarming.Settings.MinTemp>
+	<SmartFarming.Settings.MinTemp>When predicting the weather of the earliest harvest day, consider anything below this temperature unacceptable. Plants can potentially die at 0C, but can usually survive if it's only barely freezing for a few hours. However, random daily temperature deviation may reduce accuracy.</SmartFarming.Settings.MinTemp>
 
 	<SmartFarming.Settings.PettyJobsSlider>Petty jobs margin (Mod default: {0}, Min: {1}, Max: {2}): </SmartFarming.Settings.PettyJobsSlider>
 	<SmartFarming.Settings.PettyJobs>If "no petty jobs" is enabled on a zone, pawns will not sow a field unless there is at least this percentage of empty tiles to sow. This can be useful for animal grazing zones.</SmartFarming.Settings.PettyJobs>
@@ -143,7 +143,7 @@
 	<ScatteredFlames.Ignite.Desc>Set something aflame.</ScatteredFlames.Ignite.Desc>
 	<ScatteredFlames.Ignite.Scared>This pawn is afraid of fire.</ScatteredFlames.Ignite.Scared>
 	<ScatteredFlames.Settings.IgniteGizmo>Enable ignite gizmo</ScatteredFlames.Settings.IgniteGizmo>
-	<ScatteredFlames.Settings.IgniteGizmo.Desc>Adds an "Ignite" gizmo buttons to your colonists, allowing them to manually start fires, similar to how raiders can.</ScatteredFlames.Settings.IgniteGizmo.Desc>
+	<ScatteredFlames.Settings.IgniteGizmo.Desc>Adds an "Ignite" gizmo button to your colonists, allowing them to manually start fires, similar to how raiders can.</ScatteredFlames.Settings.IgniteGizmo.Desc>
 
 	<RG.EnableScatteredFlames>Enable scattered flames</RG.EnableScatteredFlames>
 	<RG.EnableScatteredFlames.Desc>Toggles the scattered flames visual effect. (Default: True)</RG.EnableScatteredFlames.Desc>

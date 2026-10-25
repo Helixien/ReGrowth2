@@ -72,7 +72,7 @@
 	<ThingDef ParentName="BushBase">
 		<defName>RG_Plant_TemperateFern</defName>
 		<label>fern</label>
-		<description>A short shrub with long, fine leaves. Grows in warm forests areas</description>
+		<description>A short shrub with long, fine leaves. Grows in warm forest areas.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_TemperateFern</texPath>
 			<drawSize>1.15</drawSize>
