@@ -68,6 +68,51 @@
 			<li>RG_WoollyStegosaurus</li>
 			<li>RG_Rimclaw</li>
 			<li MayRequire="Ludeon.RimWorld.Biotech">RG_Hemolope</li>
+			<!-- Odyssey animals -->
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Alligator</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">AlphaThrumbo</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Armadillo</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Badger</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Bluebird</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">BogHound</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Bullfrog</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Cat_Scimitar</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">ColossusToad</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Crow</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Flamingo</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Gorilla</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">HermitCrab</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Heron</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Hippo</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">HiveQueen</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Larva</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">LavaSnail</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Locust</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Macaw</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Mastodon</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Megavole</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Mink</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">MonitorLizard</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Moose</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Muskox</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Otter</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Panda</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Peacock</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Penguin</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Porcupine</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">PrairieDog</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Quail</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Seal</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">SeaLion</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">SeaTurtle</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Sparrow</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">StoneCrab</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Swan</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Tiger</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Vulture</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Walrus</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Wolf_Great</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">Wolverine</li>
 		</toggleablePawns>
 	</VEF.AnimalBehaviours.GenericToggleableAnimalDef>
 </Defs>

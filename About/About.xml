@@ -38,6 +38,7 @@ This mod is as lightweight as possible, adding the minimum of code required and 
 		<li>VanillaExpanded.VCEF</li>
 		<li>OskarPotocki.VFE.Tribals</li>
 		<li>oskarpotocki.vfe.empire</li>
+		<li>OskarPotocki.VFE.Medieval2</li>
 	</loadAfter>
 	<loadBefore>
 		<li>Balthoraz.RimUniverse.BiomesModule</li>

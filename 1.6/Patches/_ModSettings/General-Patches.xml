@@ -710,9 +710,6 @@
 						<forestDenseAbove>1500</forestDenseAbove>
 						<mountainsSemiSnowyBelow>10</mountainsSemiSnowyBelow>
 						<impassableSemiSnowyBelow>25</impassableSemiSnowyBelow>
-						<impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
-						<mountainsSnowyBelow>-5</mountainsSnowyBelow>
-						<impassableSnowyBelow>0</impassableSnowyBelow>
 						<materialRandomRotation>false</materialRandomRotation>
 						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
 						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
@@ -842,7 +839,7 @@
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
 						<uniqueHills>true</uniqueHills>
-						<snowpilesBelow>-15</snowpilesBelow>
+						<snowpilesBelow>999</snowpilesBelow>
 						<mountainsSnowyBelow>-5</mountainsSnowyBelow>
 						<impassableSnowyBelow>0</impassableSnowyBelow>
 						<mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
@@ -890,8 +887,6 @@
 						<impassableSnowyBelow>0</impassableSnowyBelow>
 						<mountainsVerySnowyBelow>-12</mountainsVerySnowyBelow>
 						<impassableVerySnowyBelow>-5</impassableVerySnowyBelow>
-						<mountainsFullySnowyBelow>-21</mountainsFullySnowyBelow>
-						<impassableFullySnowyBelow>-21</impassableFullySnowyBelow>
 						<materialRandomRotation>false</materialRandomRotation>
 						<smallHillSizeMultiplier>1.5</smallHillSizeMultiplier>
 						<largeHillSizeMultiplier>2</largeHillSizeMultiplier>
