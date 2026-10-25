@@ -461,15 +461,13 @@
 				<eggProgressUnfertilizedMax>0.6</eggProgressUnfertilizedMax>
 				<eggCountRange>1</eggCountRange>
 			</li>
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.AnimalBehaviours.CompProperties_DoesntFlee" />
 		</comps>
 		<tradeTags>
 			<li>AnimalExotic</li>
 			<li>AnimalFighter</li>
 			<li>AnimalExtinct</li>
 		</tradeTags>
-		<modExtensions>
-			<li Class="ReGrowthCore.DoesntFleeExtension" />
-		</modExtensions>
 	</ThingDef>
 	<PawnKindDef ParentName="AnimalKindBase">
 		<defName>RG_ArcticDrak</defName>
@@ -656,7 +654,9 @@
 			<li>AnimalExtinct</li>
 		</tradeTags>
 		<modExtensions>
-			<li Class="ReGrowthCore.NocturnalAnimalExtension"></li>
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.AnimalBehaviours.ExtendedRaceProperties">
+				<bodyClock>Nocturnal</bodyClock>
+			</li>
 		</modExtensions>
 	</ThingDef>
 	<PawnKindDef ParentName="AnimalKindBase">
@@ -832,7 +832,7 @@
 				<!--				<eggProgressUnfertilizedMax>0.6</eggProgressUnfertilizedMax>-->
 				<eggCountRange>1~3</eggCountRange>
 			</li>
-			<li Class="ReGrowthCore.CompProperties_StateAfterHealthLoss">
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.AnimalBehaviours.CompProperties_StateAfterHealthLoss">
 				<healthPercent>20</healthPercent>
 				<tickInterval>100</tickInterval>
 				<mentalState>PanicFlee</mentalState>
