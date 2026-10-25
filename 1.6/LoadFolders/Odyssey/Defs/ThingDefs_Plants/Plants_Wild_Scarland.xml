@@ -108,7 +108,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_Plant_LureWeed</defName>
 		<label>lure weed</label>
-		<description>A toxin-resistant flower-like plant with long stems and glowing pods. Tribal legends say it is connected to a large monster buried under the ground that uses it to lure pray close to it.</description>
+		<description>A toxin-resistant flower-like plant with long stems and glowing pods. Tribal legends say it is connected to a large monster buried under the ground that uses it to lure prey close to it.</description>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
 			<Flammability>0.2</Flammability>
@@ -185,7 +185,6 @@
 		</graphicData>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>
-			<Beauty>0</Beauty>
 			<Nutrition>0.4</Nutrition>
 			<Beauty>-5</Beauty>
 			<BeautyOutdoors>-5</BeautyOutdoors>
