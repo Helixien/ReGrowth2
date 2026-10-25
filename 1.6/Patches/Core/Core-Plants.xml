@@ -113,11 +113,20 @@
 				</value>
 			</li>
 			<!-- ================================ Palm Tree ====================== -->
-			<li Class="PatchOperationReplace">
-				<xpath>/Defs/ThingDef[defName="Plant_TreeDrago"]/plant/visualSizeRange</xpath>
-				<value>
-					<visualSizeRange>1.5~2.8</visualSizeRange>
-				</value>
+			<li Class="PatchOperationConditional">
+				<xpath>/Defs/ThingDef[defName="Plant_TreePalm"]/plant/visualSizeRange</xpath>
+				<match Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="Plant_TreePalm"]/plant/visualSizeRange</xpath>
+					<value>
+						<visualSizeRange>1.5~2.8</visualSizeRange>
+					</value>
+				</match>
+				<nomatch Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="Plant_TreePalm"]/plant</xpath>
+					<value>
+						<visualSizeRange>1.5~2.8</visualSizeRange>
+					</value>
+				</nomatch>
 			</li>
 			<!-- ================================ Pine Tree ====================== -->
 			<li Class="PatchOperationReplace">

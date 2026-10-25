@@ -4,7 +4,7 @@
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Increase vanilla plant density</label>
-		<tooltip>Makes all biomes more lush. Does only affect performance on low end machines. All ReGrowth mods are build around this setting enabled. (Default: True)</tooltip>
+		<tooltip>Makes all biomes more lush. Does only affect performance on low end machines. All ReGrowth mods are built around having this setting enabled. (Default: True)</tooltip>
 		<id>RG_IncreaseVanillaPlantDensity</id>
 		<category>RG_GeneralSettings</category>
 		<order>0</order>
@@ -115,7 +115,7 @@
 				</value>
 			</li>
 			<!-- ================ Biome Aspen Forest ================ -->
-			<li Class="PatchOperationReplace" MayRequire="ReGrowth.BOTR.AspenForest">
+			<li Class="PatchOperationReplace">
 				<xpath>/Defs/BiomeDef[defName="RG_AspenForest"]/plantDensity</xpath>
 				<value>
 					<plantDensity>1.0</plantDensity>
@@ -134,7 +134,7 @@
 	<Operation Class="ModSettingsFramework.PatchOperationModOption">
 		<defaultValue>True</defaultValue>
 		<label>Steel does not burn</label>
-		<tooltip>Makes it so steel wont burn because its steel. (Default: True)</tooltip>
+		<tooltip>Makes it so steel won't burn because it's steel. (Default: True)</tooltip>
 		<id>RG_SteelDoesNotBurn</id>
 		<category>RG_GeneralSettings</category>
 		<order>2</order>
@@ -381,7 +381,7 @@
 							<li>BorealForest</li>
 							<li>Tundra</li>
 							<li>ColdBog</li>
-							<li MayRequire="ReGrowth.BOTR.AspenForest">RG_AspenForest</li>
+							<li>RG_AspenForest</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_TemperateWasteland</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_FrigidWasteland</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_AridWasteland</li>
@@ -434,7 +434,7 @@
 							<li>BorealForest</li>
 							<li>Tundra</li>
 							<li>ColdBog</li>
-							<li MayRequire="ReGrowth.BOTR.AspenForest">RG_AspenForest</li>
+							<li>RG_AspenForest</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_TemperateWasteland</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_FrigidWasteland</li>
 							<li MayRequire="ReGrowth.BOTR.Wastelands">RG_AridWasteland</li>
@@ -1012,7 +1012,7 @@
 				</value>
 			</li>
 			<!-- ================ ReGrowth: Aspen Forest ================ -->
-			<li Class="PatchOperationAddModExtension" MayRequire="ReGrowth.BOTR.AspenForest">
+			<li Class="PatchOperationAddModExtension">
 				<xpath>/Defs/BiomeDef[defName="RG_AspenForest"]</xpath>
 				<value>
 					<li Class="ReGrowthCore.BiomesKitControl">
