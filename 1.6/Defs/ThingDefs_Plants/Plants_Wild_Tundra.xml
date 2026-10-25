@@ -140,7 +140,7 @@
 	<!--	<ThingDef ParentName="PlantBase">
 		<defName>RG_Taztakus</defName>
 		<label>taztakus</label>
-		<description>A tiny redish cup-shaped mushroom growing in small clusters in volcanic biomes.</description>
+		<description>A tiny reddish cup-shaped mushroom growing in small clusters in volcanic biomes.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_Taztakus</texPath>
 			<graphicClass>Graphic_Random</graphicClass>

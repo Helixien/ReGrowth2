@@ -99,7 +99,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_SychiCap</defName>
 		<label>Sychi cap</label>
-		<description>A small redish mushroom growing in clusters. It grows exclusively in cold bogs.</description>
+		<description>A small reddish mushroom growing in clusters. It grows exclusively in cold bogs.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_SychiCap</texPath>
 			<graphicClass>Graphic_Random</graphicClass>

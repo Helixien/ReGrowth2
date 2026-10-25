@@ -12,7 +12,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_Plant_TropicalIvy</defName>
 		<label>ivy</label>
-		<description>Wild ivy with leafs that grows in patches of leaves in areas of tropical temperatures.</description>
+		<description>Wild ivy that grows in leafy patches in tropical areas.</description>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>
 			<Flammability>0.6</Flammability>
@@ -227,7 +227,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_NeoAmanita</defName>
 		<label>neo amanita</label>
-		<description>A genetically engineered version of the common amanita to be save for human consumption growing in clusters. It grows exclusively in tropical regions.</description>
+		<description>A version of the common amanita genetically engineered to be safe for human consumption. It grows in clusters exclusively in tropical regions.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_NeoAmanita</texPath>
 			<graphicClass>Graphic_Random</graphicClass>

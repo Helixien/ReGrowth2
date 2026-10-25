@@ -21,8 +21,8 @@
 	</ThingDef>
 	<ThingDef ParentName="EggUnfertBase">
 		<defName>RG_EggKiwiUnfertilized</defName>
-		<label>kiwi egg (fert.)</label>
-		<description>A fertilized kiwi egg. If all goes well, it should hatch into a baby kiwi. It can be eaten raw, but it's much better cooked.</description>
+		<label>kiwi egg (unfert.)</label>
+		<description>An unfertilized kiwi egg. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
 			<color>(236,217,184)</color>
 			<drawSize>1.1</drawSize>
@@ -34,7 +34,7 @@
 	<!--====================  Woolly Stegosaurus Eggs ===========================-->
 	<ThingDef ParentName="EggFertBase">
 		<defName>RG_EggWoollyStegosaurusFertilized</defName>
-		<label>woolly stegosaurus(fert.)</label>
+		<label>woolly stegosaurus egg (fert.)</label>
 		<description>A fertilized woolly stegosaurus egg. If all goes well, it should hatch into a baby woolly stegosaurus. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
@@ -56,8 +56,8 @@
 	</ThingDef>
 	<ThingDef ParentName="EggUnfertBase">
 		<defName>RG_EggWoollyStegosaurusUnfertilized</defName>
-		<label>woolly stegosaurus(unfert.)</label>
-		<description>A fertilized woolly stegosaurus egg. If all goes well, it should hatch into a baby woolly stegosaurus. It can be eaten raw, but it's much better cooked.</description>
+		<label>woolly stegosaurus egg (unfert.)</label>
+		<description>An unfertilized woolly stegosaurus egg. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
@@ -74,7 +74,7 @@
 	<ThingDef ParentName="EggFertBase">
 		<defName>RG_RimclawEggFertilized</defName>
 		<label>rimclaw egg (fert.)</label>
-		<description>A fertilized rimclaw egg. If all goes well, it should hatch into a baby deathclaw. It can be eaten raw, but it's much better cooked.</description>
+		<description>A fertilized rimclaw egg. If all goes well, it should hatch into a baby rimclaw. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/AnimalProductRaw/EggDeathclaw</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
@@ -95,7 +95,7 @@
 	<ThingDef ParentName="EggUnfertBase">
 		<defName>RG_RimclawEggUnfertilized</defName>
 		<label>rimclaw egg (unfert.)</label>
-		<description>A fertilized rimclaw egg. If all goes well, it should hatch into a baby deathclaw. It can be eaten raw, but it's much better cooked.</description>
+		<description>An unfertilized rimclaw egg. It can be eaten raw, but it's much better cooked.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/AnimalProductRaw/EggDeathclaw</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>

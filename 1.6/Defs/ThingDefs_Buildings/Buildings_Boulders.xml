@@ -40,7 +40,6 @@
 				<multiplier>4</multiplier>
 			</li>
 		</damageMultipliers>
-		<saveCompressible>false</saveCompressible>
 	</ThingDef>
 	<ThingDef ParentName="RG_BoulderBase" Name="RG_BoulderRockMediumBase" Abstract="True">
 		<description>A medium sized chunk of rock. Can be mined into smaller chunks with a chance of occasional ores.</description>

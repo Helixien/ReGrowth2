@@ -20,7 +20,7 @@
 	<ThingDef ParentName="BushBase">
 		<defName>RG_Plant_AspenFern</defName>
 		<label>fern</label>
-		<description>A short shrub with long, fine leaves. Grows in forests in aspen forests.</description>
+		<description>A short shrub with long, fine leaves. Grows in aspen forests.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_AspenFern</texPath>
 			<drawSize>1.15</drawSize>
@@ -39,7 +39,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_Plant_SaffronCushion</defName>
 		<label>saffron cushion</label>
-		<description>Wild carpet shrubs with yellow leafs that grows in aspen forests. Shrubs takes a long time to grow, but is very frost-resistant.</description>
+		<description>Wild carpet shrubs with yellow leaves that grow in aspen forests. Shrubs take a long time to grow, but are very frost-resistant.</description>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>
 			<Flammability>0.6</Flammability>

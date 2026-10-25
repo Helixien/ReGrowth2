@@ -33,7 +33,7 @@
 	<ThingDef ParentName="BushBase">
 		<defName>RG_Plant_BorealFern</defName>
 		<label>fern</label>
-		<description>A short shrub with long, fine leaves. Grows in cold forests areas.</description>
+		<description>A short shrub with long, fine leaves. Grows in cold forest areas.</description>
 		<graphicData>
 			<texPath>Things/Plant/RG_BorealFern</texPath>
 			<drawSize>1.15</drawSize>
@@ -89,7 +89,7 @@
 	<ThingDef ParentName="PlantBase">
 		<defName>RG_Plant_TigerLily</defName>
 		<label>tiger lily</label>
-		<description>A tiny orange flower which grows in large clusters. Though it is often considered a weed, tiger lilys in bloom are quite beautiful.</description>
+		<description>A tiny orange flower which grows in large clusters. Though it is often considered a weed, tiger lilies in bloom are quite beautiful.</description>
 		<statBases>
 			<MaxHitPoints>85</MaxHitPoints>
 			<Nutrition>0.18</Nutrition>

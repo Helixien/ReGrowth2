@@ -3,8 +3,8 @@
 	<!--====================  Dinosaurs Hides ===========================-->
     <ThingDef ParentName="LeatherBase">
         <defName>RG_DinosaursHideHeavy</defName>
-        <label>heavy dinosaurs hide</label>
-        <description>Heavy hide from larger, tougher theropod or sauropod. It's reasonbly good at protection.</description>
+        <label>heavy dinosaur hide</label>
+        <description>Heavy hide from larger, tougher theropods or sauropods. It's reasonably good at protection.</description>
         <graphicData>
             <color>(129,50,41)</color>
         </graphicData>

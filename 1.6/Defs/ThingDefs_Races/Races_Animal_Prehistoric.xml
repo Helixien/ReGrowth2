@@ -4,7 +4,7 @@
 	<ThingDef ParentName="AnimalThingBase">
 		<defName>RG_WoollyStegosaurus</defName>
 		<label>woolly stegosaurus</label>
-		<description>A variation of the more common “roof lizard”, this creature is a herbivore characterized by their distinctive kite-shaped upright bony scales along the back which help regulate their body temperature and acts as a mating display.\n\nThe Woolly Stegosaurus finds their home in cold biomes, preferring to eat low-lying vegetation due to a short neck and small head. The spines on the end of the tail differ from the regular Stegosaurus, in that they are curved instead of straight. While this does hinder their ability to defend against predators somewhat, they are much better suited to digging into hard soil and flinging it away to exposed nutritious roots.</description>
+		<description>A variation of the more common “roof lizard”, this creature is a herbivore characterized by their distinctive kite-shaped upright bony scales along the back which help regulate their body temperature and act as a mating display.\n\nThe Woolly Stegosaurus finds their home in cold biomes, preferring to eat low-lying vegetation due to a short neck and small head. The spines on the end of the tail differ from the regular Stegosaurus, in that they are curved instead of straight. While this does hinder their ability to defend against predators somewhat, they are much better suited to digging into hard soil and flinging it away to expose nutritious roots.</description>
 		<statBases>
 			<MoveSpeed>4.3</MoveSpeed>
 			<MarketValue>950</MarketValue>
