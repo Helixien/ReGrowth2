@@ -456,6 +456,7 @@
 		<comps>
 			<li Class="CompProperties_EggLayer">
 				<eggFertilizedDef>RG_EggArticDrakFertilized</eggFertilizedDef>
+				<eggUnfertilizedDef>RG_EggArticDrakUnfertilized</eggUnfertilizedDef>
 				<eggFertilizationCountMax>3</eggFertilizationCountMax>
 				<eggLayIntervalDays>12</eggLayIntervalDays>
 				<eggProgressUnfertilizedMax>0.6</eggProgressUnfertilizedMax>
@@ -643,6 +644,7 @@
 		<comps>
 			<li Class="CompProperties_EggLayer">
 				<eggFertilizedDef>RG_EggThrinaxodonFertilized</eggFertilizedDef>
+				<eggUnfertilizedDef>RG_EggThrinaxodonUnfertilized</eggUnfertilizedDef>
 				<eggFertilizationCountMax>4</eggFertilizationCountMax>
 				<eggLayIntervalDays>6</eggLayIntervalDays>
 				<eggProgressUnfertilizedMax>0.5</eggProgressUnfertilizedMax>

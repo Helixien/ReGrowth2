@@ -104,4 +104,36 @@
 			</li>
 		</comps>
 	</ThingDef>
+	<ThingDef ParentName="EggUnfertBase">
+		<defName>RG_EggArticDrakUnfertilized</defName>
+		<label>drak egg (unfert.)</label>
+		<description>An unfertilized drak egg. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>95</MarketValue>
+		</statBases>
+	</ThingDef>
+	<ThingDef ParentName="EggUnfertBase">
+		<defName>RG_EggThrinaxodonUnfertilized</defName>
+		<label>thrinaxodon egg (unfert.)</label>
+		<description>An unfertilized thrinaxodon egg. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggOval</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>12</MarketValue>
+		</statBases>
+	</ThingDef>
 </Defs>
