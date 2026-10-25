@@ -99,9 +99,6 @@
 									<def>Ear</def>
 									<customLabel>right ear</customLabel>
 									<coverage>0.04</coverage>
-									<groups>
-										<li>HornAttackTool</li>
-									</groups>
 								</li>
 								<li>
 									<def>Horn</def>
@@ -115,6 +112,9 @@
 									<def>Horn</def>
 									<customLabel>left horn</customLabel>
 									<coverage>0.04</coverage>
+									<groups>
+										<li>HornAttackTool</li>
+									</groups>
 								</li>
 								<li>
 									<def>Nose</def>
