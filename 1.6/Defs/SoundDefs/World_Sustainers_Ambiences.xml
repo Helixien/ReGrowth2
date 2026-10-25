@@ -33,7 +33,7 @@
 						<clipPath>Ambience/Amb_Drizzle_Loop</clipPath>
 					</li>
 				</grains>
-				<volumeRange>5~5</volumeRange>
+				<volumeRange>15~20</volumeRange>
 				<paramMappings>
 					<li>
 						<inParam Class="SoundParamSource_CameraAltitude"/>
