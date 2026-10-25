@@ -86,7 +86,7 @@ namespace ReGrowthCore
                             case Hilliness.Mountainous: hillSizeMultiplier *= modExt.mountainSizeMultiplier; break;
                             case Hilliness.Impassable: hillSizeMultiplier *= modExt.impassableSizeMultiplier; break;
                         }
-                        if (path != null)
+                        if (path != null && ContentFinder<Texture2D>.Get(path, reportFailure: false) != null)
                         {
                             Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit, 3600);
                             var subMesh = GetSubMesh(mat);
@@ -124,6 +124,7 @@ namespace ReGrowthCore
                         if (!modified)
                             path = path.TrimEnd('_');
 
+                        if (ContentFinder<Texture2D>.Get(path, reportFailure: false) == null) continue;
                         Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit,
                             modExt.materialLayer);
                         var subMesh = GetSubMesh(mat);
@@ -167,7 +168,7 @@ namespace ReGrowthCore
                             break;
                     }
 
-                    if (hillPath != null)
+                    if (hillPath != null && ContentFinder<Texture2D>.Get(hillPath, reportFailure: false) != null)
                     {
                         Material mat = MaterialPool.MatFrom(hillPath, ShaderDatabase.WorldOverlayTransparentLit,
                             3515);

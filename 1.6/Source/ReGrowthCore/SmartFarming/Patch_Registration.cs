@@ -64,10 +64,7 @@ namespace ReGrowthCore
         }
         static void Postfix(Zone __instance)
         {
-            if (ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp))
-            {
-                mapComp.CalculateAll(__instance);
-            }
+            if (ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp)) mapComp.MarkZoneDirty(__instance);
         }
     }
 
@@ -84,11 +81,7 @@ namespace ReGrowthCore
         }
         static void Postfix(Zone __instance)
         {
-            if (ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp))
-            {
-                mapComp.CalculateAll(__instance);
-                if (mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData)) zoneData.CalculateCornerCell(__instance);
-            }
+            if (ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp)) mapComp.MarkZoneDirty(__instance);
         }
     }
 
@@ -98,11 +91,7 @@ namespace ReGrowthCore
     {
         static void Postfix(Zone __instance)
         {
-            if (__instance is IPlantToGrowSettable && __instance.cells.Count > 0 && ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp))
-            {
-                mapComp.CalculateAll(__instance);
-                if (mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData)) zoneData.CalculateCornerCell(__instance);
-            }
+            if (__instance is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp)) mapComp.MarkZoneDirty(__instance);
         }
     }
 

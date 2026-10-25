@@ -260,6 +260,10 @@ namespace ReGrowthCore
 		{
 			if (__result == null)
 			{
+				if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
+				{
+					return __result;
+				}
 				var map = pawn.Map;
 				var zone = map.zoneManager.ZoneAt(c);
 				if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
@@ -445,6 +449,10 @@ namespace ReGrowthCore
 		static int lastRecalculateTick = 0;
 		static string Postfix(string __result, Zone __instance)
 		{
+			if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
+			{
+				return __result;
+			}
 			Map map = __instance.Map;
 			if (ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming mapComp) && mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData))
 			{
@@ -542,6 +550,10 @@ namespace ReGrowthCore
 		}
 		static bool Prefix(Pawn pawn, IntVec3 c)
 		{
+			if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
+			{
+				return true;
+			}
 			Map map = pawn?.Map;
 
 			//We don't check the zone type because it's faster for the collection lookup to return with nothing than it is to cast the zone
@@ -563,6 +575,10 @@ namespace ReGrowthCore
 	{
 		static bool Prefix(Zone __instance)
 		{
+			if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
+			{
+				return true;
+			}
 			return !(__instance is IPlantToGrowSettable &&
 			ReGrowthCore_SmartFarming.compCache.TryGetValue(__instance.zoneManager.map.uniqueID, out MapComponent_SmartFarming mapComp) &&
 			mapComp.growZoneRegistry.TryGetValue(__instance.ID, out ZoneData zoneData) && zoneData.isMerged);

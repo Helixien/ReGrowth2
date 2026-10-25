@@ -1,5 +1,6 @@
 using RimWorld;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Verse;
@@ -44,11 +45,26 @@ namespace ReGrowthCore
             return true;
         }
 
+        private static readonly Dictionary<int, (int tick, FloatRange range)> comfortCache = new Dictionary<int, (int, FloatRange)>();
+
         public static FloatRange GetComfortTempRange(Pawn pawn)
         {
-            var comfortRange = pawn != null ? ComfortableTemperatureRange(pawn) : GenTemperature.ComfortableTemperatureRange(ThingDefOf.Human);
+            if (pawn is null)
+            {
+                var fallback = GenTemperature.ComfortableTemperatureRange(ThingDefOf.Human);
+                fallback.min -= 10f;
+                fallback.max += 10f;
+                return fallback;
+            }
+            var tick = Find.TickManager.TicksGame;
+            if (comfortCache.TryGetValue(pawn.thingIDNumber, out var cached) && tick >= cached.tick && tick - cached.tick < GenDate.TicksPerHour)
+            {
+                return cached.range;
+            }
+            var comfortRange = ComfortableTemperatureRange(pawn);
             comfortRange.min -= 10f;
             comfortRange.max += 10f;
+            comfortCache[pawn.thingIDNumber] = (tick, comfortRange);
             return comfortRange;
         }
 
@@ -116,6 +132,7 @@ namespace ReGrowthCore
             var comfortRange = GetComfortTempRange(pawn);
             bool CellValidator(IntVec3 x)
             {
+                if (!pawn.Map.terrainGrid.waterCells.Contains(x)) return false;
                 if (IsGoodSpotForBathing(pawn.Map, x, comfortRange, pawn: pawn) && pawn.CanReserve(x) && pawn.CanReach(x, PathEndMode.OnCell, Danger.Deadly))
                 {
                     foreach (var adj in GenAdj.AdjacentCells)
@@ -130,7 +147,8 @@ namespace ReGrowthCore
                 }
                 return false;
             }
-            var cells = pawn.Map.terrainGrid.waterCells.Where(x => CellValidator(x)).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
+            var cells = pawn.Map.zoneManager.AllZones.OfType<Zone_Bathe>().SelectMany(z => z.cells)
+                .Where(CellValidator).OrderByDescending(x => NearbyWaterCount(x, pawn.Map))
                 .ThenBy(x => pawn.Position.DistanceTo(x)).Take(10);
             if (cells.TryRandomElement(out var cell))
             {

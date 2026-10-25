@@ -14,6 +14,7 @@ namespace ReGrowthCore
 	{
 		public static HashSet<ushort> hardTerrains;
 		public static Dictionary<int, Vector3[]> hardGrids = new Dictionary<int, Vector3[]>();
+		public static Dictionary<int, HashSet<Vector3>> hardGridSets = new Dictionary<int, HashSet<Vector3>>();
 		public static Vector3[] activeMapHardGrid;
 		public static FastRandom fastRandom = new FastRandom();
 		public static FleckSystem fleckSystemCache;
@@ -131,6 +132,7 @@ namespace ReGrowthCore
 
 			//Record
 			hardGrids[map.uniqueID] = workingList.ToArray();
+			hardGridSets[map.uniqueID] = new HashSet<Vector3>(workingList);
 
 			SetActiveGrid(map);
 		}
@@ -139,40 +141,31 @@ namespace ReGrowthCore
 		{
 			if (map == null) return;
 			Vector3 vector = GetDeterministicOffset(map, c);
-			if (hardGrids.TryGetValue(map.uniqueID, out Vector3[] hardGrid))
+			if (hardGrids.ContainsKey(map.uniqueID) && hardGridSets.TryGetValue(map.uniqueID, out HashSet<Vector3> set))
 			{
-				if (hardGrid.NullOrEmpty())
-				{
-					hardGrid = new Vector3[0];
-				}
-
 				//Add the new cell if relevant
 				if (def == null) def = map.terrainGrid.TerrainAt(map.cellIndices.CellToIndex(c));
 				bool isHard = hardTerrains.Contains(def.index) &&
 				              (!def.natural || PassesNatureFilter(map, c)) &&
 				              !c.Roofed(map) &&
 				              !map.fogGrid.IsFogged(c);
-				var list = new List<Vector3>(hardGrid);
-				bool contains = list.Contains(vector);
+				bool contains = set.Contains(vector);
 
 				//Filter out this cell
 				if (isHard)
 				{
 					if (!contains)
 					{
-						list.Add(vector);
-						hardGrids[map.uniqueID] = list.ToArray();
+						set.Add(vector);
+						hardGrids[map.uniqueID] = set.ToArray();
 						SetActiveGrid(map);
 					}
 				}
-				else
+				else if (contains)
 				{
-					if (contains)
-					{
-						list.Remove(vector);
-						hardGrids[map.uniqueID] = list.ToArray();
-						SetActiveGrid(map);
-					}
+					set.Remove(vector);
+					hardGrids[map.uniqueID] = set.ToArray();
+					SetActiveGrid(map);
 				}
 			}
 		}
@@ -200,6 +193,7 @@ namespace ReGrowthCore
 		public static void ResetCache()
 		{
 			hardGrids.Clear();
+			hardGridSets.Clear();
 			activeMapHardGrid = null;
 			fleckSystemCache = null;
 		}

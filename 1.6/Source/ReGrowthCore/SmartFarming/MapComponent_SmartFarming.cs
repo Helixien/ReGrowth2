@@ -13,6 +13,9 @@ namespace ReGrowthCore
 		int currentDay, hour, sunrise, sunset, lastMessageDay = -1;
 		PlanetTile tile;
 		public Dictionary<int, ZoneData> growZoneRegistry = new Dictionary<int, ZoneData>();
+		public readonly HashSet<int> dirtyZoneIDs = new HashSet<int>();
+
+		public void MarkZoneDirty(Zone zone) => dirtyZoneIDs.Add(zone.ID);
 		public float tempOffsetCache, latitude, longitudeTuning, baseTemperature, worldAverage, sunLow, sunHigh;
 		List<string> report = new List<string>();
 		World world;
@@ -323,6 +326,20 @@ namespace ReGrowthCore
 			if (!ReGrowthCore_SmartFarming.ModSettings.enabled)
 			{
 				return;
+			}
+			if (dirtyZoneIDs.Count > 0)
+			{
+				UpdateCommonCache();
+				foreach (var zoneID in dirtyZoneIDs)
+				{
+					var zone = map.zoneManager.AllZones.FirstOrDefault(x => x.ID == zoneID);
+					if (zone != null && zone is IPlantToGrowSettable && growZoneRegistry.ContainsKey(zoneID))
+					{
+						CalculateAll(zone, false);
+						if (growZoneRegistry.TryGetValue(zoneID, out ZoneData zoneData)) zoneData.CalculateCornerCell(zone);
+					}
+				}
+				dirtyZoneIDs.Clear();
 			}
 			if (map.IsHashIntervalTick(GenDate.TicksPerHour)) //Hourly
 			{

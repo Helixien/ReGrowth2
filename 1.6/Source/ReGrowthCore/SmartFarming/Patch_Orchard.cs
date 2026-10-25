@@ -16,6 +16,7 @@ namespace ReGrowthCore
 
 		static Job Postfix(Job __result, IntVec3 c, Pawn pawn)
 		{
+			if (!ReGrowthCore_SmartFarming.ModSettings.enabled) return __result;
 			//Is relevant? Plants that need clearance only...
 			if (__result?.plantDefToSow?.plant?.blockAdjacentSow != true) return __result;
 

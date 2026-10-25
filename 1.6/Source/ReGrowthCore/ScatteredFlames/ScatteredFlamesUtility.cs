@@ -114,7 +114,7 @@ namespace ReGrowthCore
 
 			FleckCreationData dataStatic = FleckMaker.GetDataStatic(vector, map, ScatteredFlames_ResourceBank.FleckDefOf.RG_LongFireGlow, fastRandom.Next(400, 600) / 100f * size);
 			dataStatic.rotationRate = fastRandom.Next(-300, 300) / 100f;
-			dataStatic.velocityAngle = fastRandom.Next(360) / 100f;
+			dataStatic.velocityAngle = fastRandom.Next(0, 360);
 			dataStatic.velocitySpeed = 0.12f;
 			dataStatic.instanceColor = new Color(0.5f, 0.5f, 0.5f);
 			map.flecks.CreateFleck(dataStatic);

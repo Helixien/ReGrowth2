@@ -57,6 +57,7 @@ namespace ReGrowthCore
 
         private static readonly Dictionary<(Material, float), Material> materials = [];
         private static readonly object materialsLock = new();
+        private static readonly int mainThreadId = Environment.CurrentManagedThreadId;
         public static Material GetBatheMat(Material baseMat, float transparency)
         {
             if (baseMat is null) return baseMat;
@@ -65,6 +66,10 @@ namespace ReGrowthCore
             {
                 if (!materials.TryGetValue(key, out var value))
                 {
+                    if (Environment.CurrentManagedThreadId != mainThreadId)
+                    {
+                        return baseMat;
+                    }
                     materials[key] = value = new Material(baseMat);
                     value.color = new Color(baseMat.color.r, baseMat.color.g, baseMat.color.b, transparency);
                 }

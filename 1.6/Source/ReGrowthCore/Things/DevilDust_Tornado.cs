@@ -359,6 +359,7 @@ namespace ReGrowthCore
 			for (int i = 0; i < tmpThings.Count; i++)
 			{
 				BattleLogEntry_DamageTaken battleLogEntry_DamageTaken = null;
+				float thingDamageFactor = damageFactor;
 				switch (tmpThings[i].def.category)
 				{
 					case ThingCategory.Pawn:
@@ -368,29 +369,29 @@ namespace ReGrowthCore
 							Find.BattleLog.Add(battleLogEntry_DamageTaken);
 							if (pawn.RaceProps.baseHealthScale < 1f)
 							{
-								damageFactor *= pawn.RaceProps.baseHealthScale;
+								thingDamageFactor *= pawn.RaceProps.baseHealthScale;
 							}
 							if (pawn.RaceProps.Animal)
 							{
-								damageFactor *= 0.75f;
+								thingDamageFactor *= 0.75f;
 							}
 							if (pawn.Downed)
 							{
-								damageFactor *= 0.2f;
+								thingDamageFactor *= 0.2f;
 							}
 							break;
 						}
 					case ThingCategory.Building:
-						damageFactor *= BuildingDamageFactor;
+						thingDamageFactor *= BuildingDamageFactor;
 						break;
 					case ThingCategory.Item:
-						damageFactor *= ItemDamageFactor;
+						thingDamageFactor *= ItemDamageFactor;
 						break;
 					case ThingCategory.Plant:
-						damageFactor *= 1.7f;
+						thingDamageFactor *= 1.7f;
 						break;
 				}
-				tmpThings[i].TakeDamage(new DamageInfo(DamageDefOf.TornadoScratch, 1f * damageFactor, 0f, angle, this)).AssociateWithLog(battleLogEntry_DamageTaken);
+				tmpThings[i].TakeDamage(new DamageInfo(DamageDefOf.TornadoScratch, 1f * thingDamageFactor, 0f, angle, this)).AssociateWithLog(battleLogEntry_DamageTaken);
 			}
 			tmpThings.Clear();
 		}

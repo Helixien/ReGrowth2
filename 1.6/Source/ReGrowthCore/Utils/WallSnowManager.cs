@@ -18,6 +18,7 @@ namespace ReGrowthCore
         private const int FULL_SCAN_INTERVAL = 2500;
         private List<Building> wallsToProcess = new List<Building>();
         private int currentBatchIndex = 0;
+        private bool batchPassComplete = true;
         private const int WALLS_PER_TICK = 50;
 
         private static List<ThingDef> wallDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.IsWall).ToList();
@@ -34,7 +35,7 @@ namespace ReGrowthCore
             if (map.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
                 int currentTick = Find.TickManager.TicksGame;
-                if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL && currentBatchIndex >= wallsToProcess.Count)
+                if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL && batchPassComplete)
                 {
                     RebuildEligibleWallsCache();
                     lastFullScanTick = currentTick;
@@ -62,6 +63,7 @@ namespace ReGrowthCore
             }
 
             currentBatchIndex = 0;
+            batchPassComplete = false;
         }
 
         private void ProcessWallBatch()
@@ -87,6 +89,7 @@ namespace ReGrowthCore
             if (currentBatchIndex >= wallsToProcess.Count)
             {
                 currentBatchIndex = 0;
+                batchPassComplete = true;
             }
         }
         private Dictionary<Building, bool> wallGroupSnowCache = new Dictionary<Building, bool>();

@@ -131,17 +131,18 @@ namespace ReGrowthCore
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.roofGrid.SetRoof(cell, def);
             });
-            var ticksPassed = Find.TickManager.TicksGame - savedCamp.ticksSaved;
+            var ticksPassed = Math.Min(Find.TickManager.TicksGame - savedCamp.ticksSaved, MaxSimulatedTicks);
             var map = Map;
             var num = Mathf.CeilToInt((float)map.Area * 0.0006f);
             var area = map.Area;
-            for (var i = 0; i < ticksPassed; i++)
+            for (var i = 0; i < ticksPassed; i += GenTicks.TickRareInterval)
             {
+                var delta = Math.Min(GenTicks.TickRareInterval, ticksPassed - i);
                 foreach (var item in itemsRottables)
                 {
                     if (item.Value.parent.Destroyed is false)
                     {
-                        item.Value.TickInterval(1);
+                        item.Value.TickInterval(delta);
                     }
                 }
                 for (int j = 0; j < num; j++)
@@ -200,6 +201,8 @@ namespace ReGrowthCore
                 thing.DeSpawn();
             }
         }
+
+        private const int MaxSimulatedTicks = 15 * GenDate.TicksPerDay;
 
         private void SyncGrids<T>(T[] mapGrid, T[] savedGrid, Action<int, T> syncAction)
         {

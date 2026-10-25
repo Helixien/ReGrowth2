@@ -126,6 +126,9 @@ namespace ReGrowthCore
 
 		private void BiomesKit()
 		{
+			firstOrderBiomes.Clear();
+			secondOrderBiomes.Clear();
+			thirdOrderBiomes.Clear();
 			foreach (BiomeDef biomeDef in DefDatabase<BiomeDef>.AllDefsListForReading.Where(x => x.HasModExtension<BiomesKitControl>()))
 			{
 				// We then get the modextension from the specific BiomeDef we are iterating through right now.
@@ -164,6 +167,12 @@ namespace ReGrowthCore
 		private void BiomesKitCalcs(BiomeDef biomeDef)
 		{
 			BiomesKitControl biomesKit = biomeDef.GetModExtension<BiomesKitControl>();
+			bool spawnsBiome = biomeDef.workerClass.Name == "UniversalBiomeWorker";
+			if (!spawnsBiome && biomesKit.setHills == null && biomesKit.setElevation == null && biomesKit.randomizeHilliness == false)
+			{
+				return;
+			}
+			var tmpNeighbors = new List<PlanetTile>();
 			// South Latitudes need to be negative values. Here we convert them for the user's convenience.
 			float minSouthLatitude = biomesKit.minSouthLatitude * -1;
 			float maxSouthLatitude = biomesKit.maxSouthLatitude * -1;
@@ -255,21 +264,20 @@ namespace ReGrowthCore
 						continue;
 					}
 				}
-				// Now we define the Perlin Noise seed.
-				// If the user has assigned a custom seed, we use that.
-				if (biomesKit.perlinCustomSeed != null)
-				{
-					perlinSeed = biomesKit.perlinCustomSeed.Value;
-				}
-				// If not, we check if they've asked to use the alternative preset seed.
-				else if (biomesKit.useAlternativePerlinSeedPreset) // If they have, we use that.
-				{
-					perlinSeed = tileID;
-				}
 				// Are we using perlin for this biome?
 				if (biomesKit.usePerlin == true)
 				{
-					// If we are, it's time to generate our perlin noise.
+					// Now we define the Perlin Noise seed.
+					// If the user has assigned a custom seed, we use that.
+					if (biomesKit.perlinCustomSeed != null)
+					{
+						perlinSeed = biomesKit.perlinCustomSeed.Value;
+					}
+					// If not, we check if they've asked to use the alternative preset seed.
+					else if (biomesKit.useAlternativePerlinSeedPreset) // If they have, we use that.
+					{
+						perlinSeed = tileID;
+					}
 					PerlinNoise = new Perlin(0.1, 10, 0.6, 12, perlinSeed, QualityMode.Low);
 					float perlinNoiseValue = PerlinNoise.GetValue(coords);
 					// And after that we cull the lower perlin values.
@@ -303,13 +311,13 @@ namespace ReGrowthCore
 				{
 					continue;
 				}
-				var tmpNeighbors = new List<PlanetTile>();
-				worldGrid.GetTileNeighbors(tileID, tmpNeighbors);
 				int neighbor = 0;
 				int waterNeighbors = 0;
 				bool enoughWaterNeighbors = true;
 				if (biomesKit.minimumWaterNeighbors > 0)
 				{
+					tmpNeighbors.Clear();
+					worldGrid.GetTileNeighbors(tileID, tmpNeighbors);
 					for (int count = tmpNeighbors.Count; neighbor < count; neighbor++)
 					{
 						if (worldGrid[tmpNeighbors[neighbor]].biome == BiomeDefOf.Ocean)
