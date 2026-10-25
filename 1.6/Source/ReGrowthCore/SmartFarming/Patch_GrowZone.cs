@@ -207,7 +207,7 @@ namespace ReGrowthCore
 
 			var map = pawn.Map;
 			var zone = map.zoneManager.ZoneAt(c);
-			if (zone != null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out MapComponent_SmartFarming comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out ZoneData zoneData))
+			if (zone is not null && zone is IPlantToGrowSettable && ReGrowthCore_SmartFarming.ModSettings.enabled && ReGrowthCore_SmartFarming.compCache.TryGetValue(map.uniqueID, out var comp) && comp.growZoneRegistry.TryGetValue(zone.ID, out var zoneData))
 			{
 				if (ReGrowthCore_SmartFarming.ModSettings.autoCutBlighted)
 				{
@@ -503,7 +503,7 @@ namespace ReGrowthCore
 		static void Postfix(Plant __instance)
 		{
 			Map map = __instance.Map;
-			if (ReGrowthCore_SmartFarming.ModSettings.autoCutBlighted && map.designationManager.DesignationOn(__instance, DesignationDefOf.CutPlant) == null)
+			if (ReGrowthCore_SmartFarming.ModSettings.enabled && ReGrowthCore_SmartFarming.ModSettings.autoCutBlighted && map.designationManager.DesignationOn(__instance, DesignationDefOf.CutPlant) is null)
 			{
 				map.designationManager.AddDesignation(new Designation(__instance, DesignationDefOf.CutPlant));
 			}
@@ -516,7 +516,7 @@ namespace ReGrowthCore
 	{
 		static bool Prepare()
 		{
-			return ReGrowthCore_SmartFarming.ModSettings.autoCutDying;
+			return ReGrowthCore_SmartFarming.ModSettings.enabled && ReGrowthCore_SmartFarming.ModSettings.autoCutDying;
 		}
 
 		static void Prefix(Plant __instance)

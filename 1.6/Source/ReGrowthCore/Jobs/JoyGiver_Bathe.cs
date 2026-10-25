@@ -116,7 +116,7 @@ namespace ReGrowthCore
             var comfortRange = GetComfortTempRange(pawn);
             bool CellValidator(IntVec3 x)
             {
-                if (IsGoodSpotForBathing(pawn.Map, x, comfortRange, pawn: pawn) && pawn.CanReserve(x))
+                if (IsGoodSpotForBathing(pawn.Map, x, comfortRange, pawn: pawn) && pawn.CanReserve(x) && pawn.CanReach(x, PathEndMode.OnCell, Danger.Deadly))
                 {
                     foreach (var adj in GenAdj.AdjacentCells)
                     {

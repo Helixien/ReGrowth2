@@ -67,7 +67,7 @@ namespace ReGrowthCore
         {
             get
             {
-                if (ModSettingsFrameworkSettings.GetModSettingsContainer(ReGrowthMod.modPack.PackageIdPlayerFacing).patchOperationStates.TryGetValue("RG_WorldMapBeautificationProject", out var value) && value)
+                if (ModSettingsFrameworkSettings.GetModSettingsContainer(ReGrowthMod.modPack.PackageIdPlayerFacing).patchOperationStates.TryGetValue("RG_WMBPDefaultFallback", out var value) && value)
                 {
                     return true;
                 }

@@ -15,7 +15,10 @@ namespace ReGrowthCore
 
         public void ExposeData()
         {
-            FixLists();
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                FixLists();
+            }
             var fakeMap = new Map();
             var camp = new CaravanCamp();
             fakeMap.generationTick = GenTicks.TicksGame;

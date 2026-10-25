@@ -38,11 +38,11 @@ namespace ReGrowthCore
             return CaravanArrivalActionUtility.GetFloatMenuOptions(
                 () =>
                 {
-                    if (!SettleInEmptyTileUtility.CanCreateMapAt(caravan.Tile))
+                    if (!SettleInEmptyTileUtility.CanCreateMapAt(abandonedCamp.Tile))
                     {
                         return FloatMenuAcceptanceReport.WithFailMessage("CommandCampFailSiteAlreadyThere".Translate());
                     }
-                    if (Find.WorldObjects.AnyMapParentAt(caravan.Tile))
+                    if (Find.WorldObjects.AnyMapParentAt(abandonedCamp.Tile))
                     {
                         return FloatMenuAcceptanceReport.WithFailMessage("CommandCampFailExistingWorldObject".Translate());
                     }

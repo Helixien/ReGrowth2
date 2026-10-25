@@ -333,19 +333,19 @@ namespace ReGrowthCore
 				}
 				int landNeighbors = 0;
 				bool enoughLandNeighbors = true;
-				if (biomesKit.minimumWaterNeighbors > 0)
+				if (biomesKit.minimumLandNeighbors > 0)
 				{
-					for (int count = tmpNeighbors.Count; neighbor < count; neighbor++)
+					for (int i = 0; i < tmpNeighbors.Count; i++)
 					{
-						if (worldGrid[tmpNeighbors[neighbor]].biome != BiomeDefOf.Ocean)
+						if (worldGrid[tmpNeighbors[i]].biome != BiomeDefOf.Ocean)
 						{
 							landNeighbors += 1;
 						}
-						if (waterNeighbors < biomesKit.minimumLandNeighbors)
+						if (landNeighbors < biomesKit.minimumLandNeighbors)
 						{
 							enoughLandNeighbors = false;
 						}
-						if (waterNeighbors == biomesKit.minimumLandNeighbors)
+						if (landNeighbors == biomesKit.minimumLandNeighbors)
 						{
 							enoughLandNeighbors = true;
 						}
@@ -359,14 +359,12 @@ namespace ReGrowthCore
 				if (biomeDef.workerClass.Name == "UniversalBiomeWorker")
 					tile.biome = biomeDef;
 				// If the user wants to actually change the hilliness of a tile, we handle that here.
+				if (biomesKit.spawnHills != null && biomesKit.setHills == null)
+				{
+					biomesKit.setHills = biomesKit.spawnHills;
+				}
 				if (biomesKit.setHills != null)
 				{
-					int hilliness = (int)biomesKit.setHills;
-					if (biomesKit.spawnHills != null && biomesKit.setHills == null) // convert deprecated tag if modern tag is not used
-					{
-						hilliness = (int)biomesKit.spawnHills;
-						biomesKit.setHills = biomesKit.spawnHills;
-					}
 					if (biomesKit.setHills == BiomesKitHilliness.Random)
 					{
 						// random number from 0 to 3.

@@ -23,6 +23,10 @@ namespace ReGrowthCore
 
 		[MayRequireOdyssey] public static TerrainDef HotSpring;
 
+		public static TerrainDef RG_HotSpring;
+
+		public static TerrainDef RG_HotSpringDeep;
+
 		public static JobDef RG_Bathe;
 		public static GameConditionDef Aurora;
 		public static ThingDef RG_Filth_Neutroamine;

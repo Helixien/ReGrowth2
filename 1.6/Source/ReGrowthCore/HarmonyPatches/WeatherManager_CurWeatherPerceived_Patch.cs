@@ -8,7 +8,7 @@ namespace ReGrowthCore
     [HarmonyPatch(typeof(WeatherManager), "CurWeatherPerceived", MethodType.Getter)]
     public static class WeatherManager_CurWeatherPerceived_Patch
     {
-        private static readonly Dictionary<Map, WeatherDef> weathers = new Dictionary<Map, WeatherDef>();
+        public static readonly Dictionary<Map, WeatherDef> weathers = [];
 
         private static void Postfix(WeatherManager __instance, WeatherDef __result)
         {

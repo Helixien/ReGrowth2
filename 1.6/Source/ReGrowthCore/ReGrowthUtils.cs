@@ -45,7 +45,7 @@ namespace ReGrowthCore
 
         public static bool IsHotSpring(this TerrainDef terrainDef)
         {
-            return terrainDef == RG_DefOf.HotSpring;
+            return terrainDef == RG_DefOf.HotSpring || terrainDef == RG_DefOf.RG_HotSpring || terrainDef == RG_DefOf.RG_HotSpringDeep;
         }
 
         public static bool IsBathingNow(this Pawn pawn)
@@ -55,16 +55,21 @@ namespace ReGrowthCore
             && driver_Bathe.IsBathingNow() || pawn.jobs.curJob.swimming;
         }
 
-        private static Dictionary<Material, Material> materials = new();
+        private static readonly Dictionary<(Material, float), Material> materials = [];
+        private static readonly object materialsLock = new();
         public static Material GetBatheMat(Material baseMat, float transparency)
         {
             if (baseMat is null) return baseMat;
-            if (!materials.TryGetValue(baseMat, out var value))
+            var key = (baseMat, transparency);
+            lock (materialsLock)
             {
-                materials[baseMat] = value = new Material(baseMat);
+                if (!materials.TryGetValue(key, out var value))
+                {
+                    materials[key] = value = new Material(baseMat);
+                    value.color = new Color(baseMat.color.r, baseMat.color.g, baseMat.color.b, transparency);
+                }
+                return value;
             }
-            value.color = new Color(value.color.r, value.color.g, value.color.b, transparency);
-            return value;
         }
 
         public static bool TryGetBiomeSpecificTerrain(this TerrainDef def, Map map, out TerrainByBiome terrain)

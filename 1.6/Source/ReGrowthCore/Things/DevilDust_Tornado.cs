@@ -194,8 +194,8 @@ namespace ReGrowthCore
 				}
 				if (this.IsHashIntervalTick(4) && !CellImmuneToDamage(base.Position))
 				{
-					//float num = Rand.Range(0.6f, 1f);
-					Vector3 a = realPosition with { y = AltitudeLayer.MoteOverhead.AltitudeFor() };
+					var a = new Vector3(realPosition.x, 0f, realPosition.y);
+					a.y = AltitudeLayer.MoteOverhead.AltitudeFor();
 					ThrowDevilDustPuff(a + Vector3Utility.RandomHorizontalOffset(1.5f), base.Map, Rand.Range(1.5f, 3f), new ColorInt(191, 161, 127).ToColor);
 				}
 			}
@@ -381,10 +381,10 @@ namespace ReGrowthCore
 							break;
 						}
 					case ThingCategory.Building:
-						damageFactor = 0f;
+						damageFactor *= BuildingDamageFactor;
 						break;
 					case ThingCategory.Item:
-						damageFactor = 0f;
+						damageFactor *= ItemDamageFactor;
 						break;
 					case ThingCategory.Plant:
 						damageFactor *= 1.7f;

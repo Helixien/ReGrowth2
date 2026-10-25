@@ -52,11 +52,11 @@ namespace ReGrowthCore
             {
                 Visit(caravan);
             };
-            if (!SettleInEmptyTileUtility.CanCreateMapAt(caravan.Tile))
+            if (!SettleInEmptyTileUtility.CanCreateMapAt(Tile))
             {
                 command_Action.Disable("CommandCampFailSiteAlreadyThere".Translate());
             }
-            else if (Find.WorldObjects.AnyMapParentAt(caravan.Tile))
+            else if (Find.WorldObjects.AnyMapParentAt(Tile))
             {
                 command_Action.Disable("CommandCampFailExistingWorldObject".Translate());
             }
@@ -102,6 +102,27 @@ namespace ReGrowthCore
                     FloodFillerFog.FloodUnfog(cellToUnfog, map);
                 }
             }, "GeneratingMap", doAsynchronously: true, GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap);
+        }
+
+        public override void TickInterval(int delta)
+        {
+            base.TickInterval(delta);
+            if (savedCamp is null || Find.TickManager.TicksGame - savedCamp.ticksSaved
+                >= ReGrowthUtils.MakeCampPatchWorker.preserveSavedCampsForDays * GenDate.TicksPerDay)
+            {
+                Find.WorldObjects.Remove(this);
+            }
+        }
+
+        public override string GetInspectString()
+        {
+            if (savedCamp is not null)
+            {
+                var ticksPassed = Find.TickManager.TicksGame - savedCamp.ticksSaved;
+                var ticksTotal = ReGrowthUtils.MakeCampPatchWorker.preserveSavedCampsForDays * GenDate.TicksPerDay;
+                return "RG.TimeRemaining".Translate((ticksTotal - ticksPassed).ToStringTicksToPeriod(allowSeconds: false));
+            }
+            return base.GetInspectString();
         }
     }
 }

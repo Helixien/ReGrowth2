@@ -34,7 +34,7 @@ namespace ReGrowthCore
             if (map.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
                 int currentTick = Find.TickManager.TicksGame;
-                if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL)
+                if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL && currentBatchIndex >= wallsToProcess.Count)
                 {
                     RebuildEligibleWallsCache();
                     lastFullScanTick = currentTick;
@@ -47,6 +47,7 @@ namespace ReGrowthCore
         {
             eligibleWalls.Clear();
             wallsToProcess.Clear();
+            outsideCache.Clear();
 
             foreach (var wallDef in wallDefs)
             {

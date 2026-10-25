@@ -78,13 +78,21 @@ namespace ReGrowthCore
                                 break;
                         }
 
+                        var hillSizeMultiplier = modExt.materialSizeMultiplier;
+                        switch (singleTile.hilliness)
+                        {
+                            case Hilliness.SmallHills: hillSizeMultiplier *= modExt.smallHillSizeMultiplier; break;
+                            case Hilliness.LargeHills: hillSizeMultiplier *= modExt.largeHillSizeMultiplier; break;
+                            case Hilliness.Mountainous: hillSizeMultiplier *= modExt.mountainSizeMultiplier; break;
+                            case Hilliness.Impassable: hillSizeMultiplier *= modExt.impassableSizeMultiplier; break;
+                        }
                         if (path != null)
                         {
                             Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit, 3600);
                             var subMesh = GetSubMesh(mat);
 
                             WorldRendererUtility.PrintQuadTangentialToPlanet(tileCenter, tileCenter,
-                                singleTile.Layer.AverageTileSize * modExt.materialSizeMultiplier, 0.005f, subMesh, false,
+                                singleTile.Layer.AverageTileSize * hillSizeMultiplier, 0.005f, subMesh, false,
                                 0.01f, false);
                             WorldRendererUtility.PrintTextureAtlasUVs(Rand.Range(0, 2), Rand.Range(0, 2), 2, 2, subMesh);
                         }

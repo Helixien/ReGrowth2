@@ -123,7 +123,18 @@ namespace ReGrowthCore
             SpawnThings(savedCamp.items);
             var itemsRottables = savedCamp.items.ToDictionary(x => x, x => x.TryGetComp<CompRottable>());
             itemsRottables.RemoveAll(x => x.Value is null);
+            savedCamp.buildings.Clear();
+            savedCamp.plants.Clear();
+            savedCamp.items.Clear();
+            SyncGrids(Map.roofGrid.roofGrid, savedCamp.roofGrid.roofGrid, (int i, RoofDef def) =>
+            {
+                var cell = Map.cellIndices.IndexToCell(i);
+                Map.roofGrid.SetRoof(cell, def);
+            });
             var ticksPassed = Find.TickManager.TicksGame - savedCamp.ticksSaved;
+            var map = Map;
+            var num = Mathf.CeilToInt((float)map.Area * 0.0006f);
+            var area = map.Area;
             for (var i = 0; i < ticksPassed; i++)
             {
                 foreach (var item in itemsRottables)
@@ -133,26 +144,17 @@ namespace ReGrowthCore
                         item.Value.TickInterval(1);
                     }
                 }
-                var map = Map;
-                int num = Mathf.CeilToInt((float)map.Area * 0.0006f);
-                int area = map.Area;
                 for (int j = 0; j < num; j++)
                 {
-                    if (Map.steadyEnvironmentEffects.cycleIndex >= area)
+                    if (map.steadyEnvironmentEffects.cycleIndex >= area)
                     {
-                        Map.steadyEnvironmentEffects.cycleIndex = 0;
+                        map.steadyEnvironmentEffects.cycleIndex = 0;
                     }
-                    IntVec3 c = map.cellsInRandomOrder.Get(Map.steadyEnvironmentEffects.cycleIndex);
-                    DoCellSteadyEffects(Map.steadyEnvironmentEffects, c);
-                    Map.steadyEnvironmentEffects.cycleIndex++;
+                    var c = map.cellsInRandomOrder.Get(map.steadyEnvironmentEffects.cycleIndex);
+                    DoCellSteadyEffects(map.steadyEnvironmentEffects, c);
+                    map.steadyEnvironmentEffects.cycleIndex++;
                 }
             }
-
-            SyncGrids(Map.roofGrid.roofGrid, savedCamp.roofGrid.roofGrid, delegate (int i, RoofDef def)
-            {
-                var cell = Map.cellIndices.IndexToCell(i);
-                Map.roofGrid.SetRoof(cell, def);
-            });
         }
 
         private void DoCellSteadyEffects(SteadyEnvironmentEffects steadyEnvironmentEffects, IntVec3 c)

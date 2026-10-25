@@ -1,4 +1,5 @@
 using RimWorld;
+using Verse;
 
 namespace ReGrowthCore
 {
@@ -17,7 +18,8 @@ namespace ReGrowthCore
         {
             if (parent is Plant tree && !tree.LeaflessNow)
             {
-                if (ticksUntilSpawn <= 0 && PlantFallColors_GetFallColorFactor_Patch.fallColorFactor > 0.48f)
+                var latitude = Find.WorldGrid.LongLatOf(parent.Map.Tile).y;
+                if (ticksUntilSpawn <= 0 && PlantFallColors.GetFallColorFactor(latitude, GenLocalDate.DayOfYear(parent.Map)) > 0.48f)
                 {
                     TryDoSpawn();
                     ResetCountdown();

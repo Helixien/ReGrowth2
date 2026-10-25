@@ -116,7 +116,7 @@ namespace ReGrowthCore
 			dataStatic.rotationRate = fastRandom.Next(-300, 300) / 100f;
 			dataStatic.velocityAngle = fastRandom.Next(360) / 100f;
 			dataStatic.velocitySpeed = 0.12f;
-			dataStatic.def.graphicData.color *= 0.5f;
+			dataStatic.instanceColor = new Color(0.5f, 0.5f, 0.5f);
 			map.flecks.CreateFleck(dataStatic);
 		}
 	}

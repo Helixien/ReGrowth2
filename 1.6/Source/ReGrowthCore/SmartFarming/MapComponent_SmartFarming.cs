@@ -200,14 +200,14 @@ namespace ReGrowthCore
 			//This adjusts the ticks of light if we're doing a partial day calculation, depending on what hour it currently is
 			if (numOfDays == 0)
 			{
-				hour = 14 - hour;
-				if (hour < 1)
+				int hoursOfLightLeft = 14 - hour;
+				if (hoursOfLightLeft < 1)
 				{
-					if (hour < -3) hour = 13; //Past midnight, consider it a full day
-					else hour = 0;
+					if (hoursOfLightLeft < -3) hoursOfLightLeft = 13; //Past midnight, consider it a full day
+					else hoursOfLightLeft = 0;
 				}
 
-				ticksOfLight = 2500 * hour;
+				ticksOfLight = 2500 * hoursOfLightLeft;
 			}
 
 			//Prepare date
@@ -361,11 +361,8 @@ namespace ReGrowthCore
 				CalculateYield(zone, zoneData);
 				var plantDefToGrow = ((IPlantToGrowSettable)zone).GetPlantDefToGrow();
 				//Sanity check on alwaysSow in case settings were changed
-				if (ReGrowthCore_SmartFarming.ModSettings.coldSowing && zoneData.sowMode == SowMode.Smart && plantDefToGrow != null && !plantDefToGrow.plant.dieIfLeafless &&
-					(plantDefToGrow.plant.forceIsTree || plantDefToGrow.plant.harvestTag == "Wood"))
-				{
-					zoneData.alwaysSow = true;
-				}
+				zoneData.alwaysSow = ReGrowthCore_SmartFarming.ModSettings.coldSowing && zoneData.sowMode == SowMode.Smart && plantDefToGrow?.plant.dieIfLeafless is false &&
+					(plantDefToGrow.plant.forceIsTree || plantDefToGrow.plant.harvestTag == "Wood");
 			}
 		}
 

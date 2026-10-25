@@ -54,7 +54,7 @@
 					</value>
 				</match>
 				<nomatch Class="PatchOperationAdd">
-					<xpath>/Defs/TerrainDef[defName="Marsh"]/edgeType</xpath>
+					<xpath>/Defs/TerrainDef[defName="Marsh"]</xpath>
 					<value>
 						<edgeType>Water</edgeType>
 					</value>

@@ -43,6 +43,7 @@ namespace ReGrowthCore
 			Scribe_Values.Look<bool>(ref noPettyJobs, "pettyJobs");
 			Scribe_Values.Look<bool>(ref allowHarvest, "allowHarvest", true);
 			Scribe_Values.Look<bool>(ref orchardAlignment, "orchardAlignment");
+			Scribe_Values.Look<bool>(ref isMerged, "isMerged");
 		}
 		public void Init(MapComponent_SmartFarming comp, Zone zone)
 		{
