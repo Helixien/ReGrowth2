@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="EggUnfertBase">
+		<defName>RG_EggDodoEggUnfertilized</defName>
+		<label>dodo egg (unfert.)</label>
+		<description>An unfertilized dodo egg. It can be eaten raw, but it's much, much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggOval</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>16</MarketValue>
+		</statBases>
+	</ThingDef>
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_EggDodoEggFertilized</defName>
+		<label>dodo egg (fert.)</label>
+		<description>A fertilized dodo egg. If all goes well, it should hatch into a dodo. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggOval</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>16</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>4</hatcherDaystoHatch>
+				<hatcherPawn>RG_Dodo</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_EggArticDrakFertilized</defName>
+		<label>drak egg (fert.)</label>
+		<description>A fertilized drak egg. If all goes well, it should hatch into a baby drak. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>95</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>5.79</hatcherDaystoHatch>
+				<hatcherPawn>RG_ArcticDrak</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_EggThrinaxodonFertilized</defName>
+		<label>thrinaxodon egg (fert.)</label>
+		<description>A fertilized thrinaxodon egg. If all goes well, it should hatch into a baby thrinaxodon. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggOval</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>12</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>3.65</hatcherDaystoHatch>
+				<hatcherPawn>RG_Thrinaxodon</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="EggFertBase">
+		<defName>RG_EggVelociraptorFertilized</defName>
+		<label>velociraptor egg (fert.)</label>
+		<description>A fertilized velociraptor egg. If all goes well, it should hatch into a baby velociraptor. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/DinosaurEgg</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(146,102,66)</color>
+			<drawSize>(1.2,1.2)</drawSize>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MarketValue>60</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>4.27</hatcherDaystoHatch>
+				<hatcherPawn>RG_Velociraptor</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

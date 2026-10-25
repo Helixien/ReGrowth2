@@ -66,6 +66,12 @@
 			<li>RG_KiwiBird</li>
 			<li>RG_Neutrolope</li>
 			<li>RG_WoollyStegosaurus</li>
+			<li>RG_Dodo</li>
+			<li>RG_SabertoothSquirrel</li>
+			<li>RG_ArcticDrak</li>
+			<li>RG_Thrinaxodon</li>
+			<li>RG_Velociraptor</li>
+			<li>RG_Synthetion</li>
 			<li>RG_Rimclaw</li>
 			<li MayRequire="Ludeon.RimWorld.Biotech">RG_Hemolope</li>
 			<!-- Odyssey animals -->

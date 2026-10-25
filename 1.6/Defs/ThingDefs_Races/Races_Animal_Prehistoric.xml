@@ -130,7 +130,7 @@
 		<defName>RG_WoollyStegosaurus</defName>
 		<label>woolly stegosaurus</label>
 		<race>RG_WoollyStegosaurus</race>
-		<combatPower>135</combatPower>
+		<combatPower>300</combatPower>
 		<wildGroupSize>3~5</wildGroupSize>
 		<lifeStages>
 			<li>

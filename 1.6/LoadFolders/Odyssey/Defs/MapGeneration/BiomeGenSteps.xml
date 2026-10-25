@@ -7,7 +7,7 @@
 			<thingDef>RG_AncientPowerPole</thingDef>
 			<createUsedRect>true</createUsedRect>
 			<skipRoofed>true</skipRoofed>
-			<countPer10kCellsRange>6~12</countPer10kCellsRange>
+			<countPer10kCellsRange>4.2~8.4</countPer10kCellsRange>
 			<warnOnFail>false</warnOnFail>
 		</genStep>
 	</GenStepDef>

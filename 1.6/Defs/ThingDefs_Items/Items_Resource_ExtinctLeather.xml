@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="LeatherBase">
+		<defName>RG_DinosaursHideMedium</defName>
+		<label>medium dinosaur hide</label>
+		<description>Medium theropod or sauropod hide, often from ones with few natural defenses.</description>
+		<graphicData>
+			<color>(172,198,93)</color>
+		</graphicData>
+		<statBases>
+			<MarketValue>2.7</MarketValue>
+			<StuffPower_Armor_Sharp>0.75</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Blunt>0.25</StuffPower_Armor_Blunt>
+			<StuffPower_Insulation_Cold>15</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>13</StuffPower_Insulation_Heat>
+		</statBases>
+		<stuffProps>
+			<color>(172,198,93)</color>
+			<commonality>0.08</commonality>
+			<statFactors>
+				<MaxHitPoints>1.0</MaxHitPoints>
+			</statFactors>
+		</stuffProps>
+	</ThingDef>
+	<ThingDef ParentName="LeatherBase">
+		<defName>RG_DinosaursHideThin</defName>
+		<label>thin dinosaur hide</label>
+		<description>Lightweight, thin leather from a small theropod or sauropod. Doesn't insulate well.</description>
+		<graphicData>
+			<color>(183,175,79)</color>
+		</graphicData>
+		<statBases>
+			<MarketValue>2.1</MarketValue>
+			<StuffPower_Armor_Sharp>0.56</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Blunt>0.18</StuffPower_Armor_Blunt>
+			<StuffPower_Insulation_Cold>12</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>12</StuffPower_Insulation_Heat>
+		</statBases>
+		<stuffProps>
+			<color>(183,175,79)</color>
+			<commonality>0.1</commonality>
+			<statFactors>
+				<MaxHitPoints>1.0</MaxHitPoints>
+			</statFactors>
+		</stuffProps>
+	</ThingDef>
+</Defs>
