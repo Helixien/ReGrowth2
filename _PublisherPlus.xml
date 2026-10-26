@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
   <Excluded>
+    <exclude>_Modpage</exclude>
     <exclude>.git</exclude>
     <exclude>.vscode</exclude>
-    <exclude>1.4\Source</exclude>
     <exclude>1.5\Source</exclude>
     <exclude>1.6\.vscode</exclude>
     <exclude>1.6\Source</exclude>
