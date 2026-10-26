@@ -82,8 +82,9 @@ namespace ReGrowthCore
             foreach (var pawn in map.mapPawns.AllPawnsSpawned)
             {
                 if (!pawn.IsBathingNow()) continue;
-                for (var rot = Rot4.North; rot.AsInt < 4; rot.AsInt++)
+                for (var i = 0; i < 4; i++)
                 {
+                    var rot = new Rot4(i);
                     var bodyMat = pawn.Drawer.renderer.BodyGraphic?.MatAt(rot);
                     if (bodyMat != null) GetBatheMat(bodyMat, 0.1f);
                     if (pawn.apparel?.WornApparel is null) continue;
