@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-	<!-- This folder is loaded only for RimWorld 1.6 with Vanilla Landmarks Expanded active. -->
-	<Operation Class="PatchOperationSequence" MayRequire="VanillaExpanded.VExplorationE">
+	<Operation Class="PatchOperationSequence">
 		<operations>
-			<!-- Extend the relevant Boreal Forest permissions to Aspen Forest. -->
 			<li Class="PatchOperationConditional">
 				<xpath>/Defs/TileMutatorDef[defName="VEE_DetachedIceberg" or defName="VEE_IceAndFire" or defName="VEE_DryRiver" or defName="VEE_MangroveTerrain" or defName="VEE_BurnedForest" or defName="VEE_AuburnTree_Oaks" or defName="VEE_AuburnTree_Poplars" or defName="VEE_AuburnTree_Maples" or defName="VEE_AuburnTree_Birches"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
 				<match Class="PatchOperationAdd">
 					<xpath>/Defs/TileMutatorDef[defName="VEE_DetachedIceberg" or defName="VEE_IceAndFire" or defName="VEE_DryRiver" or defName="VEE_MangroveTerrain" or defName="VEE_BurnedForest" or defName="VEE_AuburnTree_Oaks" or defName="VEE_AuburnTree_Poplars" or defName="VEE_AuburnTree_Maples" or defName="VEE_AuburnTree_Birches"]/biomeWhitelist[not(li="RG_AspenForest")]</xpath>
 					<value>
-						<li MayRequire="VanillaExpanded.VExplorationE">RG_AspenForest</li>
+						<li>RG_AspenForest</li>
 					</value>
 				</match>
 			</li>
-			<!-- Keep ReGrowth's palms in the tropical beach worker's restricted flora list. -->
 			<li Class="PatchOperationConditional">
 				<xpath>/Defs/TileMutatorDef[defName="VEE_TropicalBeachFlora"]/plantKinds[not(li="RG_Plant_TreeDwarfPalm")]</xpath>
 				<match Class="PatchOperationAdd">
 					<xpath>/Defs/TileMutatorDef[defName="VEE_TropicalBeachFlora"]/plantKinds[not(li="RG_Plant_TreeDwarfPalm")]</xpath>
 					<value>
-						<li MayRequire="VanillaExpanded.VExplorationE">RG_Plant_TreeDwarfPalm</li>
+						<li>RG_Plant_TreeDwarfPalm</li>
 					</value>
 				</match>
 			</li>
@@ -28,25 +25,22 @@
 				<match Class="PatchOperationAdd">
 					<xpath>/Defs/TileMutatorDef[defName="VEE_TropicalBeachFlora"]/plantKinds[not(li="RG_Plant_TallPalmTree")]</xpath>
 					<value>
-						<li MayRequire="VanillaExpanded.VExplorationE">RG_Plant_TallPalmTree</li>
+						<li>RG_Plant_TallPalmTree</li>
 					</value>
 				</match>
 			</li>
-			<!-- Match the existing megafauna entries' forced spawn chance. -->
 			<li Class="PatchOperationConditional">
 				<xpath>/Defs/TileMutatorDef[defName="VEE_Megafauna"]/modExtensions/li[@Class="VEF.Maps.TileMutatorExtension"]/forcedPawnKindDefs[not(li[forcedPawnKindDef="RG_WoollyStegosaurus"])]</xpath>
 				<match Class="PatchOperationAdd">
 					<xpath>/Defs/TileMutatorDef[defName="VEE_Megafauna"]/modExtensions/li[@Class="VEF.Maps.TileMutatorExtension"]/forcedPawnKindDefs[not(li[forcedPawnKindDef="RG_WoollyStegosaurus"])]</xpath>
 					<value>
-						<li MayRequire="VanillaExpanded.VExplorationE">
+						<li>
 							<forcedPawnKindDef>RG_WoollyStegosaurus</forcedPawnKindDef>
 							<forcedPawnKindDefChance>0.1</forcedPawnKindDefChance>
 						</li>
 					</value>
 				</match>
 			</li>
-			<!-- Preserve VAE's existing definition when it is active. Without VAE, only
-			     allow biomes with Thrinaxodon: the worker cannot handle an empty nocturnal pool. -->
 			<li Class="PatchOperationFindMod">
 				<mods>
 					<li>Vanilla Animals Expanded</li>
@@ -75,11 +69,10 @@
 							</li>
 						</operations>
 					</match>
-					<!-- Also support loaders that have already removed the unmet VAE definition. -->
 					<nomatch Class="PatchOperationAdd">
 						<xpath>/Defs</xpath>
 						<value>
-							<TileMutatorDef MayRequire="VanillaExpanded.VExplorationE">
+							<TileMutatorDef>
 								<defName>VEE_NocturnalFauna</defName>
 								<label>nocturnal fauna</label>
 								<description>Nocturnal and crepuscular animals appear in greater numbers here.</description>
@@ -103,13 +96,12 @@
 					</nomatch>
 				</nomatch>
 			</li>
-			<!-- Succulents are optional; keep Aspen excluded alongside the other cold biomes. -->
 			<li Class="PatchOperationConditional">
 				<xpath>/Defs/TileMutatorDef[defName="VEE_WildSucculents"]/biomeBlacklist[not(li="RG_AspenForest")]</xpath>
 				<match Class="PatchOperationAdd">
 					<xpath>/Defs/TileMutatorDef[defName="VEE_WildSucculents"]/biomeBlacklist[not(li="RG_AspenForest")]</xpath>
 					<value>
-						<li MayRequire="VanillaExpanded.VPlantsESucculents">RG_AspenForest</li>
+						<li>RG_AspenForest</li>
 					</value>
 				</match>
 			</li>
