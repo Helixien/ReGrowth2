@@ -77,6 +77,12 @@ namespace ReGrowthCore
                 return false;
             }
 
+            if (ModsConfig.OdysseyActive && map.pollutionGrid.IsPolluted(cell))
+            {
+                failReason?.Append("RG.PollutedWater".Translate());
+                return false;
+            }
+
             if (pawn != null && cell.InAllowedArea(pawn) is false)
             {
                 return false;

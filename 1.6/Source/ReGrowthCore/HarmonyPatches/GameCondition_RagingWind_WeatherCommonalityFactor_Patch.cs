@@ -7,7 +7,7 @@ namespace ReGrowthCore
     [HarmonyPatch]
     public static class GameCondition_RagingWind_WeatherCommonalityFactor_Patch
     {
-        public static bool Prepare() => ModLister.HasActiveModWithName("Vanilla Landmarks Expanded");
+        public static bool Prepare() => ModLister.AnyModActiveNoSuffix(["VanillaExpanded.VExplorationE"]);
 
         public static MethodBase TargetMethod()
         {
@@ -16,7 +16,7 @@ namespace ReGrowthCore
 
         public static void Postfix(ref float __result, WeatherDef weather)
         {
-            if (weather == RG_DefOf.RG_FogStorm) __result = 0f;
+            if (weather == RG_DefOf.RG_FogStorm || weather == RG_DefOf.RG_FoggySnow) __result = 0f;
         }
     }
 }

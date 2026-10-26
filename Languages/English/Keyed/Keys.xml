@@ -159,4 +159,5 @@
   <RG.PuddlesPerTickUltrafast>Puddles per tick (ultrafast+ speed)</RG.PuddlesPerTickUltrafast>
   <RG.PuddlesPerTickUltrafast.Desc>Amount of puddles that will be spawned each tick during rain while playing on ultrafast (or faster) game speed. Having too many puddles spawn will cause stutters until reaching maximum amount of puddles, especially at higher game speed. (Default {0})</RG.PuddlesPerTickUltrafast.Desc>
 	<RG.TerrainNotSupported>{0} cannot support {1}.</RG.TerrainNotSupported>
+	<RG.PollutedWater>The water is polluted.</RG.PollutedWater>
 </LanguageData>

@@ -89,32 +89,37 @@ namespace ReGrowthCore
 
         private void RestoreCampMap()
         {
+            if (savedCamp.mapSize.IsValid && (savedCamp.mapSize.x > Map.Size.x || savedCamp.mapSize.z > Map.Size.z))
+            {
+                Log.ErrorOnce("ReGrowth: Saved camp is larger than the generated camp map. Skipping camp restoration.", 882346);
+                return;
+            }
             SyncGrids(Map.terrainGrid.underGrid, savedCamp.terrainGrid.underGrid, delegate (int i, TerrainDef def)
             {
                 if (def is null) return;
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetUnderTerrain(cell, def);
-            });
+            }, savedCamp.mapSize);
             SyncGrids(Map.terrainGrid.foundationGrid, savedCamp.terrainGrid.foundationGrid, delegate (int i, TerrainDef def)
             {
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetFoundation(cell, def);
-            });
+            }, savedCamp.mapSize);
             SyncGrids(Map.terrainGrid.tempGrid, savedCamp.terrainGrid.tempGrid, delegate (int i, TerrainDef def)
             {
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetTempTerrain(cell, def);
-            });
+            }, savedCamp.mapSize);
             SyncGrids(Map.terrainGrid.topGrid, savedCamp.terrainGrid.topGrid, delegate (int i, TerrainDef def)
             {
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetTerrain(cell, def);
-            });
+            }, savedCamp.mapSize);
             SyncGrids(Map.terrainGrid.colorGrid, savedCamp.terrainGrid.colorGrid, delegate (int i, ColorDef def)
             {
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.terrainGrid.SetTerrainColor(cell, def);
-            });
+            }, savedCamp.mapSize);
             DespawnThings(Map.listerThings.AllThings.Where(x => x is Building).ToList());
             DespawnThings(Map.listerThings.AllThings.Where(x => x is Plant).ToList());
             DespawnThings(Map.listerThings.AllThings.Where(x => x.def.category == ThingCategory.Item).ToList());
@@ -130,7 +135,7 @@ namespace ReGrowthCore
             {
                 var cell = Map.cellIndices.IndexToCell(i);
                 Map.roofGrid.SetRoof(cell, def);
-            });
+            }, savedCamp.mapSize);
             var ticksPassed = Find.TickManager.TicksGame - savedCamp.ticksSaved;
             var map = Map;
             var num = Mathf.CeilToInt((float)map.Area * 0.0006f);
@@ -145,19 +150,13 @@ namespace ReGrowthCore
                         item.Value.TickInterval(stepTicks);
                     }
                 }
-                for (int t = 0; t < stepTicks; t++)
+                if (map.steadyEnvironmentEffects.cycleIndex >= area)
                 {
-                    for (int j = 0; j < num; j++)
-                    {
-                        if (map.steadyEnvironmentEffects.cycleIndex >= area)
-                        {
-                            map.steadyEnvironmentEffects.cycleIndex = 0;
-                        }
-                        var c = map.cellsInRandomOrder.Get(map.steadyEnvironmentEffects.cycleIndex);
-                        DoCellSteadyEffects(map.steadyEnvironmentEffects, c);
-                        map.steadyEnvironmentEffects.cycleIndex++;
-                    }
+                    map.steadyEnvironmentEffects.cycleIndex = 0;
                 }
+                var c = map.cellsInRandomOrder.Get(map.steadyEnvironmentEffects.cycleIndex);
+                DoCellSteadyEffects(map.steadyEnvironmentEffects, c);
+                map.steadyEnvironmentEffects.cycleIndex++;
             }
         }
 
@@ -205,15 +204,21 @@ namespace ReGrowthCore
             }
         }
 
-        private void SyncGrids<T>(T[] mapGrid, T[] savedGrid, Action<int, T> syncAction)
+        private void SyncGrids<T>(T[] mapGrid, T[] savedGrid, Action<int, T> syncAction, IntVec3 savedSize)
         {
-            if (savedGrid?.Length != mapGrid.Length)
+            if (savedGrid.Length > mapGrid.Length)
             {
                 Log.ErrorOnce("ReGrowth: Saved camp grid size does not match the generated camp map. Skipping grid restoration.", 882345);
                 return;
             }
-            for (int i = mapGrid.Count() - 1; i >= 0; i--)
+            var subRect = savedGrid.Length < mapGrid.Length;
+            for (int i = mapGrid.Length - 1; i >= 0; i--)
             {
+                if (subRect)
+                {
+                    var cell = Map.cellIndices.IndexToCell(i);
+                    if (cell.x >= savedSize.x || cell.z >= savedSize.z) continue;
+                }
                 var mapValue = mapGrid[i];
                 var savedValue = savedGrid[i];
                 if (EqualityComparer<T>.Default.Equals(mapValue, savedValue) is false)

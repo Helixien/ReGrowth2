@@ -172,7 +172,7 @@ namespace ReGrowthCore
 			int growthNeeded = (int)(plant.plant.growDays * plant.plant.harvestMinGrowth * 60000f * 1.1f * (1f - (forSowing ? 0f : zoneData.averageGrowth / plant.plant.harvestMinGrowth)));
 			int simulatedGrowth = 0;
 			int numOfDays = 0;
-			int lifespan = (int)plant.plant.LifespanDays;
+			var lifespanDays = plant.plant.LifespanDays;
 
 			while (simulatedGrowth < growthNeeded && simulatedGrowth != -1)
 			{
@@ -183,7 +183,7 @@ namespace ReGrowthCore
 					Log.Warning("[Smart Farming] failed simulating " + plant.defName + " at zone " + zone.Position);
 					simulatedGrowth = -1;
 				}
-				else if (lifespan < numOfDays) simulatedGrowth = -1;
+				else if (lifespanDays > 0f && lifespanDays < numOfDays) simulatedGrowth = -1;
 			}
 
 			if (ReGrowthCore_SmartFarming.ModSettings.logging && Prefs.DevMode)
