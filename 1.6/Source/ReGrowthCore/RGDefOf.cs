@@ -23,9 +23,9 @@ namespace ReGrowthCore
 
 		[MayRequireOdyssey] public static TerrainDef HotSpring;
 
-		public static TerrainDef RG_HotSpring;
+		[MayRequire("ReGrowth.BOTR.BoilingForest")] public static TerrainDef RG_HotSpring;
 
-		public static TerrainDef RG_HotSpringDeep;
+		[MayRequire("ReGrowth.BOTR.BoilingForest")] public static TerrainDef RG_HotSpringDeep;
 
 		public static JobDef RG_Bathe;
 		public static WeatherDef RG_Windy;
