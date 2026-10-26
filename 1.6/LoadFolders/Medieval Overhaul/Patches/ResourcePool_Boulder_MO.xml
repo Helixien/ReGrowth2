@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!--====================================== Medium Boulder Resources ======================================-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[@Name="RG_BoulderRockMediumBase"]/comps/li[@Class="ReGrowthCore.CompProperties_ContainsOre"]/blacklistOres</xpath>
+		<value>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_IronIngot</li>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_PlasteelOre</li>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Clay</li>
+				<li>Steel</li>
+				<li>Silver</li>
+				<li>Gold</li>
+				<li>Uranium</li>
+				<li>Plasteel</li>
+		</value>
+	</Operation>
+	<!--====================================== Large Boulder Resources ======================================-->
+	<Operation Class="PatchOperationAdd">	
+		<xpath>/Defs/ThingDef[@Name="RG_BoulderRockLargeBase"]/comps/li[@Class="ReGrowthCore.CompProperties_ContainsOre"]/blacklistOres</xpath>
+		<value>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_IronIngot</li>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_PlasteelOre</li>
+				<li MayRequire="DankPyon.Medieval.Overhaul">DankPyon_Clay</li>
+				<li>Steel</li>
+				<li>Silver</li>
+				<li>Gold</li>
+				<li>Uranium</li>
+				<li>Plasteel</li>
+		</value>
+	</Operation>	
+</Patch>

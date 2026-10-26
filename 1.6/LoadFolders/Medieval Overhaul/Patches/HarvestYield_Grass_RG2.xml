@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!--====================================== Grass ======================================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="RG_GrassBase"]/plant</xpath>
+		<value>
+			<harvestYield>1</harvestYield>
+			<harvestedThingDef>Hay</harvestedThingDef>
+		</value>
+	</Operation>
+	<!--====================================== Tall Grass ======================================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="RG_TallGrassBase"]/plant</xpath>
+		<value>
+			<harvestYield>2</harvestYield>
+			<harvestedThingDef>Hay</harvestedThingDef>
+		</value>
+	</Operation>
+	<!--====================================== Brambles ======================================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="RG_BramblesBase"]/plant</xpath>
+		<value>
+			<harvestYield>2</harvestYield>
+			<harvestedThingDef>DankPyon_RawWood</harvestedThingDef>
+		</value>
+	</Operation>
+</Patch>

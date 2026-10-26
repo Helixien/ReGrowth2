@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!--====================================== Replaced Mineable Ore Textures ======================================-->
+	<Operation Class="PatchOperationReplace" MayRequire="DankPyon.Medieval.Overhaul">
+		<xpath>/Defs/ThingDef[defName="DankPyon_MineableCoal" or defName="DankPyon_MineableIron" or defName="DankPyon_MineableGold"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Things/Building/Linked/RG_RockFlecked_Atlas</texPath>
+		</value>
+	</Operation>
+	<!--====================================== Replaced Mineable Gem Textures ======================================-->	
+	<Operation Class="PatchOperationReplace" MayRequire="DankPyon.Medieval.Overhaul">
+		<xpath>/Defs/ThingDef[defName="DankPyon_MineableSalt" or defName="DankPyon_MineableCitrine" or defName="DankPyon_MineableAmber" or defName="DankPyon_MineableOnyx" or defName="DankPyon_MineableEmerald" or defName="DankPyon_MineableSapphire" or defName="DankPyon_MineableRuby"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Things/Building/Linked/RG_CrystalRockFleck_Atlas</texPath>
+		</value>
+	</Operation>
+	<!--====================================== Replaced Mineable Ore & Gem Colors ======================================-->
+									<!--================= GOLD =================-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="DankPyon_MineableGold"]/graphicData/colorTwo</xpath>
+		<value>
+			<colorTwo>(230,180,65)</colorTwo>
+		</value>
+	</Operation>	
+									<!--================= SALT =================-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="DankPyon_MineableSalt"]/graphicData/colorTwo</xpath>
+		<value>
+			<colorTwo>(240,185,150)</colorTwo>
+		</value>
+	</Operation>
+									<!--================= AMBER =================-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="DankPyon_MineableAmber"]/graphicData/colorTwo</xpath>
+		<value>
+			<colorTwo>(200,110,60)</colorTwo>
+		</value>
+	</Operation>
+</Patch>
