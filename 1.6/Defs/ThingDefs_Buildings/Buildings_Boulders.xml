@@ -16,6 +16,7 @@
 		<castEdgeShadows>false</castEdgeShadows>
 		<blockWind>true</blockWind>
 		<canOverlapZones>false</canOverlapZones>
+		<canScatterOver>false</canScatterOver>
 		<fertility>0</fertility>
 		<fillPercent>0.6</fillPercent>
 		<blockLight>true</blockLight>
