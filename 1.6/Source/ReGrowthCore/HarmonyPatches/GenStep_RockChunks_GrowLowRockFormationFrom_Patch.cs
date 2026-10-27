@@ -191,6 +191,8 @@ namespace ReGrowthCore
                 List<Thing> thingsInCell = cell.GetThingList(map);
                 for (int i = thingsInCell.Count - 1; i >= 0; i--)
                 {
+                    if (thingsInCell[i] is Plant plant && plant.def.plant.treeCategory == TreeCategory.Super) return false;
+
                     thingsInCell[i].DeSpawn(DestroyMode.Vanish);
                 }
             }
