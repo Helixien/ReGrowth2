@@ -9,6 +9,20 @@ namespace ReGrowthCore
 
     public class WorldDrawLayer_Beautification : WorldDrawLayer
     {
+        private const int BelowLandmarksRenderQueue = 3505;
+
+        private static readonly FloatRange BaseSizeRange = new FloatRange(0.9f, 1.1f);
+
+        private static readonly IntVec2 TexturesInAtlas = new IntVec2(2, 2);
+
+        private static readonly FloatRange BasePosOffsetRange_SmallHills = new FloatRange(0f, 0.37f);
+
+        private static readonly FloatRange BasePosOffsetRange_LargeHills = new FloatRange(0f, 0.2f);
+
+        private static readonly FloatRange BasePosOffsetRange_Mountains = new FloatRange(0f, 0.08f);
+
+        private static readonly FloatRange BasePosOffsetRange_ImpassableMountains = new FloatRange(0f, 0.08f);
+
         public override bool Visible
         {
             get
@@ -51,6 +65,7 @@ namespace ReGrowthCore
                 {
                     bool noRoads = !singleTile.PrimaryBiome.allowRoads || surfaceTile?.potentialRoads == null;
                     bool noRivers = !singleTile.PrimaryBiome.allowRivers || surfaceTile?.potentialRivers == null;
+                    bool hillDrawn = false;
 
                     // --- Unique Hills ---
                     if (modExt.uniqueHills && noRoads && noRivers)
@@ -99,13 +114,21 @@ namespace ReGrowthCore
                         }
                         if (path != null && ContentFinder<Texture2D>.Get(path, reportFailure: false) != null)
                         {
-                            Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit, 3600);
+                            var color = Color.white;
+                            var layer = modExt.materialLayer;
+                            if (singleTile.Landmark != null)
+                            {
+                                color = new Color(1f, 1f, 1f, 0.5f);
+                                layer = BelowLandmarksRenderQueue;
+                            }
+                            Material mat = MaterialPool.MatFrom(path, ShaderDatabase.WorldOverlayTransparentLit, color, layer);
                             var subMesh = GetSubMesh(mat);
 
                             WorldRendererUtility.PrintQuadTangentialToPlanet(tileCenter, tileCenter,
                                 singleTile.Layer.AverageTileSize * hillSizeMultiplier, 0.005f, subMesh, false,
                                 0.01f, false);
                             WorldRendererUtility.PrintTextureAtlasUVs(Rand.Range(0, 2), Rand.Range(0, 2), 2, 2, subMesh);
+                            hillDrawn = true;
                         }
                     }
 
@@ -156,8 +179,16 @@ namespace ReGrowthCore
                             false);
                         WorldRendererUtility.PrintTextureAtlasUVs(Rand.Range(0, 2), Rand.Range(0, 2), 2, 2, subMesh);
                     }
+                    if (!hillDrawn)
+                    {
+                        DrawVanillaHills(singleTile, tileCenter);
+                    }
                 }
-                else if (ReGrowthMod.DefaultWMBPTextureFallback)
+                else if (!ReGrowthMod.DefaultWMBPTextureFallback)
+                {
+                    DrawVanillaHills(singleTile, tileCenter);
+                }
+                else
                 {
                     //Fallback for if biome does not have any textures.
                     //Will revert to base game graphics
@@ -181,13 +212,24 @@ namespace ReGrowthCore
 
                     if (hillPath != null && ContentFinder<Texture2D>.Get(hillPath, reportFailure: false) != null)
                     {
+                        var color = Color.white;
+                        var layer = 3515;
+                        if (singleTile.Landmark != null)
+                        {
+                            color = new Color(1f, 1f, 1f, 0.5f);
+                            layer = BelowLandmarksRenderQueue;
+                        }
                         Material mat = MaterialPool.MatFrom(hillPath, ShaderDatabase.WorldOverlayTransparentLit,
-                            3515);
+                            color, layer);
                         var subMesh = GetSubMesh(mat);
                         WorldRendererUtility.PrintQuadTangentialToPlanet(tileCenter, tileCenter,
                             singleTile.Layer.AverageTileSize, 0.005f, subMesh, false, Rand.Range(0f, 360f),
                             false);
                         WorldRendererUtility.PrintTextureAtlasUVs(Rand.Range(0, 2), Rand.Range(0, 2), 2, 2, subMesh);
+                    }
+                    else
+                    {
+                        DrawVanillaHills(singleTile, tileCenter);
                     }
                 }
             }
@@ -196,6 +238,43 @@ namespace ReGrowthCore
             FinalizeMesh(MeshParts.All);
 
             yield break; // must yield because Regenerate is IEnumerable
+        }
+
+        private void DrawVanillaHills(Tile tile, Vector3 tileCenter)
+        {
+            if (tile.Landmark is not null)
+            {
+                return;
+            }
+            Material material;
+            FloatRange posOffsetRange;
+            switch (tile.hilliness)
+            {
+                case Hilliness.SmallHills:
+                    material = WorldMaterials.SmallHills;
+                    posOffsetRange = BasePosOffsetRange_SmallHills;
+                    break;
+                case Hilliness.LargeHills:
+                    material = WorldMaterials.LargeHills;
+                    posOffsetRange = BasePosOffsetRange_LargeHills;
+                    break;
+                case Hilliness.Mountainous:
+                    material = WorldMaterials.Mountains;
+                    posOffsetRange = BasePosOffsetRange_Mountains;
+                    break;
+                case Hilliness.Impassable:
+                    material = WorldMaterials.ImpassableMountains;
+                    posOffsetRange = BasePosOffsetRange_ImpassableMountains;
+                    break;
+                default:
+                    return;
+            }
+            var subMesh = GetSubMesh(material);
+            var posForTangents = tileCenter;
+            var magnitude = tileCenter.magnitude;
+            tileCenter = (tileCenter + Rand.UnitVector3 * (posOffsetRange.RandomInRange * planetLayer.AverageTileSize)).normalized * magnitude;
+            WorldRendererUtility.PrintQuadTangentialToPlanet(tileCenter, posForTangents, BaseSizeRange.RandomInRange * planetLayer.GetTileSize(tile.tile), 0.005f, subMesh, false, Rand.Range(0f, 360f), false);
+            WorldRendererUtility.PrintTextureAtlasUVs(Rand.Range(0, TexturesInAtlas.x), Rand.Range(0, TexturesInAtlas.z), TexturesInAtlas.x, TexturesInAtlas.z, subMesh);
         }
 
         private static string SnowSuffix(float temp, float semi, float snowy, float verySnowy, float fullySnowy)
