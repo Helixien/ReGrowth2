@@ -36,7 +36,7 @@ namespace ReGrowthCore
                     if (reset) thing.graphicInt = null; //Reset
                     continue;
                 }
-                if (!mineable.def.building.isResourceRock || !mineable.def.graphicData.Linked) continue;
+                if (mineable.def.building.isResourceRock is false || mineable.def.graphicData?.Linked is not true) continue;
 
                 if (!lumps.ContainsKey(mineable))
                 {
@@ -115,7 +115,8 @@ namespace ReGrowthCore
                 {
                     if (!lumpColors.TryGetValue(lumpID, out Color color)) continue;
 
-                    var graphic = mineable.Graphic.data;
+                    var graphic = mineable.Graphic?.data ?? mineable.def.graphicData;
+                    if (graphic?.graphicClass is null) continue;
                     //Check if the graphic already exists
                     if (!graphicCache.TryGetValue((graphic, color), out Graphic cachedGraphic))
                     {
