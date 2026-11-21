@@ -8,7 +8,6 @@ using Verse;
 namespace ReGrowthCore
 {
     [HotSwappable]
-    [StaticConstructorOnStartup]
     public class WallSnowManager : MapComponent
     {
         public HashSet<Thing> snowCoveredWalls = new HashSet<Thing>();
@@ -17,11 +16,10 @@ namespace ReGrowthCore
         private int lastFullScanTick = -1;
         private const int FULL_SCAN_INTERVAL = 2500;
         private List<Building> wallsToProcess = new List<Building>();
+        private readonly HashSet<Building> pendingWalls = new HashSet<Building>();
         private int currentBatchIndex = 0;
         private bool batchPassComplete = true;
         private const int WALLS_PER_TICK = 50;
-
-        private static List<ThingDef> wallDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.IsWall).ToList();
 
         public WallSnowManager(Map map) : base(map)
         {
@@ -29,73 +27,103 @@ namespace ReGrowthCore
 
         public override void MapComponentTick()
         {
-            if (!ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls)
+            if (!ReGrowthUtils.SnowOnWallsPatchWorker.snowOnWalls ||
+                !map.IsHashIntervalTick(GenTicks.TickRareInterval) ||
+                !map.regionAndRoomUpdater.Enabled)
                 return;
 
-            if (map.IsHashIntervalTick(GenTicks.TickRareInterval))
+            outdoorTemperatureByCell.Clear();
+
+            int currentTick = Find.TickManager.TicksGame;
+            if (batchPassComplete && (lastFullScanTick < 0 || currentTick - lastFullScanTick > FULL_SCAN_INTERVAL))
             {
-                int currentTick = Find.TickManager.TicksGame;
-                if (currentTick - lastFullScanTick > FULL_SCAN_INTERVAL && batchPassComplete)
-                {
-                    RebuildEligibleWallsCache();
-                    lastFullScanTick = currentTick;
-                }
-                ProcessWallBatch();
+                RebuildEligibleWallsCache();
+                lastFullScanTick = currentTick;
             }
+
+            if (pendingWalls.Count > 0)
+            {
+                wallGroupSnowCache.Clear();
+                foreach (var wall in pendingWalls)
+                {
+                    if (IsSpawnedWall(wall))
+                        AddWallToBatch(wall);
+                }
+                pendingWalls.Clear();
+            }
+
+            ProcessWallBatch();
         }
 
         private void RebuildEligibleWallsCache()
         {
             eligibleWalls.Clear();
             wallsToProcess.Clear();
-            outsideCache.Clear();
 
-            foreach (var wallDef in wallDefs)
+            foreach (var wallDef in DefDatabase<ThingDef>.AllDefsListForReading)
             {
+                if (!wallDef.IsWall)
+                    continue;
+
                 foreach (var wallThing in map.listerThings.ThingsOfDef(wallDef))
                 {
                     if (wallThing is Building wall && IsWallOutside(wall))
                     {
-                        eligibleWalls.Add(wall);
-                        wallsToProcess.Add(wall);
+                        AddWallToBatch(wall);
                     }
                 }
             }
 
+            snowCoveredWalls.RemoveWhere(thing => !IsSpawnedWall(thing));
+            foreach (var wall in snowCoveredWalls)
+            {
+                AddWallToBatch((Building)wall);
+            }
+
             currentBatchIndex = 0;
-            batchPassComplete = false;
+        }
+
+        private bool IsSpawnedWall(Thing thing)
+        {
+            return thing is Building { Spawned: true } wall && wall.Map == map && wall.def.IsWall;
+        }
+
+        private void AddWallToBatch(Building wall)
+        {
+            if (eligibleWalls.Add(wall))
+                wallsToProcess.Add(wall);
         }
 
         private void ProcessWallBatch()
         {
-            if (wallsToProcess.Count == 0)
-            {
-                RebuildEligibleWallsCache();
-                return;
-            }
-
             int endIndex = Mathf.Min(currentBatchIndex + WALLS_PER_TICK, wallsToProcess.Count);
 
             for (int i = currentBatchIndex; i < endIndex; i++)
             {
                 var wall = wallsToProcess[i];
-                if (wall == null || wall.Destroyed || !eligibleWalls.Contains(wall))
+                if (!IsSpawnedWall(wall))
                     continue;
 
-                UpdateWallSnowState(wall);
+                ApplyWallSnowState(wall);
             }
 
             currentBatchIndex = endIndex;
-            if (currentBatchIndex >= wallsToProcess.Count)
+            batchPassComplete = currentBatchIndex >= wallsToProcess.Count;
+            if (batchPassComplete)
             {
                 currentBatchIndex = 0;
-                batchPassComplete = true;
             }
         }
         private Dictionary<Building, bool> wallGroupSnowCache = new Dictionary<Building, bool>();
         private int lastSnowCheckTick = -1;
 
         public void UpdateWallSnowState(Building wall)
+        {
+            if (ReGrowthUtils.SnowOnWallsPatchWorker?.snowOnWalls == true)
+                pendingWalls.Add(wall);
+        }
+
+        private void ApplyWallSnowState(Building wall)
         {
             int currentTick = Find.TickManager.TicksGame;
             if (currentTick - lastSnowCheckTick > 2500)
@@ -151,18 +179,22 @@ namespace ReGrowthCore
 
             return result;
         }
-        private Dictionary<IntVec3, bool> outsideCache = new Dictionary<IntVec3, bool>();
+        private readonly Dictionary<IntVec3, bool> outdoorTemperatureByCell = new Dictionary<IntVec3, bool>();
 
         private bool IsWallOutside(Building wall)
         {
-            if (outsideCache.TryGetValue(wall.Position, out bool cached))
-                return cached;
+            return GenRadial.RadialCellsAround(wall.Position, 1f, true)
+                .Any(cell => cell.InBounds(map) && CellUsesOutdoorTemperature(cell));
+        }
 
-            bool isOutside = GenRadial.RadialCellsAround(wall.Position, 1f, true)
-                .Any(c => c.InBounds(map) && c.UsesOutdoorTemperature(map));
-
-            outsideCache[wall.Position] = isOutside;
-            return isOutside;
+        private bool CellUsesOutdoorTemperature(IntVec3 cell)
+        {
+            if (!outdoorTemperatureByCell.TryGetValue(cell, out bool usesOutdoorTemperature))
+            {
+                usesOutdoorTemperature = cell.UsesOutdoorTemperature(map);
+                outdoorTemperatureByCell.Add(cell, usesOutdoorTemperature);
+            }
+            return usesOutdoorTemperature;
         }
 
         private bool ShouldHaveSnowIndividual(Building wall)
@@ -170,7 +202,8 @@ namespace ReGrowthCore
             foreach (var adjCell in GenRadial.RadialCellsAround(wall.Position, 1f, true))
             {
                 if (adjCell.InBounds(map) &&
-                    WeatherBuildupUtility.GetBuildupCategory(map.snowGrid.GetDepth(adjCell)) == WeatherBuildupCategory.Thick)
+                    WeatherBuildupUtility.GetBuildupCategory(map.snowGrid.GetDepth(adjCell)) == WeatherBuildupCategory.Thick &&
+                    CellUsesOutdoorTemperature(adjCell))
                 {
                     return true;
                 }
@@ -205,7 +238,6 @@ namespace ReGrowthCore
                 eligibleWalls ??= new HashSet<Building>();
                 wallsToProcess ??= new List<Building>();
                 wallGroupSnowCache ??= new Dictionary<Building, bool>();
-                outsideCache ??= new Dictionary<IntVec3, bool>();
             }
         }
     }
