@@ -9,7 +9,8 @@ namespace ReGrowthCore
     {
         public static void Postfix(ref bool __result, Thing t)
         {
-            if (__result && t is Mineable mineable && mineable.IsSpaceRock())
+            if (__result && (t.def.HasModExtension<BoulderProperties>() ||
+                (t is Mineable mineable && mineable.IsSpaceRock())))
             {
                 __result = false;
             }

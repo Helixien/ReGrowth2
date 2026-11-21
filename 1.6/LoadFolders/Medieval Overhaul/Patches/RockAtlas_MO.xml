@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 	<!--====================================== Replaced Mineable Ore Textures ======================================-->
-	<Operation Class="PatchOperationReplace" MayRequire="DankPyon.Medieval.Overhaul">
+	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="DankPyon_MineableCoal" or defName="DankPyon_MineableIron" or defName="DankPyon_MineableGold"]/graphicData/texPath</xpath>
 		<value>
 			<texPath>Things/Building/Linked/RG_RockFlecked_Atlas</texPath>
 		</value>
 	</Operation>
 	<!--====================================== Replaced Mineable Gem Textures ======================================-->	
-	<Operation Class="PatchOperationReplace" MayRequire="DankPyon.Medieval.Overhaul">
+	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="DankPyon_MineableSalt" or defName="DankPyon_MineableCitrine" or defName="DankPyon_MineableAmber" or defName="DankPyon_MineableOnyx" or defName="DankPyon_MineableEmerald" or defName="DankPyon_MineableSapphire" or defName="DankPyon_MineableRuby"]/graphicData/texPath</xpath>
 		<value>
 			<texPath>Things/Building/Linked/RG_CrystalRockFleck_Atlas</texPath>
